@@ -1,0 +1,41 @@
+CREATE TABLE Cliente (
+  ID   SERIAL NOT NULL, 
+  Nome varchar(255) NOT NULL, 
+  NIF  int4 NOT NULL, 
+  PRIMARY KEY (ID));
+CREATE TABLE Pedido (
+  ID        SERIAL NOT NULL, 
+  ClienteID int4 NOT NULL, 
+  StaffID   int4 NOT NULL, 
+  Data      date NOT NULL, 
+  Status    varchar(255) NOT NULL, 
+  PRIMARY KEY (ID));
+CREATE TABLE Produto (
+  ID    SERIAL NOT NULL, 
+  Nome  varchar(255) NOT NULL, 
+  Preço float8 NOT NULL, 
+  PRIMARY KEY (ID));
+CREATE TABLE Entity (
+  PedidoID int4 NOT NULL);
+CREATE TABLE Pedido_Produto (
+  PedidoID   int4 NOT NULL, 
+  ProdutoID  int4 NOT NULL, 
+  Quandidade int4 NOT NULL, 
+  PRIMARY KEY (PedidoID, 
+  ProdutoID));
+CREATE TABLE Staff (
+  ID      SERIAL NOT NULL, 
+  Nome    varchar(255) NOT NULL, 
+  Email   varchar(255) NOT NULL, 
+  CargoID int4 NOT NULL, 
+  PRIMARY KEY (ID));
+CREATE TABLE Cargo (
+  ID   SERIAL NOT NULL, 
+  Nome int4 NOT NULL, 
+  PRIMARY KEY (ID));
+ALTER TABLE Pedido ADD CONSTRAINT FKPedido850587 FOREIGN KEY (ClienteID) REFERENCES Cliente (ID);
+ALTER TABLE Entity ADD CONSTRAINT FKEntity722832 FOREIGN KEY (PedidoID) REFERENCES Pedido (ID);
+ALTER TABLE Pedido_Produto ADD CONSTRAINT FKPedido_Pro775026 FOREIGN KEY (PedidoID) REFERENCES Pedido (ID);
+ALTER TABLE Pedido_Produto ADD CONSTRAINT FKPedido_Pro84987 FOREIGN KEY (ProdutoID) REFERENCES Produto (ID);
+ALTER TABLE Pedido ADD CONSTRAINT FKPedido975345 FOREIGN KEY (StaffID) REFERENCES Staff (ID);
+ALTER TABLE Staff ADD CONSTRAINT FKStaff192925 FOREIGN KEY (CargoID) REFERENCES Cargo (ID);
