@@ -1,0 +1,1 @@
+Importa documentos e guarda numa base de dados chroma db, na azure, faz pesquisas para certa pergunta e formata a resposta usando GPT-4o-mini

@@ -1,0 +1,21 @@
+﻿m,r,n
+"(:Cliente {nome: João Silva,nif: 123456789})",[:FEZ],"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Pedido {data: 2025-03-10,status: Pendente})",[:FEZ],"(:Cliente {nome: João Silva,nif: 123456789})"
+"(:Cliente {nome: Maria Souza,nif: 987654321})",[:FEZ],"(:Pedido {data: 2025-03-11,status: Finalizado})"
+"(:Pedido {data: 2025-03-11,status: Finalizado})",[:FEZ],"(:Cliente {nome: Maria Souza,nif: 987654321})"
+"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})",[:É],(:Cargo {nome: Atendente})
+(:Cargo {nome: Atendente}),[:É],"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})"
+"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})",[:ATENDEU],"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Pedido {data: 2025-03-10,status: Pendente})",[:ATENDEU],"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})"
+"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})",[:É],(:Cargo {nome: Padeiro})
+(:Cargo {nome: Padeiro}),[:É],"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})"
+"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})",[:ATENDEU],"(:Pedido {data: 2025-03-11,status: Finalizado})"
+"(:Pedido {data: 2025-03-11,status: Finalizado})",[:ATENDEU],"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})"
+"(:Staff {nome: Fernanda Lima,email: fernanda@pastelaria.com})",[:É],(:Cargo {nome: Gerente})
+(:Cargo {nome: Gerente}),[:É],"(:Staff {nome: Fernanda Lima,email: fernanda@pastelaria.com})"
+"(:Pedido {data: 2025-03-10,status: Pendente})",[:TEM {quantidade: 2}],"(:Produto {preço: 1.5,nome: Pastel de Nata})"
+"(:Produto {preço: 1.5,nome: Pastel de Nata})",[:TEM {quantidade: 2}],"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Pedido {data: 2025-03-10,status: Pendente})",[:TEM {quantidade: 3}],"(:Produto {preço: 2.5,nome: Bola de Berlim})"
+"(:Produto {preço: 2.5,nome: Bola de Berlim})",[:TEM {quantidade: 3}],"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Pedido {data: 2025-03-11,status: Finalizado})",[:TEM {quantidade: 1}],"(:Produto {preço: 2,nome: Croissant})"
+"(:Produto {preço: 2,nome: Croissant})",[:TEM {quantidade: 1}],"(:Pedido {data: 2025-03-11,status: Finalizado})"

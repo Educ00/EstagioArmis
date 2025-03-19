@@ -1,0 +1,11 @@
+﻿m,r,n
+"(:Cliente {nome: João Silva,nif: 123456789})",[:FEZ],"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Cliente {nome: Maria Souza,nif: 987654321})",[:FEZ],"(:Pedido {data: 2025-03-11,status: Finalizado})"
+"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})",[:É],(:Cargo {nome: Atendente})
+"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})",[:ATENDEU],"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})",[:É],(:Cargo {nome: Padeiro})
+"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})",[:ATENDEU],"(:Pedido {data: 2025-03-11,status: Finalizado})"
+"(:Staff {nome: Fernanda Lima,email: fernanda@pastelaria.com})",[:É],(:Cargo {nome: Gerente})
+"(:Pedido {data: 2025-03-10,status: Pendente})",[:TEM {quantidade: 2}],"(:Produto {preço: 1.5,nome: Pastel de Nata})"
+"(:Pedido {data: 2025-03-10,status: Pendente})",[:TEM {quantidade: 3}],"(:Produto {preço: 2.5,nome: Bola de Berlim})"
+"(:Pedido {data: 2025-03-11,status: Finalizado})",[:TEM {quantidade: 1}],"(:Produto {preço: 2,nome: Croissant})"

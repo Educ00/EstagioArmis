@@ -1,0 +1,14 @@
+﻿m
+(:Cargo {nome: Atendente})
+(:Cargo {nome: Padeiro})
+(:Cargo {nome: Gerente})
+"(:Cliente {nome: João Silva,nif: 123456789})"
+"(:Cliente {nome: Maria Souza,nif: 987654321})"
+"(:Produto {preço: 1.5,nome: Pastel de Nata})"
+"(:Produto {preço: 2,nome: Croissant})"
+"(:Produto {preço: 2.5,nome: Bola de Berlim})"
+"(:Staff {nome: Carlos Oliveira,email: carlos@pastelaria.com})"
+"(:Staff {nome: Ana Sousa,email: ana@pastelaria.com})"
+"(:Staff {nome: Fernanda Lima,email: fernanda@pastelaria.com})"
+"(:Pedido {data: 2025-03-10,status: Pendente})"
+"(:Pedido {data: 2025-03-11,status: Finalizado})"
