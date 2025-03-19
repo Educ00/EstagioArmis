@@ -1,4 +1,5 @@
 from langchain_community.document_loaders import DirectoryLoader
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma, AzureSearch
 from langchain_openai import AzureOpenAIEmbeddings, AzureChatOpenAI
@@ -45,7 +46,7 @@ def call_llm_with_context(query, context):
     )
 
     template = '''
-    Usando o contexto fornecido responde às perguntas do utilizador.
+    Usando o contexto fornecido responde às perguntas do utilizador de forma concisa.
     <query>{query}</query>
     <context>{context}</context>
     '''
@@ -63,15 +64,21 @@ def carregar_as_coisas():
     documents = load_docs(directory)
     print("A separar documentos em chunks...")
     docs = split_docs(documents)
-    
+    print(f"Criados {len(docs)} chunks...")
     print("A criar embeddings...")
-    #embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
-    embeddings = AzureOpenAIEmbeddings(
-        model=modeloAda,
-        azure_endpoint=os.getenv("ModelsEndpoint"),
-        api_key=os.getenv("ModelsKey"),
-        openai_api_version="2024-02-01",
-    )
+    # all-MiniLM-L6-v2	                384
+    # all-MiniLM-L12-v2	                384
+    # all-mpnet-base-v2	                768
+    # sentence-t5-large	                1024
+    # bge-large-en-v1.5	                1024
+    # text-embedding-ada-002 (OpenAI)	1536
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    #embeddings = AzureOpenAIEmbeddings(
+    #    model=modeloAda,
+    #    azure_endpoint=os.getenv("ModelsEndpoint"),
+    #    api_key=os.getenv("ModelsKey"),
+    #    openai_api_version="2024-02-01",
+    #)
     
     print("A guardar documentos na chromaDB local...")
     db = Chroma.from_documents(documents=docs, embedding=embeddings, persist_directory=persistence_directory)
@@ -83,7 +90,7 @@ def carregar_as_coisas():
     vector_store = AzureSearch(
         azure_search_endpoint=os.getenv("AzureUrl"),
         azure_search_key=os.getenv("AzureKey"),
-        index_name="estagio-eduardocarreiro-teste1",
+        index_name="estagio-eduardocarreiro-teste2",
         embedding_function=embeddings,
     )
     
@@ -94,12 +101,13 @@ def carregar_apenas_conexoes():
     global db, vector_store, embeddings
 
     print("A criar embeddings...")
-    embeddings = AzureOpenAIEmbeddings(
-        model=modeloAda,
-        azure_endpoint=os.getenv("ModelsEndpoint"),
-        api_key=os.getenv("ModelsKey"),
-        openai_api_version="2024-02-01",
-    )
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    #embeddings = AzureOpenAIEmbeddings(
+    #    model=modeloAda,
+    #    azure_endpoint=os.getenv("ModelsEndpoint"),
+    #    api_key=os.getenv("ModelsKey"),
+    #    openai_api_version="2024-02-01",
+    #)
 
     print("A conectar à chromaDB local...")
     db = Chroma(persist_directory=persistence_directory, embedding_function=embeddings)
@@ -108,13 +116,14 @@ def carregar_apenas_conexoes():
     vector_store = AzureSearch(
         azure_search_endpoint=os.getenv("AzureUrl"),
         azure_search_key=os.getenv("AzureKey"),
-        index_name="estagio-eduardocarreiro-teste1",
+        index_name="estagio-eduardocarreiro-teste2",
         embedding_function=embeddings,
     )
 
 def delete_all_documents_paged():
     SEARCH_SERVICE_NAME = "amorim-search-service-002"
-    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"
+    #SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"
+    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste2"
     API_KEY = os.getenv("AzureKey")
     # Construir a URL do serviço
     endpoint = f"https://{SEARCH_SERVICE_NAME}.search.windows.net"
@@ -138,7 +147,8 @@ def delete_all_documents_paged():
 
 def print_all_docs():
     SEARCH_SERVICE_NAME = "amorim-search-service-002"
-    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"
+    #SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"   # embeddingsOpenAI
+    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste2"    # all-MiniLM-L12-v2
     API_KEY = os.getenv("AzureKey")
     # Construir a URL do serviço
     endpoint = f"https://{SEARCH_SERVICE_NAME}.search.windows.net"
@@ -151,16 +161,16 @@ def print_all_docs():
     for doc in results:
         print(doc)
         
-delete_all_documents_paged()
+#delete_all_documents_paged()
 #print_all_docs()
-exit(0)
+#exit(0)
 
 db : Chroma = None
 vector_store : AzureSearch = None
 embeddings : AzureOpenAIEmbeddings = None
 
-carregar_as_coisas()
-#carregar_apenas_conexoes()
+#carregar_as_coisas()
+carregar_apenas_conexoes()
 
 sair = False
 while not sair:
