@@ -1,0 +1,91 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "A character in the narrative who is in a park."
+        },
+        {
+            "name": "parque",
+            "category": "Location",
+            "description": "The park where Sofia is located."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "Sofia's home location."
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Path",
+            "description": "The first path that is narrow and has many stones."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Path",
+            "description": "The second path that is wide and has trees and flowers."
+        },
+        {
+            "name": "\u00e1rvores",
+            "category": "Nature",
+            "description": "Trees present along the wide path."
+        },
+        {
+            "name": "vento",
+            "category": "Natural Element",
+            "description": "The wind that Sofia felt while walking."
+        },
+        {
+            "name": "p\u00e1ssaros",
+            "category": "Nature",
+            "description": "Birds that Sofia heard while walking."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "is located in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "wants to go to"
+        },
+        {
+            "source": "parque",
+            "target": "caminho estreito",
+            "value": "has"
+        },
+        {
+            "source": "parque",
+            "target": "caminho largo",
+            "value": "has"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "chose"
+        },
+        {
+            "source": "caminho largo",
+            "target": "\u00e1rvores",
+            "value": "contains"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "felt"
+        },
+        {
+            "source": "Sofia",
+            "target": "p\u00e1ssaros",
+            "value": "heard"
+        },
+        {
+            "source": "Sofia",
+            "target": "sentimento de felicidade",
+            "value": "experienced at the end"
+        }
+    ]
+}

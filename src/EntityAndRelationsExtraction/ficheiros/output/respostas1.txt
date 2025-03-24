@@ -1,0 +1,111 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "A character who is in a park facing two paths."
+        },
+        {
+            "name": "parque",
+            "category": "Place",
+            "description": "The location where Sofia is situated."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Place",
+            "description": "The destination where Sofia wants to go."
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Path",
+            "description": "The first path that is narrow and has many stones."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Path",
+            "description": "The second path that is wide and has trees and flowers."
+        },
+        {
+            "name": "\u00e1rvores",
+            "category": "Nature",
+            "description": "The trees that are present along the wide path."
+        },
+        {
+            "name": "vento",
+            "category": "Natural Element",
+            "description": "The wind that Sofia feels while walking."
+        },
+        {
+            "name": "p\u00e1ssaros",
+            "category": "Wildlife",
+            "description": "The birds that Sofia hears while walking."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "is in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "wants to go to"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho estreito",
+            "value": "is facing"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "is facing"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "chose"
+        },
+        {
+            "source": "caminho estreito",
+            "target": "parque",
+            "value": "is in"
+        },
+        {
+            "source": "caminho largo",
+            "target": "parque",
+            "value": "is in"
+        },
+        {
+            "source": "caminho largo",
+            "target": "\u00e1rvores",
+            "value": "has"
+        },
+        {
+            "source": "Sofia",
+            "target": "\u00e1rvores",
+            "value": "saw"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "felt"
+        },
+        {
+            "source": "Sofia",
+            "target": "p\u00e1ssaros",
+            "value": "heard"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "walked on"
+        },
+        {
+            "source": "Sofia",
+            "target": "feliz",
+            "value": "felt"
+        }
+    ]
+}

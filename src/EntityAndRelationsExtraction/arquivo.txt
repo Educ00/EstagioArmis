@@ -1,0 +1,98 @@
+{
+    "lc": 1,
+    "type": "constructor",
+    "id": [
+        "langchain",
+        "schema",
+        "messages",
+        "AIMessage"
+    ],
+    "kwargs": {
+        "content": {
+            "topic": "Sofia's Journey on the Chosen Path",
+            "entities": [
+                {
+                    "name": "Sofia",
+                    "type": "Person",
+                    "metadata": {
+                        "location": "Path 2",
+                        "feeling": "happy"
+                    }
+                },
+                {
+                    "name": "Path 2",
+                    "type": "Path",
+                    "metadata": {
+                        "description": "Wide with trees and flowers"
+                    }
+                },
+                {
+                    "name": "Trees",
+                    "type": "Plant",
+                    "metadata": {
+                        "relationship_to_path": "found along Path 2"
+                    }
+                },
+                {
+                    "name": "Wind",
+                    "type": "Natural Element",
+                    "metadata": {
+                        "action": "felt by Sofia"
+                    }
+                },
+                {
+                    "name": "Birds",
+                    "type": "Animal",
+                    "metadata": {
+                        "action": "heard by Sofia"
+                    }
+                }
+            ],
+            "relationships": [
+                {
+                    "source_entity": "Sofia",
+                    "target_entity": "Path 2",
+                    "relationship": "chooses"
+                },
+                {
+                    "source_entity": "Sofia",
+                    "target_entity": "Trees",
+                    "relationship": "sees while walking"
+                },
+                {
+                    "source_entity": "Sofia",
+                    "target_entity": "Wind",
+                    "relationship": "feels while walking"
+                },
+                {
+                    "source_entity": "Sofia",
+                    "target_entity": "Birds",
+                    "relationship": "hears while walking"
+                },
+                {
+                    "source_entity": "Path 2",
+                    "target_entity": "Sofia",
+                    "relationship": "provides experience leading to happiness"
+                }
+            ]
+        },
+        "additional_kwargs": {
+            "refusal": null
+        },
+        "response_metadata": {
+            "token_usage": {
+                "completion_tokens": 385,
+                "prompt_tokens": 1043,
+                "total_tokens": 1428
+            },
+            "model_name": "gpt-4o-mini-2024-07-18",
+            "system_fingerprint": "fp_ded0d14823",
+            "id": "chatcmpl-BEZXrWQg1ul7WkpkZ7teFL9SvcFJD"
+        },
+        "usage_metadata": {
+            "input_tokens": 1043,
+            "output_tokens": 385,
+            "total_tokens": 1428
+        }
+    }
+}
