@@ -10,15 +10,15 @@ A fazer
 
 ### Testes Com Flask
 
-[Atalho](./src/flaskAPI)
+[./src/flaskAPI](./src/flaskAPI)
 
 ### Testes Postgres
 
-[Atalho](./src/relationalDB)
+[./src/relationalDB](./src/relationalDB)
 
 ### Testes Indexação de Documentos - Langchain com ChromaDB e Azure AI Search
 
-[Atalho](./src/chroma-langchain)
+[./src/chroma-langchain](./src/chroma-langchain)
 
 ### Implementação Extração de Entidades e Relações
-[Atalho](./src/EntityAndRelationsExtraction)
+[./src/EntityAndRelationsExtraction](./src/EntityAndRelationsExtraction)
