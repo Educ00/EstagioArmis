@@ -21,4 +21,4 @@ A fazer
 [./src/chroma-langchain](./src/chroma-langchain)
 
 ### Implementação Extração de Entidades e Relações
-[./src/EntityAndRelationsExtraction](./src/EntityAndRelationsExtraction)
+[./src/EntityAndRelationsExtraction](./src/Neo4jIntegration)
