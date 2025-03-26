@@ -71,6 +71,8 @@ def format_string(string: str, remove_spaces=False):
             final = final + chunk
     else:
         final = string.capitalize()
+        
+    final = ''.join(char for char in final if char.isalnum() or char == " ")
 
     return final
 
