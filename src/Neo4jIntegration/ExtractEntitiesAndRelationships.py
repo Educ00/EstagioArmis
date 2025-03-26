@@ -151,7 +151,7 @@ def initialize_azureOpenAI_llm(model_deployment_name: str, azure_endpoint: str, 
     )
 
     if output_schema:
-        llm = llm.with_structured_output(json_schema1)
+        llm = llm.with_structured_output(output_schema)
 
     return llm
 
