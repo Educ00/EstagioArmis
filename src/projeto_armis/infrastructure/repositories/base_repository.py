@@ -1,7 +1,7 @@
-from infrastructure.persistence.connection import DatabaseConnection
+from infrastructure.adapters.neo4j_connection import Neo4jConnection
 
 class BaseRepository:
-    def __init__(self, connection : DatabaseConnection):
+    def __init__(self, connection : Neo4jConnection):
         self.db = connection
         
     def run_query(self, query: str, params: dict = None):

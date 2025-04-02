@@ -3,7 +3,7 @@ from os import getenv
 
 from langchain_neo4j import Neo4jGraph
 
-class DatabaseConnection:
+class Neo4jConnection:
     def __init__(self):    
         print("A iniciar conexão a base de dados...")
         self.db = Neo4jGraph(url=getenv("NEO4J_URI"), username=getenv("NEO4J_USERNAME"),
