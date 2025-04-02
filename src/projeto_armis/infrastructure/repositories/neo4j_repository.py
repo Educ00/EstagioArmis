@@ -1,0 +1,38 @@
+from infrastructure.repositories.base_repository import BaseRepository
+
+
+class Neo4jRepository(BaseRepository):
+    
+    def import_nodes(self, nodes: (str, str, str)) -> int:        
+        i = 0
+        for node in nodes:
+            name, category, description = node
+            name = self._format_string(name, remove_spaces=True)
+            category = self._format_string(category, remove_spaces=True)
+            description = self._format_string(description)
+            query_template = f"CREATE (:{category} {{name: $name, description: $description}});"
+            self.run_query(query=query_template, params={"name": name, "description": description})
+            i += 1
+        return i
+    
+    def get_all_nodes(self):
+        query_template = '''
+        MATCH (m) return m
+        '''
+        results = self.run_query(query=query_template)
+        return results
+
+    def _format_string(self, string: str, remove_spaces=False):
+        final = ""
+        if " " in string and remove_spaces:
+            temp = string.split(" ")
+            for i, chunk in enumerate(temp):
+                temp[i] = chunk.capitalize()
+            for chunk in temp:
+                final = final + chunk
+        else:
+            final = string.capitalize()
+    
+        final = ''.join(char for char in final if char.isalnum() or char == " ")
+    
+        return final

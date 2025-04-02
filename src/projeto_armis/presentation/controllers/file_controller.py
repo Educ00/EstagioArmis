@@ -1,13 +1,16 @@
+from dependency_injector.wiring import inject, Provide
 from flask import Blueprint, jsonify, request
-import os
 
-from services.files_service import FilesService
+from application.services.files_service import FilesService
+
+from dependency_container import DependencyContainer
 
 files_blueprint = Blueprint("Files", __name__)
 
 
 @files_blueprint.route("/import-file", methods=["POST"])
-def upload_file():
+@inject
+def upload_file(file_service : FilesService = Provide[DependencyContainer.files_service]):
     if 'file' not in request.files:
         return jsonify({"error": "Nenhum arquivo enviado"}), 400
 
@@ -15,7 +18,6 @@ def upload_file():
     if file.filename == '':
         return jsonify({"error": "Nome de arquivo inválido"}), 400
 
-    service = FilesService()
-    result = service.upload_file(file)
+    result = file_service.upload_file(file)
 
     return jsonify(result), 201
