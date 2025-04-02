@@ -5,7 +5,7 @@ from dependency_container import DependencyContainer
 
 from flask import Blueprint, jsonify
 
-neo4j_blueprint = Blueprint("TESTE", __name__)
+neo4j_blueprint = Blueprint("Neo4j", __name__)
 
 @neo4j_blueprint.route('/get-all-nodes', methods=['GET'])
 @inject
