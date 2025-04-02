@@ -7,7 +7,7 @@ from flask import Blueprint, jsonify
 
 neo4j_blueprint = Blueprint("TESTE", __name__)
 
-@teste_blueprint.route('/get-all-graph-info', methods=['GET'])
+@neo4j_blueprint.route('/get-all-nodes', methods=['GET'])
 @inject
 def get_all_nodes(service : Neo4jService= Provide[DependencyContainer.neo4j_service]):
     results = service.get_all_nodes()
