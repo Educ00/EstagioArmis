@@ -1,0 +1,11 @@
+*.env
+
+venv2
+
+.idea
+
+chroma_db
+
+db
+
+uploads
