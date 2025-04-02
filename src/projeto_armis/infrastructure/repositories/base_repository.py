@@ -1,8 +1,4 @@
-from langchain_neo4j import Neo4jGraph
-
 from infrastructure.persistence.connection import DatabaseConnection
-
-from os import getenv
 
 class BaseRepository:
     def __init__(self, connection : DatabaseConnection):
