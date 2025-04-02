@@ -21,6 +21,12 @@ class Neo4jRepository(BaseRepository):
         '''
         results = self.run_query(query=query_template)
         return results
+    
+    def clean_db(self) -> None:
+        query_template = '''
+        MATCH (m) detach delete m
+        '''
+        self.run_query(query_template)
 
     def _format_string(self, string: str, remove_spaces=False):
         final = ""

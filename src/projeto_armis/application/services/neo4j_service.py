@@ -10,4 +10,7 @@ class Neo4jService:
     
     def import_nodes(self, nodes: (str, str, str)) -> int :
         return self.repository.import_nodes(nodes)
+
+    def clean_db(self):
+        return self.repository.clean_db()
         

@@ -5,10 +5,16 @@ from dependency_container import DependencyContainer
 
 from flask import Blueprint, jsonify
 
-teste_blueprint = Blueprint("TESTE", __name__)
+neo4j_blueprint = Blueprint("TESTE", __name__)
 
 @teste_blueprint.route('/get-all-graph-info', methods=['GET'])
 @inject
-def get_application_status(service : Neo4jService= Provide[DependencyContainer.neo4j_service]):
+def get_all_nodes(service : Neo4jService= Provide[DependencyContainer.neo4j_service]):
     results = service.get_all_nodes()
     return jsonify(results), 200
+
+@neo4j_blueprint.route("/clean-db", methods=["GET"])
+@inject
+def clean_db(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    service.clean_db()
+    return jsonify({"message": "done!"}), 200
