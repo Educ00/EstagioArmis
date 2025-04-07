@@ -49,13 +49,15 @@ ENTITIES:
 RELATIONSHIPS:
 - Only connect entities in your entities list
 - Specify directionality (source_entity → target_entity via relationship)
-- Capture all meaningful connections
+- Capture all meaningful connections, either direct or implicit
 
 REQUIREMENTS:
 - Be comprehensive - extract all information in one pass
 - Maintain consistent terminology
 - Base all extractions strictly on text content, not external knowledge
 - Produce a clean JSON.
+- Be aware of duplicates, provided in the context.
+- Respect the context.
 '''
 
 json_schema1 = {
