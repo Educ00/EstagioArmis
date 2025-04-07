@@ -15,6 +15,24 @@ class Neo4jRepository(BaseRepository):
             i += 1
         return i
     
+    def import_relationships(self, relationships: (str, str, str)) -> int:
+        i = 0
+        for relationship in relationships:
+            source, target, value = relationship
+            source = self._format_string(source, remove_spaces=True)
+            target = self._format_string(target, remove_spaces=True)
+            value = self._format_string(value, remove_spaces=True)
+    
+            query_template = f"""
+                MATCH (source {{name: $source}}), (target {{name: $target}})
+                CREATE (source)-[:{value}]->(target);
+                """
+            print(f"source: {source}, target: {target}, value: {value}")
+            self.run_query(query_template, params={"source": source, "target": target})
+            i += 1
+        return i
+            
+    
     def get_all_nodes(self):
         query_template = '''
         MATCH (m) return m

@@ -14,9 +14,8 @@ class AzureService:
         
     def extract_entities_and_relations(self, file_name: str, save_to_file: bool = True):
         folder_name = current_app.config['UPLOAD_FOLDER']
-        file_path = folder_name + "\\" + file_name
-        print(file_path)
-        chunks = self._split_text(file_path=folder_name + "/" + file_name, chunk_size=250, chunk_overlap=25)
+        file_path = folder_name + "/" + file_name
+        chunks = self._split_text(file_path=file_path, chunk_size=250, chunk_overlap=25)
         responses = []
         for chunk in chunks:
             responses.append(self.adapter.call_llm(prompt_template=prompt_template, instructions=prompt_instructions1, text= chunk))

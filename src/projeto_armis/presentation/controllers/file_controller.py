@@ -5,7 +5,7 @@ from application.services.files_service import FilesService
 
 from dependency_container import DependencyContainer
 
-files_blueprint = Blueprint("Files", __name__)
+files_blueprint = Blueprint("Files", __name__, url_prefix="/files")
 
 
 @files_blueprint.route("/import-file", methods=["POST"])
