@@ -7,7 +7,7 @@ from flask import Blueprint, jsonify, request
 
 neo4j_blueprint = Blueprint("Neo4j", __name__, url_prefix="/neo4j")
 
-@neo4j_blueprint.route("import-file", methods=["GET"])
+@neo4j_blueprint.route("/import-file", methods=["GET"])
 @inject
 def import_file(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
     filename = request.args.get("filename")
