@@ -22,7 +22,7 @@ class AzureService:
             responses.append(self.adapter.call_llm(prompt_template=prompt_template, instructions=prompt_instructions1, text= chunk))
         
         if save_to_file:
-            with open(folder_name + "\\" + "resposta", 'w', encoding='utf-8') as outp:  # Overwrites any existing file.
+            with open(folder_name + "\\" + "resposta.txt", 'w', encoding='utf-8') as outp:  # Overwrites any existing file.
                 json.dump(responses[-1], outp, indent=4, ensure_ascii=False)
         
         return responses[-1]
