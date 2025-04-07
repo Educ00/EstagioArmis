@@ -38,27 +38,45 @@ Your task is to ensure that all extracted entities and their relationships are f
 '''
 
 prompt_instructions2 = '''
-Extract all entities and relationships from the text, following these guidelines:
+You are a very smart studint that loves to analyse texts.
+Extract all entities and relationships from the chunk of the text, following these guidelines:
 
 ENTITIES:
-- Specific, meaningful, and non-ambiguous
-- Consolidated to avoid redundancy
+- Specific and non-ambiguous
 - The metadata must have the "name", the "category" and the "description" as fields.
-- All information must be directly from the text
+- All information must be directly from the text or context.
 
 RELATIONSHIPS:
 - Only connect entities in your entities list
 - Specify directionality (source_entity → target_entity via relationship)
-- Capture all meaningful connections, either direct or implicit
+- Capture all direct connections  
+- Capture all implicit connections.
 
 REQUIREMENTS:
-- Be comprehensive - extract all information in one pass
 - Maintain consistent terminology
-- Base all extractions strictly on text content, not external knowledge
+- Base all extractions strictly on text content or context, not external knowledge
+- Be aware of duplicates.
 - Produce a clean JSON.
-- Be aware of duplicates, provided in the context.
-- Respect the context.
+- Merge the results from the for the final answer.
 '''
+
+prompt_instructions3 = """
+Extract ALL entities and relationships from the text or context following these guidelines:
+
+ENTITIES:
+- Include name, category, description
+- Be comprehensive - extract everything
+- No duplicates
+
+RELATIONSHIPS:
+- Connect entities with source → relationship → target
+- Include explicit AND implicit connections
+- Include supporting context
+
+IMPORTANT:
+- Do not try to filter entities or relationships, extract all.
+- All entities are important.
+"""
 
 json_schema1 = {
     "title": "GraphSchema",

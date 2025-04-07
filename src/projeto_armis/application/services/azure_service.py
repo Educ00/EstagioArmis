@@ -3,7 +3,7 @@ from flask import current_app
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from core.constants import prompt_template, prompt_instructions1, prompt_instructions2
+from core.constants import prompt_template, prompt_instructions1, prompt_instructions2, prompt_instructions3
 from infrastructure.adapters.azure_adapter import AzureAdapter
 
 
@@ -18,7 +18,7 @@ class AzureService:
         chunks = self._split_text(file_path=file_path, chunk_size=250, chunk_overlap=25)
         
         messages = [
-            {"role": "system", "content": prompt_instructions2},
+            {"role": "system", "content": prompt_instructions3},
             {"role": "user", "content": "Please follow everything."}
         ]
         response = self.adapter.llm.invoke(messages)
@@ -27,7 +27,7 @@ class AzureService:
 
         responses = []
         for i, chunk in enumerate(chunks):
-            messages.append({"role": "user", "content": f"Chunk #{i + 1}/{len(chunks)}: {chunk}"})
+            messages.append({"role": "user", "content": f"Chunk Content #{i + 1}/{len(chunks)}: {chunk}"})
 
             response = self.adapter.llm.invoke(messages)
             response_str = json.dumps(response)
@@ -43,7 +43,7 @@ class AzureService:
             
 
 
-    def _split_text(self, file_path: str, chunk_size: int = 250, chunk_overlap: int = 50):
+    def _split_text(self, file_path: str, chunk_size: int = 600, chunk_overlap: int = 50):
         loader = TextLoader(file_path)
         documents = loader.load()
     
