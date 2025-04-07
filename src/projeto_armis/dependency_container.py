@@ -18,13 +18,12 @@ class DependencyContainer(containers.DeclarativeContainer):
     config = providers.Configuration()
     wiring_config = containers.WiringConfiguration()
     
-    azure_adapter = providers.Singleton(AzureAdapter)
-    azure_service = providers.Factory(AzureService, adapter=azure_adapter)
-
     neo4j_adapter = providers.Singleton(Neo4jAdapter)
     neo4j_repository = providers.Factory(Neo4jRepository, adapter = neo4j_adapter)
     neo4j_service = providers.Factory(Neo4jService, repository=neo4j_repository)
     
+    azure_adapter = providers.Singleton(AzureAdapter)
+    azure_service = providers.Factory(AzureService, azure_adapter=azure_adapter, neo4j_repository=neo4j_repository)
     
     files_service = providers.Factory(FilesService)
     

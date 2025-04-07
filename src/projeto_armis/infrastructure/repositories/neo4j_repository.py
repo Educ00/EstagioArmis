@@ -60,3 +60,6 @@ class Neo4jRepository(BaseRepository):
         final = ''.join(char for char in final if char.isalnum() or char == " ")
     
         return final
+
+    def get_schema(self):
+        return self.adapter.db.get_schema
