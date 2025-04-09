@@ -6,7 +6,11 @@ modeloGpt4omini = "GPT-4o-mini"
 openaiApiVersion = "2024-10-21"
 openAiApiType = "azure"
 
-prompt_template = '''
+prompt_template0 = """
+<instructions>{instructions}</instructions>
+"""
+
+prompt_template1 = '''
 <instructions>{instructions}</instructions>
 <text>{text}</text>
 '''
@@ -91,7 +95,7 @@ IMPORTANT:
 """
 
 instructions_generate_cypher_query = """
-    Task: Generate Cypher queries to query a Neo4j graph database based on the provided schema definition.
+    Task: Generate Cypher queries to query a Neo4j graph database based on the provided schema definition. Care about the context of the question.
     Instructions:
     Use only the provided relationship types and properties.
     Do not use any other relationship types or properties that are not provided.
@@ -111,6 +115,19 @@ Instructions:
 - Provide only the phrase.
 - You can use the answer to create a well-structured and polished response.
 - Focus on making it sound natural and clear.
+"""
+
+instructions_group_results = """
+Task: Format the given text following the instructions:
+Instructions:
+- Combine the provided JSON lists into a single clean JSON.
+- Place all entities in the 'entities' list and all relationships in the 'relationships' list.
+- Remove duplicates from both lists based on the following rules:
+  - Entities with the same `name` (case-insensitive) and similar `description` or `category` are considered duplicates. For example, "árvores" and "Árvores" are the same entity.
+  - Entities with the same name (ignoring capitalization) but different categories or descriptions can be considered duplicates if the differences are minimal or refer to the same concept.
+  - For relationships, ensure no duplicate entries based on the same `source`, `target`, and `value`. If the combination of these is identical, treat it as a duplicate.
+  - Relationships with the same `source` and `target` but completely different 'value' are not duplicates.
+- Ensure that no field is altered or removed.
 """
 
 

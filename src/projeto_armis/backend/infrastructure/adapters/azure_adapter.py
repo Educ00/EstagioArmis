@@ -8,39 +8,31 @@ from core.constants import modeloGpt4omini, openaiApiVersion, openAiApiType, jso
 
 
 class AzureAdapter:
+    llm = None
     def __init__(self):
-        self.llm = AzureChatOpenAI(
-            openai_api_version=openaiApiVersion,
-            #deployment_name=modeloGpt4o,
-            deployment_name=modeloGpt4omini,
-            azure_endpoint=getenv("MODELS_ENDPOINT"),
-            openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
-            openai_api_type=openAiApiType,
-        ).with_structured_output(json_schema1)
+        self.llm = self.get_llm()
         
-    def create_new(self):
+    def get_llm(self):
+        if self.llm is None:
+            self.create_new_llm()
+        return self.llm
+    
+    def create_new_llm(self, json_schema=None):
         print("Initializing LLM instance...")
-        self.llm = AzureChatOpenAI(
+        temp_llm = AzureChatOpenAI(
             openai_api_version=openaiApiVersion,
-            #deployment_name=modeloGpt4o,
-            deployment_name=modeloGpt4omini,
+            deployment_name=modeloGpt4o,
+            #deployment_name=modeloGpt4omini,
             azure_endpoint=getenv("MODELS_ENDPOINT"),
             openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
             openai_api_type=openAiApiType,
         )
-        print("Done")
         
-    def create_new_with_output_schema(self, json_schema):
-        print("Initializing LLM instance with structured output...")
-        self.llm = AzureChatOpenAI(
-            openai_api_version=openaiApiVersion,
-            #deployment_name=modeloGpt4o,
-            deployment_name=modeloGpt4omini,
-            azure_endpoint=getenv("MODELS_ENDPOINT"),
-            openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
-            openai_api_type=openAiApiType,
-        ).with_structured_output(json_schema)
-        print("DONE!")
+        if json_schema:
+            print("   With schema...")
+            temp_llm = temp_llm.with_structured_output(json_schema)
+        self.llm = temp_llm
+        print("Done")
         
         
 
@@ -49,6 +41,7 @@ class AzureAdapter:
         prompt_template = PromptTemplate.from_template(prompt_template)
         prompt = prompt_template.format(**kwargs)
         message = HumanMessage(content=prompt)
+        print(" Thinking...")
         response = self.llm.invoke([message])
         print("Done")
         return response
