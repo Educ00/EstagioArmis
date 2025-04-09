@@ -3,7 +3,12 @@ from infrastructure.repositories.base_repository import BaseRepository
 
 class Neo4jRepository(BaseRepository):
     
-    def import_nodes(self, nodes: (str, str, str)) -> int:        
+    def import_nodes(self, nodes: (str, str, str)) -> int:
+        """
+        Imports a node to the database. 
+        :param nodes: tuple of string (name, category, description)
+        :return: number of relationships
+        """
         i = 0
         for node in nodes:
             name, category, description = node
@@ -16,6 +21,11 @@ class Neo4jRepository(BaseRepository):
         return i
     
     def import_relationships(self, relationships: (str, str, str)) -> int:
+        """
+        Imports a relationship to the database. 
+        :param relationships: tuple of string (origin node, target node, value)
+        :return: number of relationships
+        """
         i = 0
         for relationship in relationships:
             source, target, value = relationship
@@ -34,6 +44,10 @@ class Neo4jRepository(BaseRepository):
             
     
     def get_all_nodes(self):
+        """
+        Returns all nodes
+        :return: nodes
+        """
         query_template = '''
         MATCH (m) return m
         '''
@@ -41,12 +55,21 @@ class Neo4jRepository(BaseRepository):
         return results
     
     def clean_db(self) -> None:
+        """
+        Clean Entire Database
+        """
         query_template = '''
         MATCH (m) detach delete m
         '''
         self.run_query(query_template)
 
     def _format_string(self, string: str, remove_spaces=False):
+        """
+        Capitalizes the first word. If the remove_spaces parameter is set to True, joins the words and capitalizes the first letter of each word.
+        :param string: String to format 
+        :param remove_spaces: If True, removes spaces from the string
+        :return: formated string
+        """
         final = ""
         if " " in string and remove_spaces:
             temp = string.split(" ")
@@ -62,5 +85,9 @@ class Neo4jRepository(BaseRepository):
         return final
 
     def get_schema(self):
+        """
+        Refreshes the schema of the database and returns it.
+        :return: schema
+        """
         self.adapter.db.refresh_schema()
         return self.adapter.db.get_schema

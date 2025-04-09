@@ -13,11 +13,19 @@ class AzureAdapter:
         self.llm = self.get_llm()
         
     def get_llm(self):
+        """
+        Retrieves the instance of the AzureChatOpenAI
+        :return: AzureChatOpenAI instance
+        """
         if self.llm is None:
             self.create_new_llm()
         return self.llm
     
     def create_new_llm(self, json_schema=None):
+        """
+        Saves an instance of AzureChatOpenAI
+        :param json_schema: json_schema of the output
+        """
         print("Initializing LLM instance...")
         temp_llm = AzureChatOpenAI(
             openai_api_version=openaiApiVersion,
@@ -37,6 +45,12 @@ class AzureAdapter:
         
 
     def call_llm(self,prompt_template: str, **kwargs):
+        """
+        Calls an LLM and retrieves the answer 
+        :param prompt_template: template of the prompt
+        :param kwargs: parameters of the prompt template
+        :return: response of LLM
+        """
         print("Calling LLM")
         prompt_template = PromptTemplate.from_template(prompt_template)
         prompt = prompt_template.format(**kwargs)

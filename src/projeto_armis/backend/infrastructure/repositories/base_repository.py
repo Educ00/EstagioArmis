@@ -5,5 +5,10 @@ class BaseRepository:
         self.adapter = adapter
         
     def run_query(self, query: str, params: dict = None):
-        """Executa uma query Cypher no Neo4j"""
+        """
+        Runs a query in the database
+        :param query: query
+        :param params: parameters of the query
+        :return: query results
+        """
         return self.adapter.run_query(query, params or {})

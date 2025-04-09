@@ -20,6 +20,11 @@ class AzureService:
         self.neo4j_repository = neo4j_repository
         
     def make_question(self, question):
+        """
+        Accepts a question and return an answer.
+        :param question: question string
+        :return: response and info
+        """
         query, answer = self.generate_query_and_query(question)
         self.azure_adapter.create_new_llm(json_schema=json_schema2)
         print("Formatting Answer...")
@@ -28,6 +33,12 @@ class AzureService:
         
     
     def generate_query_and_query(self, question, max_correction_attempts : int = 5):
+        """
+        Accepts a question, converts to a valid Chyper query and retreives the query result.
+        :param question: question to parse to Cypher
+        :param max_correction_attempts: max number of correction attempts
+        :return: Query results or error message.
+        """
         print("Generating query...")
         graph_schema = self.neo4j_repository.get_schema()
         self.azure_adapter.create_new_llm(json_schema=json_schema2)
@@ -51,6 +62,12 @@ class AzureService:
         
         
     def extract_entities_and_relations(self, file_name: str, save_to_file: bool = True):
+        """
+        Extracts entities and relationships from a file.
+        :param file_name: name of the file
+        :param save_to_file: if True, saves to resposta.txt in outputs folder
+        :return: JSON with entities and relationships
+        """
         self.azure_adapter.create_new_llm(json_schema=json_schema1)
 
         upload_folder_name = current_app.config['UPLOAD_FOLDER']
@@ -84,6 +101,13 @@ class AzureService:
 
 
     def _split_text(self, file_path: str, chunk_size: int = 600, chunk_overlap: int = 50):
+        """
+        Splits a file in to designated chunks.
+        :param file_path: path for the file
+        :param chunk_size: size of the chunks
+        :param chunk_overlap: overlap beetween the chunks
+        :return: list of Document objects
+        """
         loader = TextLoader(file_path)
         documents = loader.load()
     

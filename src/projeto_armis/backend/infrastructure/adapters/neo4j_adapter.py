@@ -11,9 +11,18 @@ class Neo4jAdapter:
         print("Conexão estabelecida!")
 
     def run_query(self, query: str, params: dict = None):
-        """Executa uma query Cypher no Neo4j"""
+        """
+        Runs a query in the database
+        :param query: query
+        :param params: parameters of the query
+        :return: query results
+        """
         result = self.db.query(query, params or {})
         return result
 
     def initialize_db(self):
+        """
+        Initializes the Neo4jGraph instance
+        :return: Neo4jGraph instance
+        """
         return self.db
