@@ -12,7 +12,7 @@ azure_blueprint = Blueprint("Azure", __name__, url_prefix="/azure")
 @inject
 def generate_query(service: AzureService = Provide[DependencyContainer.azure_service]):
     try:
-        response = service.generate_query("Por onde foi a Sofia?")
+        response = service.generate_query_and_query("Por onde foi a Sofia?")
         print(response)
         return jsonify(response), 400
     except Exception as e:

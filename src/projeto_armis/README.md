@@ -2,6 +2,10 @@
 
 ## ENDPOINTS
 
+### GET: /chat/make-question
+
+Makes a question and provides the answer.
+
 ### GET: /favicon.ico
 
 Gives the icon.

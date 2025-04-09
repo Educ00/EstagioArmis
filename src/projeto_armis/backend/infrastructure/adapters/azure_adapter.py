@@ -13,25 +13,42 @@ class AzureAdapter:
             openai_api_version=openaiApiVersion,
             #deployment_name=modeloGpt4o,
             deployment_name=modeloGpt4omini,
-            azure_endpoint=getenv("ModelsEndpoint"),
-            openai_api_key=getenv("ModelsKey"),
+            azure_endpoint=getenv("MODELS_ENDPOINT"),
+            openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
             openai_api_type=openAiApiType,
         ).with_structured_output(json_schema1)
         
-    def set_output_schema(self, json_schema):
+    def create_new(self):
+        print("Initializing LLM instance...")
         self.llm = AzureChatOpenAI(
             openai_api_version=openaiApiVersion,
             #deployment_name=modeloGpt4o,
             deployment_name=modeloGpt4omini,
-            azure_endpoint=getenv("ModelsEndpoint"),
-            openai_api_key=getenv("ModelsKey"),
+            azure_endpoint=getenv("MODELS_ENDPOINT"),
+            openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
+            openai_api_type=openAiApiType,
+        )
+        print("Done")
+        
+    def create_new_with_output_schema(self, json_schema):
+        print("Initializing LLM instance with structured output...")
+        self.llm = AzureChatOpenAI(
+            openai_api_version=openaiApiVersion,
+            #deployment_name=modeloGpt4o,
+            deployment_name=modeloGpt4omini,
+            azure_endpoint=getenv("MODELS_ENDPOINT"),
+            openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
             openai_api_type=openAiApiType,
         ).with_structured_output(json_schema)
+        print("DONE!")
+        
         
 
     def call_llm(self,prompt_template: str, **kwargs):
+        print("Calling LLM")
         prompt_template = PromptTemplate.from_template(prompt_template)
         prompt = prompt_template.format(**kwargs)
         message = HumanMessage(content=prompt)
         response = self.llm.invoke([message])
+        print("Done")
         return response

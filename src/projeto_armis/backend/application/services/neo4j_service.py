@@ -9,14 +9,14 @@ class Neo4jService:
     def get_all_nodes(self):
         return self.repository.get_all_nodes()
     
-    def import_file(self, filename: str):           
+    def import_file(self, filename: str):  
         imported_nodes = self.import_nodes(filename)
         imported_relationships = self.import_relationships(filename)
         return imported_nodes, imported_relationships
     
     
     def import_nodes(self, filename : str):
-        folder_name = current_app.config['UPLOAD_FOLDER']
+        folder_name = current_app.config['OUTPUT_FOLDER']
         file_path = folder_name + "/" + filename
         print(file_path)
         with open(file_path, "r", encoding="utf-8") as json_data:
@@ -29,7 +29,7 @@ class Neo4jService:
         return self.repository.import_nodes(nodes)
 
     def import_relationships(self, filename : str):
-        folder_name = current_app.config['UPLOAD_FOLDER']
+        folder_name = current_app.config['OUTPUT_FOLDER']
         file_path = folder_name + "/" + filename
         print(file_path)
         with open(file_path, "r", encoding="utf-8") as json_data:
