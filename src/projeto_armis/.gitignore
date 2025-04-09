@@ -9,5 +9,6 @@ chroma_db
 db
 
 uploads
+outputs
 
 __pycache__
