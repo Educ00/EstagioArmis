@@ -62,4 +62,5 @@ class Neo4jRepository(BaseRepository):
         return final
 
     def get_schema(self):
+        self.adapter.db.refresh_schema()
         return self.adapter.db.get_schema

@@ -90,8 +90,9 @@ RELATIONSHIPS:
 - Include supporting context
 
 IMPORTANT:
+- The more complete the database is the better.
 - Do not try to filter entities or relationships, extract all.
-- All entities are important.
+- All entities and relationships are important.
 """
 
 instructions_generate_cypher_query = """
@@ -128,6 +129,7 @@ Instructions:
   - For relationships, ensure no duplicate entries based on the same `source`, `target`, and `value`. If the combination of these is identical, treat it as a duplicate.
   - Relationships with the same `source` and `target` but completely different 'value' are not duplicates.
 - Ensure that no field is altered or removed.
+- Ensure that all relationships in their final list relate to entities in their final list.
 """
 
 
