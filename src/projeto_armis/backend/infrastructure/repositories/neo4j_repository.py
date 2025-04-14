@@ -1,46 +1,52 @@
+from application.dtos.entity_dto import EntityDTO
+from application.dtos.relationship_dto import RelationshipDTO
+from application.mappers.entity_mapper import EntityMapper
+from application.mappers.relationship_mapper import RelationshipMapper
+from domain.models.entity import Entity
+from domain.models.relationship import Relationship
 from infrastructure.repositories.base_repository import BaseRepository
 
 
 class Neo4jRepository(BaseRepository):
     
-    def import_nodes(self, nodes: (str, str, str)) -> int:
+    def import_nodes(self, nodes: list[Entity]) -> list[EntityDTO]:
         """
         Imports a node to the database. 
         :param nodes: tuple of string (name, category, description)
-        :return: number of relationships
+        :return: [EntityDTO]
         """
-        i = 0
+        list_to_return : list[EntityDTO] = []        
         for node in nodes:
-            name, category, description = node
+            name, category, description = node.name, node.category, node.description
             name = self._format_string(name, remove_spaces=True)
             category = self._format_string(category, remove_spaces=True)
             description = self._format_string(description)
             query_template = f"CREATE (:{category} {{name: $name, description: $description}});"
             self.run_query(query=query_template, params={"name": name, "description": description})
-            i += 1
-        return i
+            list_to_return.append(EntityMapper.to_dto(node))
+        return list_to_return
     
-    def import_relationships(self, relationships: (str, str, str)) -> int:
+    def import_relationships(self, relationships: list[Relationship]) -> list[RelationshipDTO]:
         """
         Imports a relationship to the database. 
         :param relationships: tuple of string (origin node, target node, value)
-        :return: number of relationships
+        :return: [RelationshipDTO]
         """
-        i = 0
+        list_to_return : list[RelationshipDTO] = []
         for relationship in relationships:
-            source, target, value = relationship
+            source, target, value = relationship.source, relationship.target, relationship.value
             source = self._format_string(source, remove_spaces=True)
             target = self._format_string(target, remove_spaces=True)
             value = self._format_string(value, remove_spaces=True)
-    
             query_template = f"""
                 MATCH (source {{name: $source}}), (target {{name: $target}})
                 CREATE (source)-[:{value}]->(target);
                 """
             print(f"source: {source}, target: {target}, value: {value}")
+            
             self.run_query(query_template, params={"source": source, "target": target})
-            i += 1
-        return i
+            list_to_return.append(RelationshipMapper.to_dto(relationship))
+        return list_to_return
             
     
     def get_all_nodes(self):

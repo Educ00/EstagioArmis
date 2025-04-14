@@ -1,9 +1,12 @@
+import json
+
 from dependency_injector.wiring import inject, Provide
 
+from application.dtos.response_dto import ResponseDTO
 from application.services.neo4j_service import Neo4jService
 from dependency_container import DependencyContainer
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request, make_response
 
 neo4j_blueprint = Blueprint("Neo4j", __name__, url_prefix="/neo4j")
 
@@ -17,12 +20,17 @@ def import_file(service : Neo4jService = Provide[DependencyContainer.neo4j_servi
     """
     filename = request.args.get("filename")
     if not filename:
-        return jsonify({"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuficheiro.txt"}), 400
+        return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuficheiro.txt"}, 400
     try:
-        results = service.import_file(filename)
+        imported_nodes, imported_relationships = service.import_file(filename)
+        response_dto : ResponseDTO = ResponseDTO(
+            title="Ficheiro Importado!", 
+            imported_nodes=[node.to_dict() for node in imported_nodes],
+            imported_relationships=[rel.to_dict() for rel in imported_relationships]
+        )
+        return response_dto.to_dict(), 201
     except Exception as e:
-        return jsonify(str(e)), 400
-    return jsonify(results), 201
+        return {"error": str(e)}, 400
 
 @neo4j_blueprint.route("/import-nodes", methods=["GET"])
 @inject
@@ -35,12 +43,13 @@ def import_nodes(service : Neo4jService = Provide[DependencyContainer.neo4j_serv
     """
     filename = request.args.get("filename")
     if not filename:
-        return jsonify({"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}), 400
+        return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}, 400
     try:
-        results = service.import_nodes(filename)
+        result = service.import_nodes(filename)
+        response_dto : ResponseDTO = ResponseDTO(title="Nodes Importados!")
+        return response_dto.to_dict(), 201
     except Exception as e:
-        return jsonify(str(e)), 400
-    return jsonify(results), 201
+        return {"error": str(e)}, 400
 
 @neo4j_blueprint.route("/import-relationships", methods=["GET"])
 @inject
@@ -53,12 +62,12 @@ def import_relationships(service : Neo4jService = Provide[DependencyContainer.ne
     """
     filename = request.args.get("filename")
     if not filename:
-        return jsonify({"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}), 400
+        return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}, 400
     try:
         results = service.import_relationships(filename)
+        return [dto.to_dict() for dto in results], 201
     except Exception as e:
-        return jsonify(str(e)), 400
-    return jsonify(results), 201
+        return {"error": str(e)}, 400
 
 @neo4j_blueprint.route('/get-all-nodes', methods=['GET'])
 @inject
@@ -71,9 +80,9 @@ def get_all_nodes(service : Neo4jService= Provide[DependencyContainer.neo4j_serv
     """
     try:
         results = service.get_all_nodes()
+        return json.dumps(results), 200
     except Exception as e:
-        return jsonify(str(e)), 400
-    return jsonify(results), 200
+        return {"error": str(e)}, 400
 
 @neo4j_blueprint.route("/clean-db", methods=["GET"])
 @inject
@@ -86,6 +95,7 @@ def clean_db(service : Neo4jService = Provide[DependencyContainer.neo4j_service]
     """
     try:
         service.clean_db()
+        return {"message": "done!"}, 200
     except Exception as e:
-        return jsonify(str(e)), 400
-    return jsonify({"message": "done!"}), 200
+        return {"error": str(e)}, 400
+

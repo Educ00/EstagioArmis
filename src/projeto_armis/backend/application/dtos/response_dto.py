@@ -1,18 +1,22 @@
-from flask import jsonify
+import json
 
 class ResponseDTO:
-    def __init__(self, response_code: int, body: str, metadata: {str}):
-        self.response_code : int = response_code
-        self.body : str = body
-        self.metadata : {str} = metadata
+    def __init__(self, title: str, **kwargs):
+        self.title : str = title
+        self.body : dict = kwargs
         
-    def dto_json(self):
+    def to_dict(self):
         """
-        Converts the current object to JSON using flask.jsonify
-        :return: JSON
+        Converts the current object to dict
+        :return: dict
         """
-        return jsonify({
-            "response_code": self.response_code,
-            "body": self.body,
-            "metadata": self.metadata
-        })
+        return {
+            "title": self.title,
+            "body": self.body
+        }
+    
+    def __str__(self):
+        json.dumps(self.to_dict())
+
+    def __repr__(self):
+        return self.__str__()
