@@ -6,7 +6,10 @@ from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from neo4j.exceptions import CypherSyntaxError
+from urllib3.util.request import body_to_chunks
 
+from application.dtos.response_dto import ResponseDTO
+from application.mappers.response_mapper import ResponseMapper
 from core.constants import prompt_template1, prompt_instructions1, prompt_instructions2, prompt_instructions3, \
     json_schema1, json_schema2, prompt_template2, instructions_correct_syntax, instructions_generate_cypher_query, \
     prompt_template3, instructions_format_answer_to_question, prompt_template0, instructions_group_results
@@ -19,17 +22,19 @@ class AzureService:
         self.azure_adapter = azure_adapter
         self.neo4j_repository = neo4j_repository
         
-    def make_question(self, question):
+    def make_question(self, question) -> ResponseDTO:
         """
         Accepts a question and return an answer.
         :param question: question string
-        :return: response and info
+        :return: ResponseDTO
         """
         query, answer = self.generate_query_and_query(question)
         self.azure_adapter.create_new_llm(json_schema=json_schema2)
         print("Formatting Answer...")
         llm_response = self.azure_adapter.call_llm(prompt_template=prompt_template3, instructions=instructions_format_answer_to_question, question=question, answer=answer)
-        return llm_response["response"], query, answer
+        metadata = {query, answer}
+        response_dto = ResponseMapper.to_response_dto(response_code=400, body=llm_response["response"], metadata=metadata)
+        return response_dto
         
     
     def generate_query_and_query(self, question, max_correction_attempts : int = 5):

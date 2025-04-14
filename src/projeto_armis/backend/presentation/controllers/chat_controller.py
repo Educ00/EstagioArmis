@@ -1,10 +1,11 @@
 from dependency_injector.wiring import inject, Provide
 
+from application.dtos.response_dto import ResponseDTO
 from application.services.azure_service import AzureService
 
 from dependency_container import DependencyContainer
 
-from flask import Blueprint, jsonify, current_app, request
+from flask import Blueprint, jsonify, request
 
 chat_blueprint = Blueprint("Chat", __name__, url_prefix="/chat")
 
@@ -16,7 +17,7 @@ def make_question(service: AzureService = Provide[DependencyContainer.azure_serv
         if not question:
             return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
         
-        response = service.make_question(question)
-        return jsonify(response), 200
+        response_dto : ResponseDTO = service.make_question(question)
+        return response_dto.to_json()
     except Exception as e:
         return jsonify(str(e)), 400
