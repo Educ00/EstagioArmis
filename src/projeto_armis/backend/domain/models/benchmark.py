@@ -60,11 +60,14 @@ class Benchmark:
 
         total_time_ms = (self.execution_end_datetime - self.execution_start_datetime).total_seconds() * 1000
         print(f"Total execution time: {total_time_ms:.2f} ms")
-
+        total_thinking_time = 0
         print("\n--- LLM Thinking Time ---")
         for name, start, end in self.spent_llm_datetime_frames:
             duration = (end - start).total_seconds() * 1000
+            total_thinking_time += duration
             print(f"  {name}: {duration:.2f} ms")
+        print(f"Total Thinking Time: {total_thinking_time:.2f} ms")
+        print(f"Real execution Time: {total_time_ms - total_thinking_time:.2f} ms")
 
         print("\n--- Token Counts ---")
         print("Input tokens:")
