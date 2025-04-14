@@ -3,6 +3,7 @@ from datetime import datetime
 
 class Benchmark:
     # TODO: Add timeframes of database operations
+    # TODO: Add token info
     def __init__(self):
         self.completion_model: str = ""
         self.embeddings_model: str = ""
