@@ -20,22 +20,26 @@ class AzureService:
         self.azure_adapter = azure_adapter
         self.neo4j_repository = neo4j_repository
         
-    def make_question(self, question) -> ResponseDTO:
+    def make_question(self, question) :
         """
         Accepts a question and return an answer.
         :param question: question string
         :return: ResponseDTO
         """
-        query, answer = self.generate_query_and_query(question)
+        
+        # neo4j
+        query, query_response = self.generate_chyper_query_and_query_neo4j(question)
         self.azure_adapter.create_new_llm(json_schema=json_schema2)
         print("Formatting Answer...")
-        llm_response = self.azure_adapter.call_llm(prompt_template=prompt_template3, instructions=instructions_format_answer_to_question, question=question, answer=answer)
-        metadata = {query, answer}
-        response_dto = ResponseDTO(response_code=400, title="Question Response" ,body=llm_response["response"], metadata=metadata)
-        return response_dto
+        llm_response = self.azure_adapter.call_llm(prompt_template=prompt_template3, instructions=instructions_format_answer_to_question, question=question, answer=query_response)
+        return {
+            "llm_response": llm_response["response"],
+            "query": query,
+            "query_result": query_response
+        }
         
     
-    def generate_query_and_query(self, question, max_correction_attempts : int = 5):
+    def generate_chyper_query_and_query_neo4j(self, question, max_correction_attempts : int = 5):
         """
         Accepts a question, converts to a valid Chyper query and retreives the query result.
         :param question: question to parse to Cypher

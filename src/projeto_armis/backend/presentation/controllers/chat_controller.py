@@ -18,6 +18,7 @@ def make_question(service: AzureService = Provide[DependencyContainer.azure_serv
             return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
         
         response_dto : ResponseDTO = service.make_question(question)
-        return make_response(response_dto.to_dict(), 200)
+        print("hehe")
+        return make_response(response_dto, 200)
     except Exception as e:
         return jsonify(str(e)), 400
