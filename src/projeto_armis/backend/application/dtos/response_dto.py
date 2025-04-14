@@ -1,10 +1,10 @@
 from flask import jsonify
 
 class ResponseDTO:
-    def __init__(self, response_code: int, body: str, metadata: str):
-        self.response_code = response_code
-        self.title = body
-        self.metadata = metadata
+    def __init__(self, response_code: int, body: str, metadata: {str}):
+        self.response_code : int = response_code
+        self.body : str = body
+        self.metadata : {str} = metadata
         
     def dto_json(self):
         """
@@ -13,6 +13,6 @@ class ResponseDTO:
         """
         return jsonify({
             "response_code": self.response_code,
-            "title": self.title,
+            "body": self.body,
             "metadata": self.metadata
         })
