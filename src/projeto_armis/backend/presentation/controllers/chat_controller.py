@@ -11,14 +11,14 @@ chat_blueprint = Blueprint("Chat", __name__, url_prefix="/chat")
 
 @chat_blueprint.route("/make-question", methods=["GET"])
 @inject
-def make_question(service: AzureService = Provide[DependencyContainer.azure_service]):
+def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service]):
     try:
         question = request.args.get("question")
         if not question:
             return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
         
-        response_dto : ResponseDTO = service.make_question(question)
-        print("hehe")
-        return make_response(response_dto, 200)
+        response, query, query_response = azure_service.make_question(question)
+        response_dto = ResponseDTO(title=f"Resposta à pergunta: {question}", response=response, query=query, query_response=query_response)
+        return make_response(response_dto.to_dict(), 200)
     except Exception as e:
         return jsonify(str(e)), 400
