@@ -1,19 +1,23 @@
 from os import getenv
 
+from langchain_community.vectorstores import AzureSearch
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import AzureChatOpenAI
+from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 
-from core.constants import modeloGpt4omini, openaiApiVersion, openAiApiType, json_schema1, modeloGpt4o
+from core.constants import modeloGpt4omini, openaiApiVersion, openAiApiType, json_schema1, modeloGpt4o, modeloAda
 
 
 class AzureAdapter:
     llm_base : AzureChatOpenAI= None
     llm = None
+    llm_embeddings_base : AzureOpenAIEmbeddings = None
+    vector_store : AzureSearch = None
     def __init__(self):
         self.llm_base = self.get_llm_base()
         self.llm = None
-        
+        self.llm_embeddings_base = self.get_llm_embeddings_base()
+        self.vector_store = self.get_vector_store()
     def get_llm_base(self):
         """
         Retrieves the instance of the AzureChatOpenAI
@@ -22,6 +26,32 @@ class AzureAdapter:
         if self.llm_base is None:
             self.change_schema()
         return self.llm_base
+    
+    def get_llm_embeddings_base(self):
+        print("[Azure Adapter]: Initializing LLM Embeddings instance...")
+        if self.llm_embeddings_base is None:
+            self.llm_embeddings_base = AzureOpenAIEmbeddings(
+                model= modeloAda,
+                azure_endpoint= getenv("MODELS_ENDPOINT"),
+                api_key= getenv("MODELS_ENDPOINT_KEY"),
+                #openai_api_version=openaiApiVersion
+            )
+        print("[Azure Adapter]: LLM Embeddings Instance Created.")
+        return self.llm_embeddings_base
+    
+    def get_vector_store(self):
+        print("[Azure Adapter]: Initializing Azure Search Instance...")
+
+        if self.vector_store is None:
+            self.vector_store = AzureSearch(
+                azure_search_endpoint=getenv("AZURE_URL"),
+                azure_search_key=getenv("AZURE_URL_KEY"),
+                index_name=getenv("INDEX_NAME_1"),
+                embedding_function=self.llm_embeddings_base
+            )
+        print("[Azure Adapter]: Azure Search Instance Created.")
+            
+        return self.vector_store
     
     def change_schema(self, json_schema = None):
         """
