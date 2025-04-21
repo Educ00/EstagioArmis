@@ -8,6 +8,9 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from neo4j.exceptions import CypherSyntaxError
 
+from application.dtos.azure_ai_search_benchmark_dto import AzureAiSearchBenchmarkDTO
+from application.dtos.chromadb_benchmark_dto import ChromaDBBenchmarkDTO
+from application.dtos.neo4j_benchmark_dto import Neo4jBenchmarkDTO
 from application.dtos.response_dto import ResponseDTO
 from core.constants import prompt_template1, prompt_instructions1, prompt_instructions2, prompt_instructions3, \
     json_schema1, json_schema2, prompt_template2, instructions_correct_syntax, instructions_generate_cypher_query, \
@@ -22,32 +25,80 @@ class AzureService:
         self.azure_adapter = azure_adapter
         self.neo4j_repository = neo4j_repository
         
-    def make_question(self, question, neo4j : bool = False, chromaDB : bool = False, azureAISearch: bool = False) :
+    def make_question(self, question, neo4j : bool = False, azure_ai_search: bool = False, chroma_db : bool = False, display_benchmark_info: bool = False) -> (Neo4jBenchmarkDTO, AzureAiSearchBenchmarkDTO, ChromaDBBenchmarkDTO):
         """
-        Accepts a question and return an answer.
-        :param neo4j: if True queries neo4j
-        :param chromaDB: if True queries chromaDB
-        :return: 
+        Accepts a question and returns the answer from Neo4j, Azure Ai Search and ChromaDB and some metrics in the form of Benchmark objects.
         :param question: question string
-        :return: ResponseDTO
+        :param neo4j: if True queries neo4j
+        :param chroma_db: if True queries chromaDB
+        :param azure_ai_search: if True queries Azure Ai Search
+        :param display_benchmark_info: if true displays benchmark info of the operations
+        :return: Neo4j Benchmark Object, Azure Ai Search Benchmark Object, ChromaDb Benchmark Object
         """
-        benchmark = Benchmark()
-        # neo4j
-        benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model="None")
         
-        query, query_response, benchmark = self.generate_chyper_query_and_query_neo4j(question, benchmark=benchmark)
+        neo4j_benchmark : Benchmark | None = None
+        neo4j_benchmark_dto : Neo4jBenchmarkDTO | None = None
         
-        self.azure_adapter.change_schema(json_schema=json_schema2)
-        print("[Azure Service]: Formatting Answer...")
-        llm_response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template3, instructions=instructions_format_answer_to_question, question=question, answer=query_response)
-        benchmark.add_thinking_time("Formatting Answer", start=start, end=end)
+        azure_ai_search_benchmark : Benchmark | None = None
+        azure_ai_search_benchmark_dto : AzureAiSearchBenchmarkDTO | None = None
         
-        benchmark.end_benchmark()
-        benchmark.display()
-        return llm_response["response"], query, query_response
+        chroma_db_benchmark : Benchmark | None = None
+        chroma_db_benchmark_dto : ChromaDBBenchmarkDTO | None = None
+            
+        if neo4j:
+            neo4j_benchmark = Benchmark("neo4j")
+            neo4j_benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model="None")
+            
+            print("[Azure Service] A usar Neo4j:")
+            neo4j_query, neo4j_query_response, neo4j_benchmark = self.generate_chyper_query_and_query_neo4j(question=question, benchmark=neo4j_benchmark)
+            
+            self.azure_adapter.change_schema(json_schema=json_schema2)
+            print("[Azure Service]: Formatting Answer...")
+            llm_response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template3, instructions=instructions_format_answer_to_question, question=question, answer=neo4j_query_response)
+            neo4j_response = llm_response["response"]
+            neo4j_benchmark.add_thinking_time(operation_name="Formatting Answer", start=start, end=end)
+            neo4j_benchmark.process_callback(operation_name="Formatting Answer", callback=cb)
+            neo4j_benchmark.end_benchmark()
+            neo4j_benchmark_dto = Neo4jBenchmarkDTO(neo4j_response=neo4j_response, neo4j_query=neo4j_query, neo4j_query_response=neo4j_query_response)
+            print("[Azure Service] Acabou com Neo4j.")
+        
+        if azure_ai_search:
+            print("[Azure Service] A usar Azure Ai Search:")
+            azure_ai_search_benchmark = Benchmark(name="Azure Ai Search")
+            azure_ai_search_benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model=self.azure_adapter.llm_embeddings_base.model)
+            azure_ai_search_response, start, end = self.azure_adapter.call_vector_store(query=question)
+            docs = []
+            for doc in azure_ai_search_response:
+                docs.append(doc.page_content)
+            self.azure_adapter.change_schema(json_schema=json_schema2)
+            print("[Azure Service]: Formatting Answer...")
+            llm_response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template3,instructions=instructions_format_answer_to_question, question=question, answer=docs)
+            azure_ai_search_response = llm_response["response"]
+            azure_ai_search_benchmark.add_thinking_time("Formatting Answer", start=start, end=end)
+            azure_ai_search_benchmark.process_callback("Formatting Answer", callback=cb)
+            azure_ai_search_benchmark.end_benchmark()
+            azure_ai_search_benchmark_dto = AzureAiSearchBenchmarkDTO(response=azure_ai_search_response, docs=docs)
+            print("[Azure Service] Acabou Azure Ai Search")
+            
+        if chroma_db:
+            print("[Azure Service] A usar Chroma DB:")
+            chroma_db_benchmark = Benchmark(name="Chroma DB")
+            
+            print("[Azure Service] Acabou Chroma DB")
+            
+        
+        if display_benchmark_info:
+            if neo4j_benchmark:
+                neo4j_benchmark.display()
+            if azure_ai_search_benchmark:
+                azure_ai_search_benchmark.display()
+            if chroma_db_benchmark:
+                chroma_db_benchmark.display()
+                
+        return neo4j_benchmark_dto, azure_ai_search_benchmark_dto, chroma_db_benchmark_dto
         
     
-    def generate_chyper_query_and_query_neo4j(self, question: str, max_correction_attempts : int = 5, benchmark: Benchmark = None) -> (any, int, Benchmark):
+    def generate_chyper_query_and_query_neo4j(self, question: str, benchmark: Benchmark, max_correction_attempts : int = 5) -> (any, int, Benchmark):
         """
         Accepts a question, converts to a valid Chyper query and retreives the query result.
         :param benchmark: Benchmark object
@@ -61,11 +112,10 @@ class AzureService:
         graph_schema = self.neo4j_repository.get_schema()
         self.azure_adapter.change_schema(json_schema=json_schema2)
         
-        llm_response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template2, instructions=instructions_generate_cypher_query ,schema=graph_schema, question=question)
-        
-        if benchmark:
-            time_ms = benchmark.add_thinking_time("Generate Graph Query", start=start, end=end)
-            total_llm_thinking_time_ms += time_ms
+        llm_response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template2, instructions=instructions_generate_cypher_query ,schema=graph_schema, question=question)
+        time_ms = benchmark.add_thinking_time("Generate Graph Query", start=start, end=end)
+        total_llm_thinking_time_ms += time_ms
+        benchmark.process_callback(operation_name="Generate Graph Query", callback=cb)
         
         graph_response = "Não foi possivel consultar a base de dados porque a query era inválida!"
         
@@ -77,10 +127,10 @@ class AzureService:
             while correction_attempt <= max_correction_attempts:
                 print(f"[Azure Service]: Tentativa de correção #{correction_attempt+1}/{max_correction_attempts}")
                 correction_attempt += 1
-                llm_response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template2, instructions=instructions_correct_syntax, schema=graph_schema, question=question)
-                if benchmark:
-                    time_ms = benchmark.add_thinking_time(f"Correction of Cypher Syntax  {correction_attempt+1}", start=start, end=end)
-                    total_llm_thinking_time_ms += time_ms
+                llm_response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template2, instructions=instructions_correct_syntax, schema=graph_schema, question=question)
+                time_ms = benchmark.add_thinking_time(operation_name=f"Correction of Cypher Syntax  {correction_attempt+1}", start=start, end=end)
+                total_llm_thinking_time_ms += time_ms
+                benchmark.process_callback(operation_name=f"Correction of Cypher Syntax  {correction_attempt+1}", callback=cb)
                 try:
                     graph_response = self.neo4j_repository.run_query(llm_response["response"])
                     break
@@ -105,7 +155,7 @@ class AzureService:
         chunks = self._split_text(file_path=file_path, chunk_size=250, chunk_overlap=25)
         
         messages = [{"role": "system", "content": prompt_instructions3}]
-        response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template0, instructions="Please follow everything.")
+        response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template0, instructions="Please follow everything.")
         response_str = json.dumps(response)
         messages.append({"role": "assistant", "content": response_str})
 
@@ -114,12 +164,12 @@ class AzureService:
             print(f"   Chunk #{i+1}/{len(chunks)}...")
             messages.append({"role": "user", "content": f"Chunk Content #{i + 1}/{len(chunks)}: {chunk}"})
 
-            response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template1, instructions=f"Process chunk {i + 1}",text=chunk)
+            response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template1, instructions=f"Process chunk {i + 1}",text=chunk)
             response_str = json.dumps(response)
             responses.append(response)
             messages.append({"role": "assistant", "content": response_str})
 
-        final_response, start, end = self.azure_adapter.call_llm(prompt_template1, instructions=instructions_group_results, text=str(json.dumps(responses, indent=4,ensure_ascii=False)))
+        final_response, start, end, cb = self.azure_adapter.call_llm(prompt_template1, instructions=instructions_group_results, text=str(json.dumps(responses, indent=4,ensure_ascii=False)))
         print(f"[Azure Service]: Saving to file: {output_folder_name + os.sep + "resposta.txt"}")
         if save_to_file:
             with open(output_folder_name + os.sep + "resposta.txt", 'w', encoding='utf-8') as outp:  # Apaga ficheiro existente.
@@ -128,6 +178,44 @@ class AzureService:
         return {"all": responses, "final": final_response}
             
 
+    def clear_azure_index(self) -> int:
+        self.azure_adapter.change_index("estagio-eduardocarreiro-teste1")
+        deleted_count = 0
+        while True:
+            results = list(self.azure_adapter.search_client.search(search_text="*", top=1000))
+            if not results:
+                break
+            documents_to_delete = [{"@search.action": "delete", "id": doc["id"]} for doc in results]
+            self.azure_adapter.search_client.upload_documents(documents=documents_to_delete)
+            deleted_count += len(documents_to_delete)
+        print(deleted_count)
+
+    def clear_azure_index2(self) -> int:
+        self.azure_adapter.change_index("estagio-eduardocarreiro-teste2")
+        deleted_count = 0
+        while True:
+            results = list(self.azure_adapter.search_client.search(search_text="*", top=1000))
+            if not results:
+                break
+            documents_to_delete = [{"@search.action": "delete", "id": doc["id"]} for doc in results]
+            self.azure_adapter.search_client.upload_documents(documents=documents_to_delete)
+            deleted_count += len(documents_to_delete)
+        print(deleted_count)
+        
+    
+    def print_azure_index(self):
+        self.azure_adapter.change_index("estagio-eduardocarreiro-teste1")
+        results = self.azure_adapter.search_client.search(search_text="*")
+        for doc in results:
+            print(doc)
+        #return results
+
+    def print_azure_index2(self):
+        self.azure_adapter.change_index("estagio-eduardocarreiro-teste2")
+        results = self.azure_adapter.search_client.search(search_text="*")
+        for doc in results:
+            print(doc)
+        #return results
 
     def _split_text(self, file_path: str, chunk_size: int = 600, chunk_overlap: int = 50):
         """

@@ -8,6 +8,27 @@ from flask import Blueprint, jsonify, current_app, request
 
 azure_blueprint = Blueprint("Azure", __name__, url_prefix="/azure")
 
+@azure_blueprint.route("/print-index", methods=["GET"])
+@inject
+def import_file(service: AzureService = Provide[DependencyContainer.azure_service]):
+    try:
+        response = service.print_azure_index()
+        response2 = service.print_azure_index2()
+        return jsonify(response, response2), 200
+    except Exception as e:
+        return jsonify(e), 400
+    
+@azure_blueprint.route("/clear-index", methods=["GET"])
+@inject
+def clear_index(service: AzureService = Provide[DependencyContainer.azure_service]):
+    try:
+        response = service.clear_azure_index()
+        response2 = service.clear_azure_index2()
+        return jsonify(response, response2), 200
+    except Exception as e:
+        return jsonify(e), 400
+
+
 @azure_blueprint.route("/generate-query", methods=["GET"])
 @inject
 def generate_query(service: AzureService = Provide[DependencyContainer.azure_service]):
