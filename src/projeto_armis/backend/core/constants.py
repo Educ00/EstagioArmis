@@ -90,6 +90,7 @@ RELATIONSHIPS:
 - Include supporting context
 
 IMPORTANT:
+- Before Answering think about the task.
 - The more complete the database is the better.
 - Do not try to filter entities or relationships, extract all.
 - All entities and relationships are important.
@@ -98,6 +99,8 @@ IMPORTANT:
 instructions_generate_cypher_query = """
     Task: Generate Cypher queries to query a Neo4j graph database based on the provided schema definition. Care about the context of the question.
     Instructions:
+    Before Answering think about the task.
+    Make a smart query that gives you all the info someone needs to answer the question.
     Use only the provided relationship types and properties.
     Do not use any other relationship types or properties that are not provided.
     Do not respond with any context, only the query.
@@ -105,6 +108,7 @@ instructions_generate_cypher_query = """
 
 instructions_correct_syntax = """
     Task: The syntax of the Cypher query is wrong. Correct it.
+    Before Answering think about the task.
     Follow the provided schema to correct the query.
     Do not use any other relationship types or properties that are not provided. 
     Do not respond with any context, only the query.
@@ -113,6 +117,7 @@ instructions_correct_syntax = """
 instructions_format_answer_to_question = """
 Task: Format to a nice phrase the answer provided.
 Instructions:
+-  Before Answering think about the task.
 - Provide only the phrase.
 - You can use the answer to create a well-structured and polished response.
 - Focus on making it sound natural and clear.
@@ -121,6 +126,7 @@ Instructions:
 instructions_group_results = """
 Task: Format the given text following the instructions:
 Instructions:
+- Before Answering think about the task.
 - Combine the provided JSON lists into a single clean JSON.
 - Place all entities in the 'entities' list and all relationships in the 'relationships' list.
 - Remove duplicates from both lists based on the following rules:
