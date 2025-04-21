@@ -39,7 +39,7 @@ class Neo4jService:
         """
         folder_name = current_app.config['OUTPUT_FOLDER']
         file_path = folder_name + "/" + filename
-        #print(file_path)
+        print(file_path)
         with open(file_path, "r", encoding="utf-8") as json_data:
             data = json.load(json_data)
 
@@ -60,7 +60,7 @@ class Neo4jService:
         """
         folder_name = current_app.config['OUTPUT_FOLDER']
         file_path = folder_name + "/" + filename
-        #print(file_path)
+        print(file_path)
         with open(file_path, "r", encoding="utf-8") as json_data:
             data = json.load(json_data)
 
@@ -76,5 +76,6 @@ class Neo4jService:
         """
         Clean Entire Database
         """
+        print(f"[Neo4j Service]: Cleaning Neo4j database...")
         return self.repository.clean_db()
         

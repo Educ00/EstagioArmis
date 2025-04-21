@@ -130,6 +130,7 @@ Instructions:
   - Relationships with the same `source` and `target` but completely different 'value' are not duplicates.
 - Ensure that no field is altered or removed.
 - Ensure that all relationships in their final list relate to entities in their final list.
+- Ensure everything is in the same language.
 """
 
 

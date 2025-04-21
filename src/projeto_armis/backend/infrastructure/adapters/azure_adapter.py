@@ -137,3 +137,6 @@ class AzureAdapter:
         end = datetime.now()
         print("[Azure Adapter]: Azure Ai Search Called")
         return response, start, end
+
+    def import_documents(self, docs):
+        return self.vector_store.add_documents(documents=docs)

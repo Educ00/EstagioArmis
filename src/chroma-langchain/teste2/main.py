@@ -16,12 +16,13 @@ modeloGpt4o = "GPT-4o"
 modeloGpt4omini = "GPT-4o-mini"
 
 load_dotenv()
-#os.getenv("ModelsEndpoint")
-#os.getenv("ModelsKey")
-#os.getenv("AzureUrl")
-#os.getenv("AzureKey")
+#os.getenv("MODELS_ENDPOINT")
+#os.getenv("MODELS_ENDPOINT_KEY")
+#os.getenv("AZURE_URL")
+#os.getenv("AZURE_URL_KEY")
 
 directory = "./data/"
+directory2 = "./data2/"
 persistence_directory = "db"
 
 def load_docs(directory):
@@ -40,8 +41,8 @@ def call_llm_with_context(query, context):
     llm = AzureChatOpenAI(
         openai_api_version="2024-02-01",
         deployment_name=modeloGpt4omini,
-        azure_endpoint=os.getenv("ModelsEndpoint"),
-        openai_api_key=os.getenv("ModelsKey"),
+        azure_endpoint=os.getenv("MODELS_ENDPOINT"),
+        openai_api_key=os.getenv("MODELS_ENDPOINT_KEY"),
         openai_api_type="azure",
     )
 
@@ -61,7 +62,8 @@ def call_llm_with_context(query, context):
 def carregar_as_coisas():
     global db, vector_store, embeddings
     print("A carregar documentos...")
-    documents = load_docs(directory)
+    #documents = load_docs(directory)
+    documents = load_docs(directory2)
     print("A separar documentos em chunks...")
     docs = split_docs(documents)
     print(f"Criados {len(docs)} chunks...")
@@ -72,59 +74,61 @@ def carregar_as_coisas():
     # sentence-t5-large	                1024
     # bge-large-en-v1.5	                1024
     # text-embedding-ada-002 (OpenAI)	1536
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    #embeddings = AzureOpenAIEmbeddings(
-    #    model=modeloAda,
-    #    azure_endpoint=os.getenv("ModelsEndpoint"),
-    #    api_key=os.getenv("ModelsKey"),
-    #    openai_api_version="2024-02-01",
-    #)
+    #embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = AzureOpenAIEmbeddings(
+        model=modeloAda,
+        azure_endpoint=os.getenv("MODELS_ENDPOINT"),
+        api_key=os.getenv("MODELS_ENDPOINT_KEY"),
+        #openai_api_version="2024-02-01",
+    )
     
     print("A guardar documentos na chromaDB local...")
     db = Chroma.from_documents(documents=docs, embedding=embeddings, persist_directory=persistence_directory)
-    text = ["O céu é esverdiada às quartas.", "O céu é a amarelado às segundas.", "O céu é azul o resto dos dias.", "Gosto do Ronaldo."]
-    db.add_texts(text)
+    #text = ["O céu é esverdiada às quartas.", "O céu é a amarelado às segundas.", "O céu é azul o resto dos dias.", "Gosto do Ronaldo."]
+    #db.add_texts(text)
     #db.persist()
     
     print("A guardar documentos na cloud azure...")
     vector_store = AzureSearch(
-        azure_search_endpoint=os.getenv("AzureUrl"),
-        azure_search_key=os.getenv("AzureKey"),
-        index_name="estagio-eduardocarreiro-teste2",
+        azure_search_endpoint=os.getenv("AZURE_URL"),
+        azure_search_key=os.getenv("AZURE_URL_KEY"),
+        index_name="estagio-eduardocarreiro-teste1",
+        #index_name="estagio-eduardocarreiro-teste2",
         embedding_function=embeddings,
     )
     
     vector_store.add_documents(documents=docs)
-    vector_store.add_texts(text)
+    #vector_store.add_texts(text)
 
 def carregar_apenas_conexoes():
     global db, vector_store, embeddings
 
     print("A criar embeddings...")
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    #embeddings = AzureOpenAIEmbeddings(
-    #    model=modeloAda,
-    #    azure_endpoint=os.getenv("ModelsEndpoint"),
-    #    api_key=os.getenv("ModelsKey"),
-    #    openai_api_version="2024-02-01",
-    #)
+    #embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = AzureOpenAIEmbeddings(
+        model=modeloAda,
+        azure_endpoint=os.getenv("MODELS_ENDPOINT"),
+        api_key=os.getenv("MODELS_ENDPOINT_KEY"),
+        #openai_api_version="2024-02-01",
+    )
 
     print("A conectar à chromaDB local...")
     db = Chroma(persist_directory=persistence_directory, embedding_function=embeddings)
 
     print("A conectar à Azure Search...")
     vector_store = AzureSearch(
-        azure_search_endpoint=os.getenv("AzureUrl"),
-        azure_search_key=os.getenv("AzureKey"),
-        index_name="estagio-eduardocarreiro-teste2",
+        azure_search_endpoint=os.getenv("AZURE_URL"),
+        azure_search_key=os.getenv("AZURE_URL_KEY"),
+        index_name="estagio-eduardocarreiro-teste1",
+        #index_name="estagio-eduardocarreiro-teste2",
         embedding_function=embeddings,
     )
 
 def delete_all_documents_paged():
     SEARCH_SERVICE_NAME = "amorim-search-service-002"
-    #SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"
-    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste2"
-    API_KEY = os.getenv("AzureKey")
+    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"
+    #SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste2"
+    API_KEY = os.getenv("AZURE_URL_KEY")
     # Construir a URL do serviço
     endpoint = f"https://{SEARCH_SERVICE_NAME}.search.windows.net"
     
@@ -147,9 +151,9 @@ def delete_all_documents_paged():
 
 def print_all_docs():
     SEARCH_SERVICE_NAME = "amorim-search-service-002"
-    #SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"   # embeddingsOpenAI
-    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste2"    # all-MiniLM-L12-v2
-    API_KEY = os.getenv("AzureKey")
+    SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste1"   # embeddingsOpenAI
+    #SEARCH_INDEX_NAME = "estagio-eduardocarreiro-teste2"    # all-MiniLM-L12-v2
+    API_KEY = os.getenv("AZURE_URL_KEY")
     # Construir a URL do serviço
     endpoint = f"https://{SEARCH_SERVICE_NAME}.search.windows.net"
     
@@ -169,8 +173,8 @@ db : Chroma = None
 vector_store : AzureSearch = None
 embeddings : AzureOpenAIEmbeddings = None
 
-#carregar_as_coisas()
-carregar_apenas_conexoes()
+carregar_as_coisas()
+#carregar_apenas_conexoes()
 
 sair = False
 while not sair:

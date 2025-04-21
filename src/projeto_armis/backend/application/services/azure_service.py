@@ -140,10 +140,10 @@ class AzureService:
         return llm_response["response"],graph_response, benchmark
         
         
-    def extract_entities_and_relations(self, file_name: str, save_to_file: bool = True):
+    def extract_entities_and_relations(self, filename: str, save_to_file: bool = True, output_filename: str = None):
         """
         Extracts entities and relationships from a file.
-        :param file_name: name of the file
+        :param filename: name of the file
         :param save_to_file: if True, saves to resposta.txt in outputs folder
         :return: JSON with entities and relationships
         """
@@ -151,8 +151,8 @@ class AzureService:
 
         upload_folder_name = current_app.config['UPLOAD_FOLDER']
         output_folder_name = current_app.config['OUTPUT_FOLDER']
-        file_path = upload_folder_name + "/" + file_name
-        chunks = self._split_text(file_path=file_path, chunk_size=250, chunk_overlap=25)
+        filename = upload_folder_name + "/" + filename
+        chunks = self._split_text(filepath=filename, chunk_size=600, chunk_overlap=50)
         
         messages = [{"role": "system", "content": prompt_instructions3}]
         response, start, end, cb = self.azure_adapter.call_llm(prompt_template=prompt_template0, instructions="Please follow everything.")
@@ -170,15 +170,31 @@ class AzureService:
             messages.append({"role": "assistant", "content": response_str})
 
         final_response, start, end, cb = self.azure_adapter.call_llm(prompt_template1, instructions=instructions_group_results, text=str(json.dumps(responses, indent=4,ensure_ascii=False)))
-        print(f"[Azure Service]: Saving to file: {output_folder_name + os.sep + "resposta.txt"}")
+        
+        if output_filename:
+            output_filepath = output_folder_name + os.sep + output_filename
+        else:
+            output_filepath = output_folder_name + os.sep + "resposta.txt"
+            
+        print(f"[Azure Service]: Saving to file: {output_filepath}")
         if save_to_file:
-            with open(output_folder_name + os.sep + "resposta.txt", 'w', encoding='utf-8') as outp:  # Apaga ficheiro existente.
+            with open(output_filepath, 'w', encoding='utf-8') as outp:  # Apaga ficheiro existente.
                 json.dump(final_response, outp, indent=4, ensure_ascii=False)
         
         return {"all": responses, "final": final_response}
+
+    def import_file(self, filename):
+        upload_folder_name = current_app.config['UPLOAD_FOLDER']
+        filepath = upload_folder_name + "/" + filename
+        print(f"[Azure Service]: Importing {filepath} to estagio-eduardocarreiro-teste1...")
+        docs = self._split_text(filepath=filepath)
+        self.azure_adapter.change_index("estagio-eduardocarreiro-teste1")
+        imported_docs = self.azure_adapter.import_documents(docs)
+        return imported_docs
             
 
     def clear_azure_index(self) -> int:
+        print("[Azure Service]: Cleaning estagio-eduardocarreiro-teste1...")
         self.azure_adapter.change_index("estagio-eduardocarreiro-teste1")
         deleted_count = 0
         while True:
@@ -191,6 +207,7 @@ class AzureService:
         print(deleted_count)
 
     def clear_azure_index2(self) -> int:
+        print("[Azure Service]: Cleaning estagio-eduardocarreiro-teste2...")
         self.azure_adapter.change_index("estagio-eduardocarreiro-teste2")
         deleted_count = 0
         while True:
@@ -217,15 +234,15 @@ class AzureService:
             print(doc)
         #return results
 
-    def _split_text(self, file_path: str, chunk_size: int = 600, chunk_overlap: int = 50):
+    def _split_text(self, filepath: str, chunk_size: int = 600, chunk_overlap: int = 50):
         """
         Splits a file in to designated chunks.
-        :param file_path: path for the file
+        :param filepath: path for the file
         :param chunk_size: size of the chunks
         :param chunk_overlap: overlap beetween the chunks
         :return: list of Document objects
         """
-        loader = TextLoader(file_path)
+        loader = TextLoader(filepath)
         documents = loader.load()
     
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
