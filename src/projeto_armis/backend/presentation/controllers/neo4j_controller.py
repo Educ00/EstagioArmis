@@ -24,7 +24,6 @@ def import_file(service : Neo4jService = Provide[DependencyContainer.neo4j_servi
     try:
         imported_nodes, imported_relationships = service.import_file(filename)
         response_dto : ResponseDTO = ResponseDTO(
-            title="Ficheiro Importado!", 
             imported_nodes=[node.to_dict() for node in imported_nodes],
             imported_relationships=[rel.to_dict() for rel in imported_relationships]
         )
@@ -46,7 +45,9 @@ def import_nodes(service : Neo4jService = Provide[DependencyContainer.neo4j_serv
         return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}, 400
     try:
         result = service.import_nodes(filename)
-        response_dto : ResponseDTO = ResponseDTO(title="Nodes Importados!")
+        response_dto : ResponseDTO = ResponseDTO(
+            imported_nodes=[node.to_dict() for node in result]
+        )
         return response_dto.to_dict(), 201
     except Exception as e:
         return {"error": str(e)}, 400

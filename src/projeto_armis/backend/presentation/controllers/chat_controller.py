@@ -29,7 +29,6 @@ def make_question(azure_service: AzureService = Provide[DependencyContainer.azur
                 neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question2(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
                 
         response_dto = ResponseDTO(
-            title=f"Resposta à pergunta: {question}", 
             neo4j_response=neo4j_benchmark_dto.neo4j_response, 
             neo4j_query=neo4j_benchmark_dto.neo4j_query, 
             neo4j_query_response=neo4j_benchmark_dto.neo4j_query_response,
@@ -69,7 +68,6 @@ def import_file(azure_service: AzureService = Provide[DependencyContainer.azure_
         print(f"[Chat Controller]: Imported {imported_nodes} nodes to Neo4j.")
         print(f"[Chat Controller]: Imported {imported_relationshipts} relationships to Neo4j.")
         response_dto = ResponseDTO(
-            title="Importing files to neo4j and azure ai search.",
             imported_docs=imported_docs,
             imported_nodes=[node.to_dict() for node in imported_nodes],
             imported_relationshipts=[rela.to_dict() for rela in imported_relationshipts]
