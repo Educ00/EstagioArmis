@@ -1,6 +1,8 @@
 import json
 
 class ResponseDTO:
+    # TODO: verify that a kwarg is not null
+    # TODO: remove title and makie the DTO with the fields of the kwargs
     def __init__(self, title: str, **kwargs):
         self.title : str = title
         self.body : dict = kwargs
