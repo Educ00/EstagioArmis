@@ -56,7 +56,7 @@ class GraphAgent:
         relation_prompt = ChatPromptTemplate.from_messages([
             ("system", "Com base nas seguintes entidades:\n\n"
                        f"{entities_context}\n\n"
-                       "Extrai todas as **relações** entre estas entidades no texto fornecido, implícitas e explicitas. Ignora novas entidades."),
+                       "Extrai todas as **relações** entre estas entidades no texto fornecido, implícitas e explícitas. Ignora novas entidades."),
             ("human", "{text}")
         ])
         print("Relationships")
@@ -70,5 +70,24 @@ class GraphAgent:
                 self.known_relations.append(r)
                 new_relations.append(r)
 
-        # Retorna apenas o que foi novo neste chunk
-        return GraphSchema(entities=new_entities, relations=new_relations)
+        # Fase 3: Filtragem por equivalência semântica
+        filtering_prompt = ChatPromptTemplate.from_messages([
+            ("system", "Com base nas listas abaixo, retorna apenas as entidades e relações únicas, removendo equivalentes semânticos ou duplicadas. Não removas entidades ou relações em que não tenhas 100% certeza que são equivalentes."),
+            ("human", "Entidades:\n{entities}\n\nRelações:\n{relations}")
+        ])
+    
+        formatted_entities = "\n".join(f"{e.name} ({e.category}) - {e.description}" for e in new_entities)
+        formatted_relations = "\n".join(f"{r.source} -[{r.value}]-> {r.target}" for r in new_relations)
+    
+        structured_llm_filter = self.llm.with_structured_output(schema=GraphSchema)
+        filtering_messages = filtering_prompt.invoke({
+            "entities": formatted_entities,
+            "relations": formatted_relations
+        })
+        filtered_output: GraphSchema = structured_llm_filter.invoke(filtering_messages)
+    
+        return GraphSchema(
+            entities=filtered_output.entities,
+            relations=filtered_output.relations
+        )
+

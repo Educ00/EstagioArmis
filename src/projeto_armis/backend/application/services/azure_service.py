@@ -275,7 +275,7 @@ class AzureService:
         upload_folder_name = current_app.config['UPLOAD_FOLDER']
         output_folder_name = current_app.config['OUTPUT_FOLDER']
         filename = upload_folder_name + "/" + filename
-        chunks = self._split_text(filepath=filename, chunk_size=250, chunk_overlap=50)
+        chunks = self._split_text(filepath=filename, chunk_size=400, chunk_overlap=75)
         llm = self.azure_adapter.get_llm_base()
         agent = GraphAgent(llm=llm)
 
@@ -283,6 +283,7 @@ class AzureService:
         all_relations : list[Relationship] = []
         for i, chunk in enumerate(chunks, start=1):
             print(f"Chunk: {i}/{len(chunks)}")
+            print(chunk.page_content)
             schema_result = agent.extract_from_chunk(chunk=chunk.page_content)
             all_entities.extend(EntityMapper.to_domain(schema_result.entities))
             all_relations.extend(RelationshipMapper.to_domain(schema_result.relations))
@@ -322,9 +323,11 @@ class AzureService:
         upload_folder_name = current_app.config['UPLOAD_FOLDER']
         filepath = upload_folder_name + "/" + filename
         print(f"[Azure Service]: Importing {filepath} to estagio-eduardocarreiro-teste1...")
-        docs = self._split_text(filepath=filepath)
+        loader = TextLoader(filepath)
+        doc = loader.load()
+        #docs = self._split_text(filepath=filepath)
         self.azure_adapter.change_index("estagio-eduardocarreiro-teste1")
-        imported_docs = self.azure_adapter.import_documents(docs)
+        imported_docs = self.azure_adapter.import_documents(doc)
         return imported_docs
             
 
