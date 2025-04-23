@@ -183,6 +183,61 @@ class AzureService:
         
         return {"all": responses, "final": final_response}
 
+    def extract_entities_and_relations2(self, filename: str, save_to_file: bool = True, output_filename: str = None):
+        """
+        Extracts entities and relationships from a text file using an Agent.
+        The agent first extracts the entities and only then extracts relationships between them.
+        :param filename: name of the file
+        :param save_to_file: if True, saves to a file in outputs folder
+        :param output_filename: if it's None the output filename will be resposta.txt
+        :return: JSON with entities and relationships
+        """
+        upload_folder_name = current_app.config['UPLOAD_FOLDER']
+        output_folder_name = current_app.config['OUTPUT_FOLDER']
+        filename = upload_folder_name + "/" + filename
+        chunks = self._split_text(filepath=filename, chunk_size=250, chunk_overlap=50)
+        llm = self.azure_adapter.get_llm_base()
+        agent = GraphAgent(llm=llm)
+
+        all_entities : list[Entity]= []
+        all_relations : list[Relationship] = []
+        for i, chunk in enumerate(chunks, start=1):
+            print(f"Chunk: {i}/{len(chunks)}")
+            schema_result = agent.extract_from_chunk(chunk=chunk.page_content)
+            all_entities.extend(EntityMapper.to_domain(schema_result.entities))
+            all_relations.extend(RelationshipMapper.to_domain(schema_result.relations))
+        
+        results = {
+            "entities": [
+                {
+                    "name": e.name, 
+                    "category": e.category, 
+                    "description": e.description
+                } 
+                for e in all_entities
+            ],
+            "relationships": [
+                {
+                    "source": r.source, 
+                    "target": r.target, 
+                    "value": r.value
+                }
+                for r in all_relations
+            ]
+        }
+
+        if output_filename:
+            output_filepath = output_folder_name + os.sep + output_filename
+        else:
+            output_filepath = output_folder_name + os.sep + "resposta.txt"
+
+        print(f"[Azure Service]: Saving to file: {output_filepath}")
+        if save_to_file:
+            with open(output_filepath, 'w', encoding='utf-8') as outp:  # Apaga ficheiro existente.
+                json.dump(results, outp, indent=4, ensure_ascii=False)
+
+        return {"all": results}
+
     def import_file(self, filename):
         upload_folder_name = current_app.config['UPLOAD_FOLDER']
         filepath = upload_folder_name + "/" + filename
