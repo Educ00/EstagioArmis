@@ -19,7 +19,7 @@ def make_question(azure_service: AzureService = Provide[DependencyContainer.azur
         if not question:
             return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
         
-        method = 1
+        method = 2
         neo4j_benchmark_dto = None
         azure_ai_search_benchmark_dto = None
         match method:
@@ -35,7 +35,6 @@ def make_question(azure_service: AzureService = Provide[DependencyContainer.azur
             azure_ai_search_response=azure_ai_search_benchmark_dto.response,
             azure_ai_search_docs = azure_ai_search_benchmark_dto.docs
         )
-        print("Make question 2")
         return make_response(response_dto.to_dict(), 200)
     except Exception as e:
         return jsonify(str(e)), 400

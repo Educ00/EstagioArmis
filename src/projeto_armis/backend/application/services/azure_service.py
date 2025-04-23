@@ -50,7 +50,7 @@ class AzureService:
         chroma_db_benchmark_dto : ChromaDBBenchmarkDTO | None = None
             
         if neo4j:
-            neo4j_benchmark = Benchmark("neo4j")
+            neo4j_benchmark = Benchmark("neo4j method 1")
             neo4j_benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model="None")
             
             print("[Azure Service] A usar Neo4j:")
@@ -68,7 +68,7 @@ class AzureService:
         
         if azure_ai_search:
             print("[Azure Service] A usar Azure Ai Search:")
-            azure_ai_search_benchmark = Benchmark(name="Azure Ai Search")
+            azure_ai_search_benchmark = Benchmark(name="Azure Ai Search neo4j method 1")
             azure_ai_search_benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model=self.azure_adapter.llm_embeddings_base.model)
             azure_ai_search_response, start, end = self.azure_adapter.call_vector_store(query=question)
             docs = []
@@ -121,7 +121,7 @@ class AzureService:
         chroma_db_benchmark_dto : ChromaDBBenchmarkDTO | None = None
         
         if neo4j:
-            neo4j_benchmark = Benchmark("neo4j")
+            neo4j_benchmark = Benchmark("neo4j neo4j method 2")
             print("[Azure Service] A usar Neo4j pela Langchain:")
             
             neo4j_benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model="None")
@@ -144,7 +144,7 @@ class AzureService:
 
         if azure_ai_search:
             print("[Azure Service] A usar Azure Ai Search:")
-            azure_ai_search_benchmark = Benchmark(name="Azure Ai Search")
+            azure_ai_search_benchmark = Benchmark(name="Azure Ai Search neo4j method 1")
             azure_ai_search_benchmark.start_benchmark(completion_model=self.azure_adapter.llm_base.deployment_name, embeddings_model=self.azure_adapter.llm_embeddings_base.model)
             azure_ai_search_response, start, end = self.azure_adapter.call_vector_store(query=question)
             docs = []
