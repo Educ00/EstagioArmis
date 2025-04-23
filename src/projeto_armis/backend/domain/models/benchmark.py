@@ -20,6 +20,7 @@ class Benchmark:
         self.prompt_tokens: list[tuple[str, int]] = []
         self.completion_tokens: list[tuple[str, int]] = []
         self.reasoning_tokens: list[tuple[str, int]] = []
+        self.successful_requests: list[tuple[str, int]] = []
         self.cost: float = 0
 
     def start_benchmark(self, completion_model, embeddings_model):
@@ -36,6 +37,7 @@ class Benchmark:
         self.execution_end_datetime = datetime.now()
 
     def process_callback(self, operation_name: str, callback: OpenAICallbackHandler):
+        self.add_sucessful_requests(operation_name=operation_name, n_requests=callback.successful_requests)
         self.add_prompt_tokens(operation_name=operation_name, tokens=callback.prompt_tokens)
         self.add_completion_tokens(operation_name=operation_name, tokens=callback.completion_tokens)
         self.add_reasoning_tokens(operation_name=operation_name, tokens=callback.reasoning_tokens)
@@ -61,6 +63,10 @@ class Benchmark:
     def add_cost(self, operation_name: str, cost: float):
         self.cost += cost
         self.add_log(f"Added cost for {operation_name}")
+
+    def add_sucessful_requests(self, operation_name: str, n_requests: int):
+        self.successful_requests.append((operation_name, n_requests))
+        self.add_log(f"Added reasoning tokens for {operation_name}")
 
     def add_log(self, text: str, timestamp=None) -> str:
         """
