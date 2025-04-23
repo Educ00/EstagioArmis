@@ -97,3 +97,11 @@ class Neo4jRepository(BaseRepository):
         """
         self.adapter.db.refresh_schema()
         return self.adapter.db.get_schema
+
+    def get_structured_schema(self):
+        """
+        Refreshes the schema of the database and returns it.
+        :return: schema
+        """
+        self.adapter.db.refresh_schema()
+        return self.adapter.db.get_structured_schema

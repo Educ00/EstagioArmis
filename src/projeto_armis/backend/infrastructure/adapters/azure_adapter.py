@@ -6,8 +6,10 @@ from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 from langchain_community.vectorstores import AzureSearch
 from langchain_community.callbacks import get_openai_callback
+from langchain_core.callbacks import CallbackManager
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import PromptTemplate
+from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 
 from core.constants import modeloGpt4omini, openaiApiVersion, openAiApiType, json_schema1, modeloGpt4o, modeloAda
@@ -140,3 +142,22 @@ class AzureAdapter:
 
     def import_documents(self, docs):
         return self.vector_store.add_documents(documents=docs)
+
+    def query_graph(self, question: str,graph: Neo4jGraph, allow_dangerous_requests: bool = True, return_intermediate_steps: bool = True, validate_cypher: bool = True):
+        start = datetime.now()
+        with get_openai_callback() as cb:
+            
+            chain = GraphCypherQAChain.from_llm(
+                llm=self.llm_base,
+                graph=graph,
+                #verbose=True,
+                allow_dangerous_requests=allow_dangerous_requests,
+                return_intermediate_steps=return_intermediate_steps,
+                validate_cypher=True,
+                callbacks=[cb]
+            )
+            
+            response = chain.invoke({"query": question})
+        end = datetime.now()
+        
+        return response, start, end, cb

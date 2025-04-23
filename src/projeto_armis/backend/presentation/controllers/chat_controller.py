@@ -1,4 +1,5 @@
 from dependency_injector.wiring import inject, Provide
+from langchain_core.messages import HumanMessage
 
 from application.dtos.response_dto import ResponseDTO
 from application.services.azure_service import AzureService
@@ -18,7 +19,15 @@ def make_question(azure_service: AzureService = Provide[DependencyContainer.azur
         if not question:
             return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
         
-        neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
+        method = 1
+        neo4j_benchmark_dto = None
+        azure_ai_search_benchmark_dto = None
+        match method:
+            case 1:
+                neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
+            case 2:
+                neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question2(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
+                
         response_dto = ResponseDTO(
             title=f"Resposta à pergunta: {question}", 
             neo4j_response=neo4j_benchmark_dto.neo4j_response, 
@@ -27,6 +36,7 @@ def make_question(azure_service: AzureService = Provide[DependencyContainer.azur
             azure_ai_search_response=azure_ai_search_benchmark_dto.response,
             azure_ai_search_docs = azure_ai_search_benchmark_dto.docs
         )
+        print("Make question 2")
         return make_response(response_dto.to_dict(), 200)
     except Exception as e:
         return jsonify(str(e)), 400
@@ -46,9 +56,17 @@ def import_file(azure_service: AzureService = Provide[DependencyContainer.azure_
         imported_docs = azure_service.import_file(filename=filename)
         for doc in imported_docs:
             print(f"[Chat Controller]: Imported {doc} to Azure Ai Search.")
-        azure_service.extract_entities_and_relations(filename=filename, output_filename="yeye.txt")
+        extraction_method = 2
+        match extraction_method:
+            case 1:
+                print(f"[Chat Controller]: Extraction Method 1")
+                azure_service.extract_entities_and_relations(filename=filename, output_filename="yeye.txt")
+            case 2:
+                print(f"[Chat Controller]: Extraction Method 2")
+                azure_service.extract_entities_and_relations2(filename=filename, output_filename="yeye.txt")
+        
         imported_nodes, imported_relationshipts = neo4j_service.import_file(filename="yeye.txt")
-        print(f"[Chat Controller]: Imported {imported_relationshipts} nodes to Neo4j.")
+        print(f"[Chat Controller]: Imported {imported_nodes} nodes to Neo4j.")
         print(f"[Chat Controller]: Imported {imported_relationshipts} relationships to Neo4j.")
         response_dto = ResponseDTO(
             title="Importing files to neo4j and azure ai search.",

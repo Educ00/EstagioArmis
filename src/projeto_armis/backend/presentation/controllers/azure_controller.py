@@ -47,5 +47,11 @@ def process_file(service: AzureService = Provide[DependencyContainer.azure_servi
     if not filename:
         return jsonify({"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}), 400
     
-    results = service.extract_entities_and_relations(filename=filename, save_to_file=True)
+    method = 2
+    results = []
+    match method:
+        case 1:
+            results = service.extract_entities_and_relations(filename=filename, save_to_file=True)
+        case 2:
+            results = service.extract_entities_and_relations2(filename=filename, save_to_file=True)
     return jsonify(results), 200

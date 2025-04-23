@@ -77,12 +77,15 @@ REQUIREMENTS:
 '''
 
 prompt_instructions3 = """
-Extract ALL entities and relationships from the text or context following these guidelines:
+Your job is to create a complete knowledge graph with entities and relationships from the text.
+All the details about the text should be represented in the database!
+Also follow the following guidelines:
 
 ENTITIES:
 - Include name, category, description
 - Be comprehensive - extract everything
 - No duplicates
+- May be objects, places, people,etc...
 
 RELATIONSHIPS:
 - Connect entities with source → relationship → target
@@ -91,20 +94,52 @@ RELATIONSHIPS:
 
 IMPORTANT:
 - Before Answering think about the task.
-- The more complete the database is the better.
-- Do not try to filter entities or relationships, extract all.
-- All entities and relationships are important.
+- Do not try to be smart -> don't group possible entities -> create separate entities.
+- All Entities and relationships must be written in the language of the text.
+"""
+
+prompt_instructions4 = """
+O teu trabalho é extrair um grafo de conhecimento COMPLETO e RICO em detalhes a partir de qualquer texto de entrada. Deves representar no grafo todos os pormenores, explícitos e implícitos, sem omissões e maximizando o número de entidades e relações.
+
+1) DEFINIÇÕES CLARAS
+
+— Entidade: qualquer elemento conceitual, concreto ou abstrato, mencionado ou inferível no texto. Inclui, mas não se limita a:
+    • Pessoas (e.g., "Maria Oliveira")
+    • Organizações (e.g., "Universidade de Lisboa")
+    • Locais (e.g., "Praça do Comércio")
+    • Objetos (e.g., "Laptop")
+    • Eventos (e.g., "Conferência Anual de IA 2024")
+    • Conceitos (e.g., "Inteligência Artificial")
+    • Datas e períodos (e.g., "21 de abril de 2025")
+    • Valores (e.g., "100€")
+  
+— Relação: conexão ou associação entre duas entidades, seja explicitamente escrita ou implicitamente inferida. Inclui:
+    • Relações diretas (verbos, preposições: "trabalha em", "localizado em")
+    • Relações descritivas ("é parte de", "é tipo de")
+    • Relações contextuais e hierárquicas ("durante", "antes de", "causado por")
+    • Inferências lógicas (e.g., se A compra B, inferir que B é produto de A)
+
+2) ORIENTAÇÕES PARA MAXIMIZAÇÃO
+
+— Extrai todas as entidades, mesmo variações (e.g., "iPhone", "o smartphone").
+— Evita fusões intempestivas: trata termos distintos como entidades separadas.
+— Identifica todas as relações possíveis: explícitas (verbos, preposições) e implícitas (inferências lógicas e contextuais).
+— Prefere dividir relações compostas em várias ligações atômicas (cada verbo/preposição gera uma relação).
+— Se uma frase listar várias entidades com mesma relação, gera múltiplas entradas.
+
+3) BOAS PRÁTICAS
+
+— Antes de responder, pensa em todas as possíveis entidades e relações.
+— Garante que não existam duplicados em "entities".
 """
 
 instructions_generate_cypher_query = """
-    Task: Generate Cypher queries to query a Neo4j graph database based on the provided schema definition. Care about the context of the question.
-    Instructions:
-    Before Answering think about the task.
-    Make a smart query that gives you all the info someone needs to answer the question.
-    Use only the provided relationship types and properties.
-    Do not use any other relationship types or properties that are not provided.
-    Do not respond with any context, only the query.
-    """
+Task: Generate Cypher queries to query a Neo4j graph database based on the provided schema definition. Care about the context of the question.
+Instructions:
+Before Answering think about the task.
+Do not use any other entities, relationship types or properties that are not provided.
+Do not respond with any context, only the query.
+"""
 
 instructions_correct_syntax = """
     Task: The syntax of the Cypher query is wrong. Correct it.
@@ -126,6 +161,7 @@ Instructions:
 instructions_group_results = """
 Task: Format the given text following the instructions:
 Instructions:
+- Ensure everything is in the same language. If you need to, translate.
 - Before Answering think about the task.
 - Combine the provided JSON lists into a single clean JSON.
 - Place all entities in the 'entities' list and all relationships in the 'relationships' list.
@@ -134,9 +170,7 @@ Instructions:
   - Entities with the same name (ignoring capitalization) but different categories or descriptions can be considered duplicates if the differences are minimal or refer to the same concept.
   - For relationships, ensure no duplicate entries based on the same `source`, `target`, and `value`. If the combination of these is identical, treat it as a duplicate.
   - Relationships with the same `source` and `target` but completely different 'value' are not duplicates.
-- Ensure that no field is altered or removed.
 - Ensure that all relationships in their final list relate to entities in their final list.
-- Ensure everything is in the same language.
 """
 
 
