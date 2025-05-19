@@ -18,13 +18,13 @@ class GraphAgent:
         return same_category and similar_name
 
     def _entity_exists(self, new_entity: EntitySchema) -> bool:
-        #return any(self._is_similar_entity(new_entity, existing) for existing in self.known_entities)
-        return any(
-            new_entity.name == e.name and
-            new_entity.description == e.category and
-            new_entity.category == e.category
-            for e in self.known_entities
-        )
+        return any(self._is_similar_entity(new_entity, existing) for existing in self.known_entities)
+        #return any(
+        #    new_entity.name == e.name and
+        #    new_entity.description == e.category and
+        #    new_entity.category == e.category
+        #    for e in self.known_entities
+        #)
 
     def _relation_exists(self, new_relation: RelationshipSchema) -> bool:
         return any(
@@ -56,7 +56,7 @@ class GraphAgent:
         relation_prompt = ChatPromptTemplate.from_messages([
             ("system", "Com base nas seguintes entidades:\n\n"
                        f"{entities_context}\n\n"
-                       "Extrai todas as **relações** entre estas entidades no texto fornecido, implícitas e explícitas. Ignora novas entidades."),
+                       "Extrai todas as **relações** implícitas e explícitas entre estas entidades."),
             ("human", "{text}")
         ])
         print("Relationships")
@@ -72,7 +72,7 @@ class GraphAgent:
 
         # Fase 3: Filtragem por equivalência semântica
         filtering_prompt = ChatPromptTemplate.from_messages([
-            ("system", "Com base nas listas abaixo, retorna apenas as entidades e relações únicas, removendo equivalentes semânticos ou duplicadas. Não removas entidades ou relações em que não tenhas 100% certeza que são equivalentes."),
+            ("system", "Com base nas listas abaixo, retorna apenas as entidades e relações únicas, removendo equivalentes semânticos ou duplicadas."),
             ("human", "Entidades:\n{entities}\n\nRelações:\n{relations}")
         ])
     
