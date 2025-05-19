@@ -106,12 +106,12 @@ Fornece o ícone do site.
 
 ## Exemplos input e output correspondente
 ### 1.
-[Ficheiro input1](./docs/exemplos/input/ficheiro1.txt)
+[Ficheiro input1](./docs/exemplos/exemplo1/input.txt)
 
-[Ficheiro output1](./docs/exemplos/output/ficheiro1.txt)
+[Ficheiro output1](./docs/exemplos/exemplo1/output.txt)
 
 ### 2.
-[Ficheiro input2](./docs/exemplos/input/ficheiro1.txt)
+[Ficheiro input2](./docs/exemplos/exemplo2/input.txt)
 
-[Ficheiro output1](./docs/exemplos/output/ficheiro2.txt)
+[Ficheiro output1](./docs/exemplos/exemplo2/output.txt)
 
