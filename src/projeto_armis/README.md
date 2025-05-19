@@ -39,6 +39,26 @@ No processamento de um chunk - todas as entidades e relações já extraídas an
 
 ![Abordagem 2](./docs/sd/entity_relationship_extraction/abordagem2.svg)
 
+## Pesquisa na Base de Dados
+
+### Abordagem 1
+Nesta abordagem, o LLM sabe qual é o conteúdo da base de dados "de uma forma declarativa", isto é, ele não tem acesso diretamente à base de dados, apenas tem acesso ao schema.
+
+O schema pode ser caracterizado como uma "blueprint" da base de dados, indicando apenas quais são as relações e o tipo da entidade.
+
+O objetivo do LLM é analisar o schema e formar uma query em chyper válido que responda à pergunta em linguagem natural.
+
+No final, os resultados da query são interpretados e é formatada uma resposta em linguagem natural.
+
+![Abordagem 1](./docs/sd/graph_query/abordagem1.png)
+
+### Abordagem 2
+Esta abordagem usa a biblioteca Langchain e a sua implementação.
+
+Na teoria e prática é igual, mas está mais otimizada a nível de utilização de tokens.
+
+Uma melhoria seria permitir ao LLM fazer várias chamadas à base de dados, com diferentes queries e não apenas uma.
+
 ## ENDPOINTS
 
 ### GET: /chat/make-question

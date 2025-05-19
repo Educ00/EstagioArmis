@@ -1,0 +1,41 @@
+@startuml
+title Perguntas ao Sistema - Abordagem 1
+autonumber
+
+Actor Utilizador as user
+participant Sistema as sys
+entity "Azure/LLM" as llm
+database "Base de Dados" as db 
+
+activate user
+user -> sys : Faz pergunta em linguagem natural
+
+activate sys
+
+sys -> db: Pede o schema da base de dados
+
+activate db
+db --> sys : Devolve o schema
+deactivate db
+
+loop até ter query Cypher válida ou threshold for atingido
+    sys -> llm: Fornece o schema, pergunta e pede para converter em query
+    activate llm
+    llm --> sys: Devolve query
+    deactivate llm
+end loop
+
+sys -> db: Faz query
+activate db
+
+db --> sys : Devolve resultados da query
+deactivate db
+sys -> llm : Fornece resultados da query e pede uma resposta formatada
+activate llm
+llm --> sys: Fornece resposta
+deactivate llm
+sys --> user : Fornece resposta 
+deactivate sys
+ 
+
+@enduml
