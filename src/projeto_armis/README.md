@@ -1,5 +1,7 @@
 # Projeto Estágio Curricular ARMIS
 
+Implementação de sistema RAG com Graph Database.
+
 ## Modelo de Domínio
 ![Modelo de Domimio](./docs/dm/domain_model.svg)
 
