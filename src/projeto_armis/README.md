@@ -1,5 +1,8 @@
 # Projeto Estágio Curricular ARMIS
 
+## Modelo de Domínio
+![Modelo de Domimio](./docs/dm/domain_model.svg)
+
 ## ENDPOINTS
 
 ### GET: /chat/make-question
