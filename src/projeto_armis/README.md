@@ -67,35 +67,40 @@ Uma melhoria seria permitir ao LLM fazer várias chamadas à base de dados, com 
 
 ## ENDPOINTS
 
-### GET: /chat/make-question
+### GET /chat/make-question
+Faz uma pergunta e devolve a resposta.
+#### Exemplo:
+    /chat/make-question?question=Onde é que a Sofia mora?
 
-Makes a question and provides the answer.
+### GET /azure/extract-entities-and-relations
+Extrai todas as entidades e relações usando um LLM.
+#### Exemplo:
+    /azure/extract-entities-and-relations?filename=meuarquivo.txt
 
-### GET: /favicon.ico
+### GET /neo4j/import-file
+Importa nós e relações de um ficheiro para a base de dados Neo4j.
+#### Exemplo:
+    /neo4j/import-file?filename=meuarquivo.txt
 
-Gives the icon.
+### GET /neo4j/import-nodes
+Importa todos os nós para o Neo4j.
+#### Exemplo:
+    /neo4j/import-nodes?filename=meuarquivo.txt
 
-### POST: /files/import-file
+### GET /neo4j/import-relationships
+Importa todas as relações para o Neo4j.
+#### Exemplo:
+    /neo4j/import-relationships?filename=meuarquivo.txt
 
-Saves file to filesystem.
+### GET /neo4j/get-all-nodes
+Retorna todos os nós do Neo4j.
 
-### GET: /neo4j/import-file
+### GET /neo4j/clean-db
+Limpa a base de dados toda.
 
-Imports nodes and relationships from a given file to neo4j.
+### POST /files/import-file
+Guarda um ficheiro no sistema de ficheiros.
 
-### GET: /neo4j/import-nodes
-
-Imports all nodes to neo4j.
-
-### GET: /neo4j/import-relationships
-
-Imports all relationships to neo4j.
-
-### GET: /neo4j/get-all-nodes
-
-Retrieves all nodes to neo4j.
-
-### GET: azure/extract-entities-and-relations
-
-Extracts all entities and relationships using an LLM.
+### GET /favicon.ico
+Fornece o ícone do site.
 
