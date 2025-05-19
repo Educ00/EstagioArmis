@@ -13,6 +13,8 @@ Cada ficheiro é dividido em chunks de tamanho X e processados separadamente.
 
 No processamento de um chunk, todas as entidades e relações já extraídas anteriormente são fornecidas ao LLM para contexto.
 
+O resultado final é um JSON com uma lista de entidades e uma lista de relações. O schema desta resposta é definido num JSON.
+
 ![Abordagem 1](docs/sd/entity_relationship_extraction/abordagem1.svg)
 
 ### Abordagem 2
@@ -36,6 +38,8 @@ Após a estração de entidades estar concluída, é pedido ao LLM para extrair 
 Cada ficheiro é dividido em chunks de tamanho X e processados separadamente.
 
 No processamento de um chunk - todas as entidades e relações já extraídas anteriormente são fornecidas ao LLM para contexto, respeitando as fases acima explicadas.
+
+O resultado final é um JSON com uma lista de entidades e uma lista de relações. O schema desta resposta é definido através da biblioteca pydantic.
 
 ![Abordagem 2](./docs/sd/entity_relationship_extraction/abordagem2.svg)
 
