@@ -1,0 +1,131 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Pessoa",
+            "description": "Personagem principal do texto."
+        },
+        {
+            "name": "parque",
+            "category": "Local",
+            "description": "Local onde Sofia estava."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Local",
+            "description": "Local para onde Sofia queria ir."
+        },
+        {
+            "name": "caminhos",
+            "category": "Objeto",
+            "description": "Caminhos que estavam à frente de Sofia."
+        },
+        {
+            "name": "pedras",
+            "category": "Objeto",
+            "description": "Obstáculo encontrado no primeiro caminho."
+        },
+        {
+            "name": "árvores",
+            "category": "Objeto",
+            "description": "Vegetação presente no segundo caminho."
+        },
+        {
+            "name": "flores",
+            "category": "Objeto",
+            "description": "Vegetação presente no segundo caminho."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Conceito",
+            "description": "O caminho que o sujeito escolheu."
+        },
+        {
+            "name": "árvores",
+            "category": "Elemento Natural",
+            "description": "Plantas grandes e lenhosas encontradas ao longo do caminho."
+        },
+        {
+            "name": "vento",
+            "category": "Elemento Natural",
+            "description": "Corrente de ar que foi sentida pelo sujeito."
+        },
+        {
+            "name": "pássaros",
+            "category": "Elemento Natural",
+            "description": "Aves que foram ouvidas pelo sujeito."
+        },
+        {
+            "name": "fim",
+            "category": "Momento",
+            "description": "O ponto final da jornada do sujeito."
+        },
+        {
+            "name": "felicidade",
+            "category": "Sentimento",
+            "description": "Emoção sentida pelo sujeito ao chegar ao fim."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "estava"
+        },
+        {
+            "source": "parque",
+            "target": "caminhos",
+            "value": "havia"
+        },
+        {
+            "source": "caminhos",
+            "target": "pedras",
+            "value": "tinha"
+        },
+        {
+            "source": "caminhos",
+            "target": "árvores",
+            "value": "tinha"
+        },
+        {
+            "source": "caminhos",
+            "target": "flores",
+            "value": "tinha"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "queria chegar"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "escolheu"
+        },
+        {
+            "source": "Sofia",
+            "target": "árvores",
+            "value": "viu"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "sentiu"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "ouviu"
+        },
+        {
+            "source": "Sofia",
+            "target": "fim",
+            "value": "chegou"
+        },
+        {
+            "source": "Sofia",
+            "target": "felicidade",
+            "value": "sentiu-se"
+        }
+    ]
+}
