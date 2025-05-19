@@ -72,6 +72,11 @@ Faz uma pergunta e devolve a resposta.
 #### Exemplo:
     /chat/make-question?question=Onde é que a Sofia mora?
 
+### GET /chat/import-file
+Importa um ficheiro (já presente no sistema de ficheiros) para as diferentes bases de dados.
+#### Exemplo:
+    /chat/import-file?filename=meuarquivo.txt
+
 ### GET /azure/extract-entities-and-relations
 Extrai todas as entidades e relações usando um LLM.
 #### Exemplo:
