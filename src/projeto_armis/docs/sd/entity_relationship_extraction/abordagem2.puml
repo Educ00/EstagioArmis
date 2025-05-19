@@ -1,0 +1,46 @@
+@startuml
+
+title Extração de Entidades e Relações - Abordagem 2
+autonumber
+
+Actor Utilizador as user
+participant Sistema as sys
+entity "Azure/LLM" as llm
+'database "Base de Dados" as db 
+
+activate user
+user -> sys : Fornece Documentos
+
+activate sys 
+sys --> sys: Divide documentos em chunks (tamanho X)
+loop até todos os chunks serem analisados
+    sys -> llm : Fornece chunk, instruções e contexto de respostas anteriores
+    activate llm
+    llm --> sys : Devolve lista de entidades
+    deactivate llm
+    sys -> sys: Adiciona lista de entidades ao contexto
+   
+    sys -> llm : Fornece chunk, instruções e contexto de respostas anteriores
+    activate llm
+    llm --> sys : Devolve lista de relações
+    deactivate llm
+    sys -> sys: Adiciona lista de relações ao contexto
+    
+    sys -> llm : Fornece chunk, instruções e contexto de respostas anteriores
+    activate llm
+    llm --> sys : Devolve lista de entidades e relações filtrada (sem repetições ou equivalentes "maus")
+    deactivate llm
+    sys -> sys: Substitui lista de entidades e lista de relações no contexto
+
+end loop
+
+'activate db
+'sys -> db : Armazena na base de dados
+'db --> sys : Confirmação
+'deactivate db
+
+sys --> user : Confirmação
+deactivate sys
+
+
+@enduml
