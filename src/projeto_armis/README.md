@@ -4,6 +4,7 @@ Implementação de sistema RAG com Graph Database.
 
 ## Modelo de Domínio
 ![Modelo de Domimio](./docs/dm/domain_model.svg)
+
 **TODO:** rever/melhorar o modelo com mais pormenores
 
 ## Extração de Entidades e Relações
