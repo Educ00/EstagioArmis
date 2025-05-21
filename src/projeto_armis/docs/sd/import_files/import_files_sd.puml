@@ -1,0 +1,29 @@
+@startuml
+
+autonumber
+Actor Utilizador as user
+
+participant FileController as controller
+participant FileService as service
+database "Sistema de Armazenamento" as fs
+
+activate user
+user -> controller : POST: /files/import-file
+
+activate controller
+controller --> controller : Filtra ficheiro
+
+controller -> service : Envia ficheiro
+activate service
+service -> fs : Guarda ficheiro
+
+activate fs
+fs --> service : Mensagem de confirmação
+deactivate fs
+
+service --> controller : Mensagem de confirmação
+
+controller --> user : Mensagem de confirmação
+deactivate controller
+
+@enduml
