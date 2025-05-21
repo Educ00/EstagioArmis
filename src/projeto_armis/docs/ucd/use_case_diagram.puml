@@ -3,10 +3,10 @@
 left to right direction
 actor Utilizador as user
 
-package "RAG SYSTEM" {
+package "Sistema RAG" {
     usecase "Importar Ficheiro de Texto" as UC1
-    usecase "Processar e indexar na Graph Database" as UC2
-    usecase "Processar e indexar na Azure AI Search" as UC3
+    usecase "Processar e indexar na Azure AI Search" as UC2
+    usecase "Processar e indexar na Graph Database" as UC3
     usecase "Efetuar Perguntas" as UC4
     usecase "Visualizar Resultados das Perguntas" as UC5
 
