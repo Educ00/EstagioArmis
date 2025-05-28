@@ -9,15 +9,15 @@ from domain.models.relationship import Relationship
 from infrastructure.repositories.neo4j_repository import Neo4jRepository
 
 class Neo4jService:
-    def __init__(self, repository: Neo4jRepository):
-        self.repository = repository
+    def __init__(self, neo4j_repository: Neo4jRepository):
+        self.neo4j_repository = neo4j_repository
 
     def get_all_nodes(self):
         """
         Returns all nodes
         :return: nodes
         """
-        return self.repository.get_all_nodes()
+        return self.neo4j_repository.get_all_nodes()
     
     def import_file(self, filename: str) -> tuple[list[EntityDTO], list[RelationshipDTO]]: 
         """
@@ -51,7 +51,7 @@ class Neo4jService:
             description = entity["description"]
             nodes.append(Entity(name=name, category=category, description=description))
             
-        return self.repository.import_nodes(nodes)
+        return self.neo4j_repository.import_nodes(nodes)
 
     def import_relationships(self, filename : str) -> list[RelationshipDTO]:
         """
@@ -72,12 +72,12 @@ class Neo4jService:
             target = entity["target"]
             value = entity["value"]
             relationships.append(Relationship(source=source, target=target, value=value))
-        return self.repository.import_relationships(relationships)
+        return self.neo4j_repository.import_relationships(relationships)
 
     def clean_db(self):
         """
         Clean Entire Database
         """
         print(f"[Neo4j Service]: Cleaning Neo4j database...")
-        return self.repository.clean_db()
+        return self.neo4j_repository.clean_db()
         

@@ -22,7 +22,7 @@ class DependencyContainer(containers.DeclarativeContainer):
     
     neo4j_adapter = providers.Singleton(Neo4jAdapter)
     neo4j_repository = providers.Factory(Neo4jRepository, neo4j_adapter = neo4j_adapter)
-    neo4j_service = providers.Factory(Neo4jService, repository=neo4j_repository)
+    neo4j_service = providers.Factory(Neo4jService, neo4j_repository=neo4j_repository)
     
     azure_adapter = providers.Singleton(AzureAdapter)
     azure_repository = providers.Factory(AzureRepository, azure_adapter=azure_adapter)
