@@ -275,7 +275,7 @@ class AzureService:
         upload_folder_name = current_app.config['UPLOAD_FOLDER']
         output_folder_name = current_app.config['OUTPUT_FOLDER']
         filename = upload_folder_name + "/" + filename
-        chunks = self._split_text(filepath=filename, chunk_size=400, chunk_overlap=75)
+        chunks = self._split_text(filepath=filename, chunk_size=1200, chunk_overlap=250)
         llm = self.azure_adapter.get_llm_base()
         agent = GraphAgent(llm=llm)
 

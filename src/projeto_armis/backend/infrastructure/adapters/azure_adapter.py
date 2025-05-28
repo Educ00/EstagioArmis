@@ -1,3 +1,4 @@
+import sys
 from os import getenv
 
 from datetime import datetime
@@ -145,11 +146,13 @@ class AzureAdapter:
 
     def query_graph(self, question: str,graph: Neo4jGraph, allow_dangerous_requests: bool = True, return_intermediate_steps: bool = True, validate_cypher: bool = True):
         start = datetime.now()
+        graph.refresh_schema()
         with get_openai_callback() as cb:
             
             chain = GraphCypherQAChain.from_llm(
                 llm=self.llm_base,
                 graph=graph,
+                top_k=sys.maxsize-1,
                 #verbose=True,
                 allow_dangerous_requests=allow_dangerous_requests,
                 return_intermediate_steps=return_intermediate_steps,
