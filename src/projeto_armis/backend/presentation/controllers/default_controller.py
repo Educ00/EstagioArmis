@@ -3,6 +3,9 @@ import os
 
 default_blueprint = Blueprint("Default Routes", __name__)
 
-@default_blueprint.route("/favicon.ico", methods=["GET"])
-def favicon():
-    return send_from_directory(os.path.join(os.getcwd(), "static"), "favicon.ico", mimetype="image/vnd.microsoft.icon")
+class DefaultController:
+    
+
+    @default_blueprint.route("/favicon.ico", methods=["GET"])
+    def favicon(self):
+        return send_from_directory(os.path.join(os.getcwd(), "static"), "favicon.ico", mimetype="image/vnd.microsoft.icon")
