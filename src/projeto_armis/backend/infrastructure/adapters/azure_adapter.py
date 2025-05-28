@@ -1,16 +1,10 @@
-import sys
+from datetime import datetime
 from os import getenv
 
-from datetime import datetime
 
-from azure.core.credentials import AzureKeyCredential
-from azure.search.documents import SearchClient
-from langchain_community.vectorstores import AzureSearch
 from langchain_community.callbacks import get_openai_callback
-from langchain_core.callbacks import CallbackManager
 from langchain_core.messages import HumanMessage
 from langchain_core.prompts import PromptTemplate
-from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
 from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 
 from core.constants import modeloGpt4omini, openaiApiVersion, openAiApiType, json_schema1, modeloGpt4o, modeloAda
@@ -20,13 +14,10 @@ class AzureAdapter:
     llm_base : AzureChatOpenAI= None
     llm = None
     llm_embeddings_base : AzureOpenAIEmbeddings = None
-    vector_store : AzureSearch = None
-    search_client : SearchClient = None
     def __init__(self):
         self.llm_base = self.get_llm_base()
         self.llm = None
         self.llm_embeddings_base = self.get_llm_embeddings_base()
-        self.vector_store = self.get_vector_store()
     def get_llm_base(self):
         """
         Retrieves the instance of the AzureChatOpenAI
@@ -47,31 +38,7 @@ class AzureAdapter:
             )
         print("[Azure Adapter]: LLM Embeddings Instance Created.")
         return self.llm_embeddings_base
-    
-    def get_vector_store(self):
-        print("[Azure Adapter]: Initializing Azure Search Instance...")
-        if self.vector_store is None:
-            self.vector_store = AzureSearch(
-                azure_search_endpoint=getenv("AZURE_URL"),
-                azure_search_key=getenv("AZURE_URL_KEY"),
-                index_name=getenv("INDEX_NAME_1"),
-                embedding_function=self.llm_embeddings_base
-            )
-        print("[Azure Adapter]: Azure Search Instance Created.")
-        self.get_search_client()
-        return self.vector_store
-    
-    def get_search_client(self):
-        print("[Azure Adapter]: Initializing Azure Search Client Instance...")
-        if self.search_client is None:
-            self.search_client = SearchClient(
-                endpoint=getenv("AZURE_URL"),
-                index_name=getenv("INDEX_NAME_1"),
-                credential=AzureKeyCredential(getenv("AZURE_URL_KEY"))
-            )
-        print("[Azure Adapter]: Azure Search Client Instance Created.")
-            
-        return self.search_client
+
     
     def change_schema(self, json_schema = None):
         """
@@ -94,19 +61,6 @@ class AzureAdapter:
             temp_llm = temp_llm.with_structured_output(json_schema, strict=True)
         self.llm = temp_llm
         print("[Azure Adapter]: LLM Instance Created.")
-        
-    def change_index(self, index: str):
-        self.vector_store = AzureSearch(
-            azure_search_endpoint=getenv("AZURE_URL"),
-            azure_search_key=getenv("AZURE_URL_KEY"),
-            index_name=index,
-            embedding_function=self.llm_embeddings_base
-        )
-        self.search_client = SearchClient(
-            endpoint=getenv("AZURE_URL"),
-            index_name=index,
-            credential=AzureKeyCredential(getenv("AZURE_URL_KEY"))
-        )
 
     def call_llm(self,prompt_template: str, **kwargs):
         """
@@ -125,42 +79,6 @@ class AzureAdapter:
         print("[Azure Adapter]: Thinking...")
         with get_openai_callback() as cb:
             response = self.llm.invoke([message])
-        #print(f"[Azure Adapter]: Prompt Tokens: {cb.prompt_tokens}")
-        #print(f"[Azure Adapter]: Completion Tokens: {cb.completion_tokens}")
-        #print(f"[Azure Adapter]: Total Tokens: {cb.total_tokens}")
-        #print(f"[Azure Adapter]: Total Cost (Dollar): {cb.total_cost}")
         end = datetime.now()
         print("[Azure Adapter]: LLM Called.")
-        return response, start, end, cb
-    
-    def call_vector_store(self, query):
-        print("[Azure Adapter]: Calling Azure Ai Search")
-        start = datetime.now()
-        response = self.vector_store.similarity_search(query, search_type="hybrid")
-        end = datetime.now()
-        print("[Azure Adapter]: Azure Ai Search Called")
-        return response, start, end
-
-    def import_documents(self, docs):
-        return self.vector_store.add_documents(documents=docs)
-
-    def query_graph(self, question: str,graph: Neo4jGraph, allow_dangerous_requests: bool = True, return_intermediate_steps: bool = True, validate_cypher: bool = True):
-        start = datetime.now()
-        graph.refresh_schema()
-        with get_openai_callback() as cb:
-            
-            chain = GraphCypherQAChain.from_llm(
-                llm=self.llm_base,
-                graph=graph,
-                top_k=sys.maxsize-1,
-                #verbose=True,
-                allow_dangerous_requests=allow_dangerous_requests,
-                return_intermediate_steps=return_intermediate_steps,
-                validate_cypher=True,
-                callbacks=[cb]
-            )
-            
-            response = chain.invoke({"query": question})
-        end = datetime.now()
-        
         return response, start, end, cb

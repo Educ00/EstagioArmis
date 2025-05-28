@@ -1,8 +1,8 @@
 from dependency_injector.wiring import inject, Provide
-from langchain_core.messages import HumanMessage
 
 from application.dtos.response_dto import ResponseDTO
 from application.services.azure_service import AzureService
+from application.services.chat_service import ChatService
 from application.services.neo4j_service import Neo4jService
 
 from dependency_container import DependencyContainer
@@ -13,7 +13,7 @@ chat_blueprint = Blueprint("Chat", __name__, url_prefix="/chat")
 
 @chat_blueprint.route("/make-question", methods=["GET"])
 @inject
-def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service]):
+def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service], chat_service: ChatService = Provide[DependencyContainer.chat_service]):
     try:
         question = request.args.get("question")
         if not question:
@@ -26,7 +26,8 @@ def make_question(azure_service: AzureService = Provide[DependencyContainer.azur
             case 1:
                 neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
             case 2:
-                neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question2(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
+                neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = chat_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
+                
                 
         response_dto = ResponseDTO(
             neo4j_response=neo4j_benchmark_dto.neo4j_response, 

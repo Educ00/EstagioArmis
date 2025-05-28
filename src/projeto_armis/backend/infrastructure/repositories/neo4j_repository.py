@@ -1,13 +1,55 @@
+from datetime import datetime
+
+import sys
+
+from langchain_community.callbacks import get_openai_callback
+from langchain_neo4j import Neo4jGraph, GraphCypherQAChain
+from langchain_openai import AzureChatOpenAI
+
 from application.dtos.entity_dto import EntityDTO
 from application.dtos.relationship_dto import RelationshipDTO
 from application.mappers.entity_mapper import EntityMapper
 from application.mappers.relationship_mapper import RelationshipMapper
 from domain.models.entity import Entity
 from domain.models.relationship import Relationship
-from infrastructure.repositories.base_repository import BaseRepository
+from infrastructure.adapters.neo4j_adapter import Neo4jAdapter
 
 
-class Neo4jRepository(BaseRepository):
+class Neo4jRepository: 
+    
+    def __init__(self, neo4j_adapter : Neo4jAdapter):
+        self.neo4j_adapter = neo4j_adapter
+
+
+    def run_query(self, query: str, params: dict = None):
+        """
+        Runs a query in the database
+        :param query: query
+        :param params: parameters of the query
+        :return: query results
+        """
+        return self.neo4j_adapter.run_query(query, params or {})
+    
+    def query_graph(self, question: str, llm: AzureChatOpenAI, allow_dangerous_requests: bool = True, return_intermediate_steps: bool = True, validate_cypher: bool = True):
+        start = datetime.now()
+        graph = self.neo4j_adapter.db
+        with get_openai_callback() as cb:
+
+            chain = GraphCypherQAChain.from_llm(
+                llm=llm,
+                graph=graph,
+                top_k=sys.maxsize-1,
+                #verbose=True,
+                allow_dangerous_requests=allow_dangerous_requests,
+                return_intermediate_steps=return_intermediate_steps,
+                validate_cypher=validate_cypher,
+                callbacks=[cb]
+            )
+
+            response = chain.invoke({"query": question})
+        end = datetime.now()
+
+        return response, start, end, cb
     
     def import_nodes(self, nodes: list[Entity]) -> list[EntityDTO]:
         """
@@ -95,13 +137,13 @@ class Neo4jRepository(BaseRepository):
         Refreshes the schema of the database and returns it.
         :return: schema
         """
-        self.adapter.db.refresh_schema()
-        return self.adapter.db.get_schema
+        self.neo4j_adapter.db.refresh_schema()
+        return self.neo4j_adapter.db.get_schema
 
     def get_structured_schema(self):
         """
         Refreshes the schema of the database and returns it.
         :return: schema
         """
-        self.adapter.db.refresh_schema()
-        return self.adapter.db.get_structured_schema
+        self.neo4j_adapter.db.refresh_schema()
+        return self. neo4j_adapter.db.get_structured_schema

@@ -37,6 +37,7 @@ class Neo4jService:
         :param filename: name of the file
         :return: number of imported nodes
         """
+        print(f"[Neo4j Service] Importing Nodes")
         folder_name = current_app.config['OUTPUT_FOLDER']
         file_path = folder_name + "/" + filename
         #print(file_path)
@@ -58,6 +59,7 @@ class Neo4jService:
         :param filename: name of the file
         :return: number of imported relationships
         """
+        print(f"[Neo4j Service] Importing Relationships")
         folder_name = current_app.config['OUTPUT_FOLDER']
         file_path = folder_name + "/" + filename
         #print(file_path)
