@@ -1,0 +1,22 @@
+@startuml
+autonumber 
+
+participant "ChatController" as chatController
+participant "AzureService" as azureService
+
+database "AzureAiSearch" as azureAiSearch
+
+chatController -> azureService : Caminho Ficheiro
+activate chatController
+activate azureService
+azureService -> azureAiSearch : Envia Ficheiro
+activate azureAiSearch
+azureAiSearch --> azureAiSearch : Guarda Ficheiro
+azureAiSearch --> azureService : Mensagem De Confirmação
+deactivate azureAiSearch
+azureService --> chatController : Mensagem de Confirmação
+deactivate chatController
+
+
+
+@enduml

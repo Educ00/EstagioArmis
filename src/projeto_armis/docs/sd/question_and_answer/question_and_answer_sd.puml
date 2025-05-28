@@ -1,0 +1,48 @@
+@startuml
+
+autonumber
+
+actor "Utilizador" as user
+participant "ChatController" as chatController
+participant "ChatService" as chatService
+participant "XAdapter" as xAdapter
+participant "LLM" as llm
+database "XDatabase" as xDatabase
+
+activate user
+user -> chatController : GET: /chat/make-question?question?<question body>
+activate chatController
+
+loop Para Todas As Bases De Dados Selecionadas
+
+chatController -> chatService : Envia Pergunta
+activate chatService
+
+
+chatService -> xAdapter : Envia Pergunta
+activate xAdapter
+
+xAdapter -> xDatabase : Query{pergunta}
+activate xDatabase
+
+xDatabase --> xAdapter : Resultados Query
+deactivate xDatabase
+
+xAdapter -> llm : Envia Resultados Query
+activate llm
+
+llm --> xAdapter : Resposta Formatada
+deactivate llm
+
+xAdapter --> chatService : Resposta Formatada E Métricas
+deactivate xAdapter
+
+end loop 
+
+
+chatService -->  chatController : Resposta(s) Formatada(s) E Métricas
+deactivate chatService
+
+chatController -->  user : Resposta(s) Formatada(s) E Métricas
+deactivate chatController
+@enduml

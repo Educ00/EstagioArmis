@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+skinparam rectangle {
+    BackgroundColor White
+    BorderColor Black
+}
+
+
+' Definir os componentes principais
+rectangle "Prompt" as Prompt
+rectangle "Document Store" as DocStore
+rectangle "Retrieved Documents" as RetrievedDocs
+rectangle "Generator\n(Language Model)" as Generator
+rectangle "Response" as Response
+
+' Fluxo do processo
+Prompt --> Generator
+Prompt -> DocStore
+DocStore -> RetrievedDocs
+RetrievedDocs --> Generator
+Generator --> Response
+
+@enduml

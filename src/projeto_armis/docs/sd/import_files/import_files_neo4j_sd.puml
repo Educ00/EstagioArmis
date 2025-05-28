@@ -1,0 +1,34 @@
+@startuml
+autonumber
+
+left header
+== Nota ==
+Este processo só é feito depois do processamento do ficheiro estar completo.
+endheader
+
+participant "ChatController" as chatController
+participant "Neo4jService" as neo4jService
+database Neo4j as neo4j
+
+chatController -> neo4jService : Caminho Ficheiro
+activate chatController
+activate neo4jService
+neo4jService --> neo4jService : Parse Entidades
+
+neo4jService -> neo4j : Envia Entidades
+activate neo4j
+neo4j --> neo4j : Guarda Entidades
+neo4j --> neo4jService : Mensagem de Confirmação
+deactivate neo4j
+neo4jService --> neo4jService : Parse Relações
+neo4jService -> neo4j : Envia Relações
+activate neo4j
+neo4j --> neo4j : Guarda Entidades
+neo4j --> neo4jService : Mensagem de Confirmação
+deactivate neo4j
+
+neo4jService --> chatController : Mensagem de Confirmação
+deactivate neo4jService
+deactivate chatController
+
+@enduml
