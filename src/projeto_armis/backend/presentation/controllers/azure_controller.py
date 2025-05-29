@@ -11,8 +11,9 @@ azure_blueprint = Blueprint("Azure", __name__, url_prefix="/azure")
 class AzureController:
 
     @azure_blueprint.route("/print-index", methods=["GET"])
+    @staticmethod
     @inject
-    def import_file(self, service: AzureService = Provide[DependencyContainer.azure_service]):
+    def import_file(service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
             response = service.print_azure_index()
             response2 = service.print_azure_index2()
@@ -21,8 +22,9 @@ class AzureController:
             return jsonify(e), 400
         
     @azure_blueprint.route("/clear-index", methods=["GET"])
+    @staticmethod
     @inject
-    def clear_index(self, service: AzureService = Provide[DependencyContainer.azure_service]):
+    def clear_index(service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
             response = service.clear_azure_index()
             response2 = service.clear_azure_index2()
@@ -32,8 +34,9 @@ class AzureController:
     
     
     @azure_blueprint.route("/generate-query", methods=["GET"])
+    @staticmethod
     @inject
-    def generate_query(self, service: AzureService = Provide[DependencyContainer.azure_service]):
+    def generate_query(service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
             response = service.generate_chyper_query_and_query_neo4j("Por onde foi a Sofia?")
             print(response)
@@ -43,8 +46,9 @@ class AzureController:
             
     
     @azure_blueprint.route("/extract-entities-and-relations", methods=["GET"])
+    @staticmethod
     @inject
-    def process_file(self, service: AzureService = Provide[DependencyContainer.azure_service]):
+    def process_file(service: AzureService = Provide[DependencyContainer.azure_service]):
         filename = request.args.get("filename")
         if not filename:
             return jsonify({"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}), 400

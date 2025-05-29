@@ -13,8 +13,9 @@ neo4j_blueprint = Blueprint("Neo4j", __name__, url_prefix="/neo4j")
 class Neo4jController:
 
     @neo4j_blueprint.route("/import-file", methods=["GET"])
+    @staticmethod
     @inject
-    def import_file(self, service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    def import_file(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
         """
         Importa um arquivo com nós e relacionamentos para a Base de Dados Neo4j configurada
         :param service: Instância do serviço NEo4jService, injetada automaticamente
@@ -34,8 +35,9 @@ class Neo4jController:
             return {"error": str(e)}, 400
     
     @neo4j_blueprint.route("/import-nodes", methods=["GET"])
+    @staticmethod
     @inject
-    def import_nodes(self, service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    def import_nodes(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
         """
         Importa nós para o Neo4j a partir de um ficheiro.
     
@@ -55,8 +57,9 @@ class Neo4jController:
             return {"error": str(e)}, 400
     
     @neo4j_blueprint.route("/import-relationships", methods=["GET"])
+    @staticmethod
     @inject
-    def import_relationships(self, service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    def import_relationships(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
         """
         Importa relacionamentos para o Neo4j a partir de um ficheiro.
     
@@ -73,8 +76,9 @@ class Neo4jController:
             return {"error": str(e)}, 400
     
     @neo4j_blueprint.route('/get-all-nodes', methods=['GET'])
+    @staticmethod
     @inject
-    def get_all_nodes(self, service : Neo4jService= Provide[DependencyContainer.neo4j_service]):
+    def get_all_nodes(service : Neo4jService= Provide[DependencyContainer.neo4j_service]):
         """
         Retorna todos os nós do banco de dados Neo4j.
     
@@ -88,8 +92,9 @@ class Neo4jController:
             return {"error": str(e)}, 400
     
     @neo4j_blueprint.route("/clean-db", methods=["GET"])
+    @staticmethod
     @inject
-    def clean_db(self, service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    def clean_db(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
         """
         Limpa o banco de dados Neo4j, removendo todos os nós e relacionamentos.
     

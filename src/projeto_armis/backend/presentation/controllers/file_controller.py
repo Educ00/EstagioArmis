@@ -10,8 +10,9 @@ files_blueprint = Blueprint("Files", __name__, url_prefix="/files")
 class FileController:
 
     @files_blueprint.route("/import-file", methods=["POST"])
+    @staticmethod
     @inject
-    def upload_file(self, file_service : FilesService = Provide[DependencyContainer.files_service]):
+    def upload_file(file_service : FilesService = Provide[DependencyContainer.files_service]):
         if 'file' not in request.files:
             return jsonify({"error": "Nenhum arquivo enviado"}), 400
     

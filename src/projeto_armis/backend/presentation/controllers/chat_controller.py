@@ -14,8 +14,9 @@ chat_blueprint = Blueprint("Chat", __name__, url_prefix="/chat")
 class ChatController:
     
     @chat_blueprint.route("/make-question", methods=["GET"])
+    @staticmethod
     @inject
-    def make_question(self, azure_service: AzureService = Provide[DependencyContainer.azure_service], chat_service: ChatService = Provide[DependencyContainer.chat_service]):
+    def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service], chat_service: ChatService = Provide[DependencyContainer.chat_service]):
         try:
             question = request.args.get("question")
             if not question:
@@ -43,8 +44,9 @@ class ChatController:
             return jsonify(str(e)), 400
         
     @chat_blueprint.route("/import-file", methods=["GET"])
+    @staticmethod
     @inject
-    def import_file(self, azure_service: AzureService = Provide[DependencyContainer.azure_service], neo4j_service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    def import_file(azure_service: AzureService = Provide[DependencyContainer.azure_service], neo4j_service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
         filename = request.args.get("filename")
         if not filename:
             return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuficheiro.txt"}, 400
