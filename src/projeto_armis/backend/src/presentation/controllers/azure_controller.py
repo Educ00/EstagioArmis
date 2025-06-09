@@ -13,7 +13,7 @@ class AzureController:
     @azure_blueprint.route("/print-index", methods=["GET"])
     @staticmethod
     @inject
-    def import_file(service: AzureService = Provide[DependencyContainer.azure_service]):
+    def print_index(service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
             response = service.print_azure_index()
             response2 = service.print_azure_index2()
