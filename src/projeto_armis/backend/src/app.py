@@ -4,7 +4,7 @@ import logging
 
 from presentation.routes import setup_blueprints
 from dependency_container import setup_dependency_container
-from core.utils.config import read_env_config, config_upload_folder
+from config import read_env_config, config_upload_folder
 from core.utils.exceptions import error_handler
 from core.utils.utils import get_port
 
