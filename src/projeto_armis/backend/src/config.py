@@ -1,5 +1,4 @@
 from pathlib import Path
-from string import Template
 
 from os import makedirs, sep
 
@@ -7,7 +6,7 @@ from dotenv import load_dotenv
 
 
 def read_env_config():
-    root_path = Path(__file__).resolve().parents[4]
+    root_path = Path(__file__).resolve().parents[2]
     env_path = root_path / ".env"
     load_dotenv(dotenv_path=env_path)
 
