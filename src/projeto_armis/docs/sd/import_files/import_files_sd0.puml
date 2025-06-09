@@ -4,36 +4,36 @@ autonumber
 Actor Utilizador as user
 
 participant ChatController as controller
-participant Neo4jService as neo4jService
+participant "X Service" as service
 
-participant "Azure/OpenAI" as azureOpenAI
+participant "LLM" as llm
 
-database "Base de dados" as db
+database "X Base de dados" as db
 
 activate user
 user -> controller : POST: /chat/import-file?filename=<name>
 
 activate controller
 
-controller -> neo4jService : Envia Ficheiro
-activate neo4jService
+controller -> service : Envia Ficheiro
+activate service
 
-neo4jService --> neo4jService : Divide Ficheiro em chunks (tamanho N)
+service --> service : Divide Ficheiro em chunks (tamanho N)
 loop até serem processados todos os chunks
-neo4jService -> azureOpenAI : Processa Informação Conforme Necessário
-activate azureOpenAI
-azureOpenAI --> neo4jService : Envia Chunk Processado
+service -> llm : Processa Informação Conforme Necessário
+activate llm
+llm --> service : Envia Chunk Processado
 end loop
-deactivate azureOpenAI
+deactivate llm
 
-neo4jService -> db : Envia Informação Processada
+service -> db : Envia Informação Processada
 activate db
 db --> db : Guarda Informação Processada
-db --> neo4jService : Mensagem de Confirmação
+db --> service : Mensagem de Confirmação
 deactivate db
 
-neo4jService --> controller : Mensagem de Confirmação
-deactivate neo4jService
+service --> controller : Mensagem de Confirmação
+deactivate service
 
 controller --> user : Mensagem de Confirmação
 deactivate controller

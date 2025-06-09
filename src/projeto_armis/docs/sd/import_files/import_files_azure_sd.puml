@@ -9,10 +9,13 @@ database "AzureAiSearch" as azureAiSearch
 chatController -> azureService : Caminho Ficheiro
 activate chatController
 activate azureService
-azureService -> azureAiSearch : Envia Ficheiro
-activate azureAiSearch
-azureAiSearch --> azureAiSearch : Guarda Ficheiro
-azureAiSearch --> azureService : Mensagem De Confirmação
+azureService --> azureService : Devide Ficheiro em Chunks (tamanho N)
+loop Até serem processados todos os chunks
+    azureService -> azureAiSearch : Envia Chunk
+    activate azureAiSearch
+    azureAiSearch --> azureAiSearch : Guarda Chunk
+    azureAiSearch --> azureService : Mensagem De Confirmação
+end loop
 deactivate azureAiSearch
 azureService --> chatController : Mensagem de Confirmação
 deactivate chatController

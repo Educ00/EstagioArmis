@@ -1,0 +1,392 @@
+@startuml
+'top to bottom direction
+skinparam monochrome true
+left to right direction
+'skinparam linetype polyline
+skinparam linetype ortho
+
+package "backend" {
+    package "src" {
+        class "App" {
+            + main()
+            - before_all()
+            - init_application()
+        }
+        class "DependencyContainer" {
+            + setup_dependency_container(app: Flask, modules: List, packages: List) : Flask
+        }
+        class "Config" {
+            + read_env_config()
+            + config_upload_folder(app: Flask) -> Flask
+        }
+    
+        package "presentation" {
+            
+            package "controllers" {
+                class "ChatController" {
+                    + azure_service: AzureService
+                    + neo4j_service : Neo4jService
+                    + make_question() : Response
+                    + import_file() : Response
+                }
+                'class "AzureController" {
+                '    + service: AzureService
+                '    + print_index() : Response
+                '    + clear_index() : Response
+                '    + generate_query() : Response
+                '    + process_file() : Response
+                '}
+                'class "Neo4jController" {
+                '    + service : Neo4jService
+                '    + import_file() : Response
+                '    + import_nodes() : Response
+                '    + import_relationships() : Response
+                '    + get_all_nodes() : Response
+                '    + clean_db() : Response
+                '}
+                class "FileController" {
+                    + file_service : FilesService
+                    + upload_file() : Response
+                }
+                class "DefaultController" {
+                    + favicon() : Response
+                }
+                
+            }
+            
+        }
+        
+        package "infrastructure" {
+            package "adapters" {
+                class "AzureAdapter" {
+                    + llm_base : AzureChatOpenAI
+                    + llm_embeddings_base : AzureOpenAIEmbeddings
+                    + llm_with_schema
+                    + AzureAdapter()
+                    + get_llm_base() : AzureChatOpenAI
+                    + get_llm_embeddings_base() : AzureOpenAIEmbeddings
+                    + change_schema(json_schema: json)
+                    + call_llm(prompt_template: str, **kwargs)
+                }
+                class "Neo4jAdapter" {
+                    + db : Neo4jGraph
+                    + run_query(query: str, params: dict) : List[Dict]
+                    + initialize_db() : Neo4jGraph
+                }
+            }
+            
+            package "repositories" {
+                class "AzureRepository" {
+                    + vector_store : AzureSearch
+                    + search_client : SearchClient
+                    + azure_adapter : AzureAdapter
+                    + AzureRepository(azure_adapter : AzureAdapter)
+                    + get_vector_store() : AzureSearch
+                    + get_search_client(self) : SearchClient
+                    + change_index(index: str)
+                    + run_query(query) : tuple[list[dict], datetime, datetime]
+                    + import_documents()
+                }
+                
+                class "Neo4jRepository" {
+                    + neo4j_adapter : Neo4jAdapter
+                    + run_query(self, query: str, params: dict) : list[disct]
+                    + query_graph(self, question: str, llm: AzureChatOpenAI, allow_dangerous_requests: bool, return_intermediate_steps: bool, validate_cypher: bool) : tuple[list[dict], datetime, datetime]
+                    + import_nodes(self, nodes: list[Entity]) : list[EntityDTO]
+                    + import_relationships(self, relationships: list[Relationship]) -> list[RelationshipDTO]
+                    + get_all_nodes(self)
+                    + clean_db(self)
+                    + get_schema(self)
+                    + get_structured_schema(self)
+                    - _format_string(self, string: str, remove_spaces=False)
+                }
+                "Neo4jRepository" --> "Neo4jAdapter"
+                "AzureRepository" --> "AzureAdapter"
+            }
+        }
+        
+        package "domain" {
+            package "models" {
+                package "schemas" {
+                    class "EntitySchema" {
+                        + name: str
+                        + category : List[str]
+                        + description : str
+                    }
+                
+                    class "RelationshipSchema" {
+                        + source: str
+                        + target: str
+                        + value: str
+                    }
+                    class "GraphSchema" {
+                        + entities: List[EntitySchema]
+                        + relations: List[RelationshipSchema]
+                    }
+                    
+                    GraphSchema --> EntitySchema
+                    GraphSchema --> RelationshipSchema
+                }
+                
+                class "Benchmark" {
+                    + name = str
+                    + completion_model: str
+                    + embeddings_model: str
+                    + execution_start_datetime: datetime
+                    + execution_end_datetime: datetime
+                    + spent_llm_datetime_frames: list[tuple[str, datetime, datetime]]
+                    + logs: list[str]
+                    + prompt_tokens: list[tuple[str, int]]
+                    + completion_tokens: list[tuple[str, int]]
+                    + reasoning_tokens: list[tuple[str, int]]
+                    + successful_requests: list[tuple[str, int]]
+                    + cost: float
+                    + start_benchmark(completion_model: str, embeddings_model: str)
+                    + end_benchmark()
+                    + process_callback(operation_name: str, callback: OpenAICallbackHandler)
+                    + add_thinking_time(self, operation_name: str, start: datetime, end: datetime)
+                    + add_prompt_tokens(self, operation_name: str, tokens: int)
+                    + add_prompt_tokens(self, operation_name: str, tokens: int)
+                    + add_completion_tokens(self, operation_name: str, tokens: int)
+                    + add_reasoning_tokens(self, operation_name: str, tokens: int):
+                    + add_cost(self, operation_name: str, cost: float)
+                    + add_sucessful_requests(self, operation_name: str, n_requests: int)
+                    + add_log(self, text: str, timestamp=None) -> str
+                    + compute_execution_time(self) -> timedelta
+                    + display(self)
+                }
+                class "Entity" {
+                    + name: str
+                    + category : str
+                    + description : str
+                    + Entity(name: str, category: str, description: str)
+                }
+                class "Relationship" {
+                    + source: str
+                    + target: str
+                    + value: str
+                    + Relationship(source: str, target: str, value: str)
+                }
+                class "GraphAgent" {
+                    + llm : AzureChatOpenAI
+                    + known_entities: List[EntitySchema]
+                    + known_relations: List[RelationshipSchema]
+                    + GraphAgent(llm : AzureChatOpenAI, known_entities: List[EntitySchema], known_relations: List[RelationshipSchema])
+                    - _is_similar_entity(e1: EntitySchema, e2: EntitySchema, threshold: float) : bool
+                    - _entity_exists(new_entity: EntitySchema) : bool
+                    - _relation_exists(new_relation: RelationshipSchema) : bool
+                    + extract_from_chunk(self, chunk: str) : GraphSchema
+                }
+                GraphAgent --> GraphSchema
+                GraphAgent --> EntitySchema
+                GraphAgent --> RelationshipSchema
+            }
+        
+        }
+        
+        package "core" {
+            Class "Constants" {
+                + UPLOAD_FOLDER
+                + modeloAda
+                + modeloGpt4o
+                + modeloGpt4omini
+                + openaiApiVersion
+                + openAiApiType
+                + prompt_template0
+                + prompt_template1
+                + prompt_template2
+                + prompt_template3
+                + prompt_instructions1
+                + prompt_instructions2
+                + prompt_instructions3
+                + prompt_instructions4
+                + instructions_generate_cypher_query
+                + instructions_correct_syntax
+                + instructions_format_answer_to_question
+                + instructions_group_results
+                + json_schema1
+                + json_schema2
+            }
+        
+            package "utils" {
+                class "Utils" {
+                    + get_port() : int
+                }
+                class "ApiException" {
+                    + message: str
+                    + code: str
+                    + status: int
+                    + meta: dict
+                    + ApiException(message: str, code: str, status: int, meta=None)
+                }
+                
+                class "BadRequest" {
+                    + BadRequest(message: str)   
+                }
+                class "NotFound" {
+                    + NotFound(message: str, meta: dict)
+                }
+                class "UnprocessableEntity" {
+                    + UnprocessableEntity(message: str, meta: dict)
+                }
+                class "Unauthorised" {
+                    + Unauthorised(message: str)
+                }
+                class "Forbidden" {
+                    + Forbidden(message: str)
+                }
+                class "RequestValidationError" {
+                    + RequestValidationError(message: str)                               
+                }
+                class "UnauthorisedError" {
+                    + UnauthorisedError(message: str)                                         
+                }
+                class "InternalServerError" {
+                    + InternalServerError(message: str)                                           
+                }
+            }
+        }
+        
+        package "application" {
+            package "dtos" {
+                class "AzureAiSearchBenchmarkDTO" {
+                    + response: str
+                    + docs
+                    + AzureAiSearchBenchmarkDTO(response: str, docs)
+                }
+                class "Neo4jBenchmarkDTO" {
+                    + neo4j_response: str
+                    + neo4j_query: str
+                    + neo4j_query_response: str
+                    + Neo4jBenchmarkDTO(neo4j_response: str, neo4j_query: str, neo4j_query_response: str)
+                }
+                'class "ChromaDBBenchmarkDTO" {
+                '    + ChromaDBBenchmarkDTO()
+                '}
+                class "EntityDTO" {
+                    + EntityDTO(name: str, category: str, description: str)
+                    + to_dict() : Dict
+                }
+                class "RelationshipDTO" {
+                    + RelationshipDTO(source : str, target: str, value: str)
+                    + to_dict() : Dict
+                }
+                class "ResponseDTO" {
+                    + ResponseDTO(**kwargs)
+                    + to_dict() : Dict
+                }
+            }
+            'package "interfaces" {
+            '}
+            package "mappers" {
+                class "EntityMapper" {
+                    + to_domain(obj: EntityDTO | EntitySchema | list[EntityDTO] | list[EntitySchema]) : list[Entity] | Entity
+                    + to_dto(obj: Entity | list[Entity]) : list[EntityDTO] | EntityDTO
+                }
+                
+                class "RelationshipMapper" {
+                    + to_domain(obj: RelationshipDTO | RelationshipSchema | list[RelationshipDTO] | list[RelationshipSchema]) : list[Relationship] | Relationship
+                    + to_dto(obj: Relationship | list[Relationship]) : list[RelationshipDTO] | RelationshipDTO
+                }
+            }
+            package "services" {
+                class "Neo4jService" {
+                    + neo4j_repository: Neo4jRepository
+                    + Neo4jService(neo4j_repository: Neo4jRepository)
+                    + get_all_nodes() : json
+                    + import_file(filename: str) : tuple[list[EntityDTO], list[RelationshipDTO]]
+                    + import_nodes(filename : str) : list[EntityDTO]
+                    + import_relationships(filename : str) : list[RelationshipDTO]
+                    + clean_db()
+                }
+                class "AzureService" {
+                    + azure_adapter: AzureAdapter
+                    + azure_repository: AzureRepository
+                    + neo4j_repository: Neo4jRepository
+                    + AzureService(azure_adapter: AzureAdapter, azure_repository: AzureRepository, neo4j_repository: Neo4jRepository)
+                    + make_question(packagequestion, neo4j : bool, azure_ai_search: bool, chroma_db : bool, display_benchmark_info: bool) : tuple[Neo4jBenchmarkDTO | None, AzureAiSearchBenchmarkDTO | None, ChromaDBBenchmarkDTO | None]
+                    + make_question2(packagequestion, neo4j : bool, azure_ai_search: bool, chroma_db : bool, display_benchmark_info: bool) : tuple[Neo4jBenchmarkDTO | None, AzureAiSearchBenchmarkDTO | None, ChromaDBBenchmarkDTO | None]
+                    + extract_entities_and_relations(packagefilename: str, save_to_file: bool, output_filename: str) : json
+                    + extract_entities_and_relations2(packagefilename: str, save_to_file: bool, output_filename: str) : json
+                    + generate_chyper_query_and_query_neo4j(packagequestion: str, benchmark: Benchmark, max_correction_attempts : int) : (json, int, Benchmark)
+                    + import_file(packagefilename) : List(str)
+                    + clear_azure_index() : int
+                    + print_azure_index():
+                    - _split_text(filepath: str, chunk_size: int, chunk_overlap: int)
+                    '+ clear_azure_index2() : int
+                    '+ print_azure_index2():
+                }
+                class "FilesService" {
+                    + upload_file(file)
+                }
+            }
+        }
+
+    }
+
+}
+
+'"DependencyContainer" --> "ChatController" 
+'"DependencyContainer" --> "AzureController"  
+'"DependencyContainer" --> "Neo4jController" 
+'"DependencyContainer" --> "FileController" 
+'
+'"DependencyContainer" --> "AzureAdapter"
+'"DependencyContainer" --> "AzureService"
+'"DependencyContainer" --> "AzureRepository"
+'
+'"DependencyContainer" --> "Neo4jAdapter"
+'"DependencyContainer" --> "Neo4jService"
+'"DependencyContainer" --> "Neo4jRepository"
+'
+'"DependencyContainer" --> "FileController"
+
+
+"App" --> "Utils"
+"App" --> "Config"
+"App" --> "DependencyContainer"
+
+"ChatController" --> "AzureService"
+"ChatController" --> "Neo4jService"
+"ChatController" -right-> "ResponseDTO"
+"ChatController" --> ApiException
+
+'"AzureController" --> "AzureService"
+'"AzureController" --> "ResponseDTO"
+
+'"Neo4jController" --> "Neo4jService"
+'"Neo4jController" --> "ResponseDTO"
+
+"FileController" -up-> "FilesService"
+"FileController" --> ApiException
+
+"AzureService" --> "AzureAdapter"
+"AzureService" --> "AzureRepository"
+"AzureService" --> "Neo4jRepository"
+"AzureService" --> "Constants"
+"AzureService" --> "Neo4jBenchmarkDTO"
+"AzureService" --> "AzureAiSearchBenchmarkDTO"
+"AzureService" --> "Benchmark"
+
+"Neo4jService" --> "Neo4jRepository"
+"Neo4jService" --> "Constants"
+
+"EntityMapper" --> "EntitySchema"
+"EntityMapper" --> "Entity"
+"EntityMapper" --> "EntityDTO"
+
+"RelationshipMapper" --> RelationshipSchema
+"RelationshipMapper" --> Relationship
+"RelationshipMapper" --> "RelationshipDTO"
+
+
+ApiException *-left- BadRequest
+ApiException *-right- Unauthorised
+ApiException *-up- InternalServerError
+ApiException *-up- RequestValidationError
+ApiException *-up- NotFound
+ApiException *-down- Forbidden
+ApiException *-down- UnauthorisedError
+ApiException *-down- UnprocessableEntity
+
+@enduml
