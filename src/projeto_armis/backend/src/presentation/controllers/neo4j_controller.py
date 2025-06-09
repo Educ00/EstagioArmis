@@ -87,7 +87,8 @@ class Neo4jController:
         """
         try:
             results = service.get_all_nodes()
-            return json.dumps(results), 200
+            response_dto = ResponseDTO(results=results)
+            return make_response(response_dto.to_dict(), 200)
         except Exception as e:
             return {"error": str(e)}, 400
     
