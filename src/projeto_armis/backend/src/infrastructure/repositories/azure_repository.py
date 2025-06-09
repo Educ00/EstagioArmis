@@ -64,3 +64,9 @@ class AzureRepository:
 
     def import_documents(self, docs):
         return self.vector_store.add_documents(documents=docs)
+    
+    def get_embeddings_model_deployment_name(self):
+        return self.azure_adapter.llm_embeddings_base.model
+    
+    def get_llm_base_name(self):
+        return self.azure_adapter.llm_base.deployment_name

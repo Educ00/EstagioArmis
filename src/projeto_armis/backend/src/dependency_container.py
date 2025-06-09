@@ -1,7 +1,6 @@
 from dependency_injector import containers, providers
 
 from application.services.azure_service import AzureService
-from application.services.chat_service import ChatService
 from infrastructure.adapters.azure_adapter import AzureAdapter
 from infrastructure.adapters.neo4j_adapter import Neo4jAdapter
 from infrastructure.repositories.azure_repository import AzureRepository
@@ -27,8 +26,6 @@ class DependencyContainer(containers.DeclarativeContainer):
     azure_adapter = providers.Singleton(AzureAdapter)
     azure_repository = providers.Factory(AzureRepository, azure_adapter=azure_adapter)
     azure_service = providers.Factory(AzureService, azure_adapter=azure_adapter, azure_repository=azure_repository, neo4j_repository=neo4j_repository)
-
-    chat_service = providers.Factory(ChatService, neo4j_repository=neo4j_repository, azure_repository=azure_repository, azure_adapter=azure_adapter)
     
     files_service = providers.Factory(FilesService)
     

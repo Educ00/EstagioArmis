@@ -2,7 +2,6 @@ from dependency_injector.wiring import inject, Provide
 
 from application.dtos.response_dto import ResponseDTO
 from application.services.azure_service import AzureService
-from application.services.chat_service import ChatService
 from application.services.neo4j_service import Neo4jService
 
 from dependency_container import DependencyContainer
@@ -16,7 +15,7 @@ class ChatController:
     @chat_blueprint.route("/make-question", methods=["GET"])
     @staticmethod
     @inject
-    def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service], chat_service: ChatService = Provide[DependencyContainer.chat_service]):
+    def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
             question = request.args.get("question")
             if not question:
@@ -29,7 +28,7 @@ class ChatController:
                 case 1:
                     neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
                 case 2:
-                    neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = chat_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
+                    neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question2(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
                     
                     
             response_dto = ResponseDTO(
@@ -59,16 +58,18 @@ class ChatController:
             imported_docs = azure_service.import_file(filename=filename)
             for doc in imported_docs:
                 print(f"[Chat Controller]: Imported {doc} to Azure Ai Search.")
+
+            output_filename = "yeye.txt"
             extraction_method = 2
             match extraction_method:
                 case 1:
                     print(f"[Chat Controller]: Extraction Method 1")
-                    azure_service.extract_entities_and_relations(filename=filename, output_filename="yeye.txt")
+                    azure_service.extract_entities_and_relations(filename=filename, output_filename=output_filename)
                 case 2:
                     print(f"[Chat Controller]: Extraction Method 2")
-                    azure_service.extract_entities_and_relations2(filename=filename, output_filename="yeye.txt")
+                    azure_service.extract_entities_and_relations2(filename=filename, output_filename=output_filename)
             
-            imported_nodes, imported_relationshipts = neo4j_service.import_file(filename="yeye.txt")
+            imported_nodes, imported_relationshipts = neo4j_service.import_file(filename=output_filename)
             print(f"[Chat Controller]: Imported {imported_nodes} nodes to Neo4j.")
             print(f"[Chat Controller]: Imported {imported_relationshipts} relationships to Neo4j.")
             response_dto = ResponseDTO(

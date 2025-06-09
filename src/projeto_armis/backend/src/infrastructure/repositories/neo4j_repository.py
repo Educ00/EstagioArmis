@@ -51,7 +51,7 @@ class Neo4jRepository:
 
         return response, start, end, cb
     
-    def import_nodes(self, nodes: list[Entity]) -> list[EntityDTO]:
+    def import_nodes(self, nodes: list[EntityDTO]) -> list[EntityDTO]:
         """
         Imports a node to the database. 
         :param nodes: tuple of string (name, category, description)
@@ -65,10 +65,10 @@ class Neo4jRepository:
             description = self._format_string(description)
             query_template = f"CREATE (:{category} {{name: $name, description: $description}});"
             self.run_query(query=query_template, params={"name": name, "description": description})
-            list_to_return.append(EntityMapper.to_dto(node))
+            list_to_return.append(node)
         return list_to_return
     
-    def import_relationships(self, relationships: list[Relationship]) -> list[RelationshipDTO]:
+    def import_relationships(self, relationships: list[RelationshipDTO]) -> list[RelationshipDTO]:
         """
         Imports a relationship to the database. 
         :param relationships: tuple of string (origin node, target node, value)
@@ -87,7 +87,7 @@ class Neo4jRepository:
             print(f"source: {source}, target: {target}, value: {value}")
             
             self.run_query(query_template, params={"source": source, "target": target})
-            list_to_return.append(RelationshipMapper.to_dto(relationship))
+            list_to_return.append(relationship)
         return list_to_return
             
     

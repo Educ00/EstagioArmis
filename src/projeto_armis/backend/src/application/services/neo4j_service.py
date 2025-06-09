@@ -4,6 +4,8 @@ from flask import current_app
 from application.dtos.entity_dto import EntityDTO
 from application.dtos.relationship_dto import RelationshipDTO
 from application.dtos.response_dto import ResponseDTO
+from application.mappers.entity_mapper import EntityMapper
+from application.mappers.relationship_mapper import RelationshipMapper
 from domain.models.entity import Entity
 from domain.models.relationship import Relationship
 from infrastructure.repositories.neo4j_repository import Neo4jRepository
@@ -44,12 +46,12 @@ class Neo4jService:
         with open(file_path, "r", encoding="utf-8") as json_data:
             data = json.load(json_data)
 
-        nodes : list[Entity] = []
+        nodes : list[EntityDTO] = []
         for entity in data["entities"]:
             name = entity["name"]
             category = entity["category"]
             description = entity["description"]
-            nodes.append(Entity(name=name, category=category, description=description))
+            nodes.append(EntityMapper.to_dto(Entity(name=name, category=category, description=description)))
             
         return self.neo4j_repository.import_nodes(nodes)
 
@@ -66,12 +68,12 @@ class Neo4jService:
         with open(file_path, "r", encoding="utf-8") as json_data:
             data = json.load(json_data)
 
-        relationships : list[Relationship]= []
+        relationships : list[RelationshipDTO]= []
         for entity in data["relationships"]:
             source = entity["source"]
             target = entity["target"]
             value = entity["value"]
-            relationships.append(Relationship(source=source, target=target, value=value))
+            relationships.append(RelationshipMapper.to_dto(Relationship(source=source, target=target, value=value)))
         return self.neo4j_repository.import_relationships(relationships)
 
     def clean_db(self):

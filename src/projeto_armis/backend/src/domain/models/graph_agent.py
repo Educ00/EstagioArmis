@@ -40,7 +40,6 @@ class GraphAgent:
             ("system", "Extrai todas as **entidades** do texto fornecido"),
             ("human", "{text}")
         ])
-        print("Entities")
         structured_llm_entities = self.llm.with_structured_output(schema=GraphSchema)
         entity_messages = entity_prompt.invoke({"text": chunk})
         entity_output: GraphSchema = structured_llm_entities.invoke(entity_messages)
@@ -59,7 +58,6 @@ class GraphAgent:
                        "Extrai todas as **relações** implícitas e explícitas entre estas entidades."),
             ("human", "{text}")
         ])
-        print("Relationships")
         structured_llm_relations = self.llm.with_structured_output(schema=GraphSchema)
         relation_messages = relation_prompt.invoke({"text": chunk})
         relation_output: GraphSchema = structured_llm_relations.invoke(relation_messages)
