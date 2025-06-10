@@ -134,14 +134,16 @@ class ChatService:
                 start_neo4j = datetime.now()
                 with get_openai_callback() as neo4j_cb:
                     extraction_results = self.azure_service.extract_entities_and_relations(documents=docs, chunk_size=neo4j_chunk_size, chunk_overlap=neo4j_chunk_overlap)
-                entities, relationships, end_neo4j = self.import_entities_and_relationships_to_neo4j(data=extraction_results)
+                entities, relationships = self.import_entities_and_relationships_to_neo4j(data=extraction_results)
+                end_neo4j = datetime.now()
                 number_nodes = len(entities)
                 number_relationships = len(relationships)
             case 2:
                 start_neo4j = datetime.now()
                 with get_openai_callback() as neo4j_cb:
                     extraction_results = self.azure_service.extract_entities_and_relations2(documents=docs, chunk_size=neo4j_chunk_size, chunk_overlap=neo4j_chunk_overlap)
-                entities, relationships, end_neo4j = self.import_entities_and_relationships_to_neo4j(data=extraction_results)
+                entities, relationships = self.import_entities_and_relationships_to_neo4j(data=extraction_results)
+                end_neo4j = datetime.now()
                 number_nodes = len(entities)
                 number_relationships = len(relationships)
         self.save_to_file(content=extraction_results, output_folder=extraction_folder, output_filename=extraction_file_filename)
@@ -171,7 +173,7 @@ class ChatService:
         return index_benchmark_dto, azure_results, extraction_results
     
     
-    def import_entities_and_relationships_to_neo4j(self, data : dict) -> tuple[list[EntityDTO], list[RelationshipDTO], datetime]:
+    def import_entities_and_relationships_to_neo4j(self, data : dict) -> tuple[list[EntityDTO], list[RelationshipDTO]]:
         nodes : list[EntityDTO] = []
         relationships : list[RelationshipDTO] = [] 
         for entity in data["entities"]:
@@ -187,8 +189,7 @@ class ChatService:
 
         entities = self.neo4j_service.import_nodes(nodes=nodes)
         relationships = self.neo4j_service.import_relationships(relationships=relationships)
-        time = datetime.now()
-        return entities, relationships, time
+        return entities, relationships
         
         
     

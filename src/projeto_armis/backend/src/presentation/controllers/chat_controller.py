@@ -23,7 +23,7 @@ class ChatController:
             question = request.args.get("question")
             if not question:
                 return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
-            method = request.args.get("method")
+            method = int(request.args.get("method"))
             if not method:
                 method = 2
                 print("[Chat Controller] Método definido por definição para <2>. usar method=<number> para definir.")
@@ -51,7 +51,7 @@ class ChatController:
             if not filename:
                 return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuficheiro.txt"}, 400
     
-            method = request.args.get("method")
+            method = int(request.args.get("method"))
             if not method:
                 method = 2
                 print("[Chat Controller] Método definido por definição para <2>. usar method=<number> para definir.")

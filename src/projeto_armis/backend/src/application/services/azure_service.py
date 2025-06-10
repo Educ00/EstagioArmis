@@ -64,9 +64,9 @@ class AzureService:
     def extract_entities_and_relations(self, documents : list[Document], chunk_size: int = 0, chunk_overlap : int = 0):
         """
         Extracts entities and relationships from a file in a single pass.
-        :param filename: name of the file
-        :param save_to_file: if True, saves to a file in outputs folder
-        :param output_filename: if it's None the output filename will be resposta.txt
+        :param documents: documents to extract
+        :param chunk_size: chunk size
+        :param chunk_overlap: overlapping size of chunks
         :return: JSON with entities and relationships
         """
         self.azure_adapter.change_schema(json_schema=json_schema1)
@@ -74,7 +74,7 @@ class AzureService:
         chunks = self._split_text(documents=documents, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
         
         messages = [{"role": "system", "content": prompt_instructions4}]
-        response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template0, instructions="Please follow everything.")
+        response = self.azure_adapter.call_llm(prompt_template=prompt_template0, instructions="Please follow everything.")
         response_str = json.dumps(response)
         messages.append({"role": "assistant", "content": response_str})
 
@@ -83,12 +83,12 @@ class AzureService:
             print(f"   Chunk #{i+1}/{len(chunks)}...")
             messages.append({"role": "user", "content": f"Chunk Content #{i + 1}/{len(chunks)}: {chunk}"})
 
-            response, start, end = self.azure_adapter.call_llm(prompt_template=prompt_template1, instructions=f"Process chunk {i + 1}",text=chunk)
+            response = self.azure_adapter.call_llm(prompt_template=prompt_template1, instructions=f"Process chunk {i + 1}",text=chunk)
             response_str = json.dumps(response)
             responses.append(response)
             messages.append({"role": "assistant", "content": response_str})
 
-        final_response, start, end = self.azure_adapter.call_llm(prompt_template1, instructions=instructions_group_results, text=str(json.dumps(responses, indent=4,ensure_ascii=False)))
+        final_response = self.azure_adapter.call_llm(prompt_template1, instructions=instructions_group_results, text=str(json.dumps(responses, indent=4,ensure_ascii=False)))
         
         return final_response
 
@@ -204,7 +204,7 @@ class AzureService:
     def _split_text(self, documents : list[Document], chunk_size: int = 600, chunk_overlap: int = 50):
         """
         Splits a file in to designated chunks.
-        :param filepath: path for the file
+        :param documents: documents to split
         :param chunk_size: size of the chunks
         :param chunk_overlap: overlap beetween the chunks
         :return: list of Document objects
