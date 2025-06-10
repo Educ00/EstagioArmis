@@ -38,9 +38,9 @@ class AzureController:
     @inject
     def generate_query(service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
-            response = service.generate_chyper_query_and_query_neo4j("Por onde foi a Sofia?")
-            print(response)
-            return jsonify(response), 400
+            llm_response, graph_response = service.generate_chyper_query_and_query_neo4j("Por onde foi a Sofia?")
+            print(llm_response)
+            return jsonify(llm_response, graph_response), 400
         except Exception as e:
             return jsonify(e), 400
             
@@ -54,10 +54,6 @@ class AzureController:
             return jsonify({"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}), 400
         
         method = 2
-        results = []
-        match method:
-            case 1:
-                results = service.extract_entities_and_relations(filename=filename, save_to_file=True)
-            case 2:
-                results = service.extract_entities_and_relations2(filename=filename, save_to_file=True)
+        results = service.extract_entities_and_relations_from_filename(input_filename=filename, chunk_size=2400, chunk_overlap=250, method=method)
+        
         return jsonify(results), 200

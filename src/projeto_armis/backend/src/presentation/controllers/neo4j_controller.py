@@ -33,47 +33,7 @@ class Neo4jController:
             return response_dto.to_dict(), 201
         except Exception as e:
             return {"error": str(e)}, 400
-    
-    @neo4j_blueprint.route("/import-nodes", methods=["GET"])
-    @staticmethod
-    @inject
-    def import_nodes(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
-        """
-        Importa nós para o Neo4j a partir de um ficheiro.
-    
-        :param service: Instância do serviço Neo4jService, injetada automaticamente.
-        :return: JSON com os resultados da importação ou mensagem de erro. 
-        """
-        filename = request.args.get("filename")
-        if not filename:
-            return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}, 400
-        try:
-            result = service.import_nodes(filename)
-            response_dto : ResponseDTO = ResponseDTO(
-                imported_nodes=[node.to_dict() for node in result]
-            )
-            return response_dto.to_dict(), 201
-        except Exception as e:
-            return {"error": str(e)}, 400
-    
-    @neo4j_blueprint.route("/import-relationships", methods=["GET"])
-    @staticmethod
-    @inject
-    def import_relationships(service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
-        """
-        Importa relacionamentos para o Neo4j a partir de um ficheiro.
-    
-        :param service: Instância do serviço Neo4jService, injetada automaticamente.
-        :return: JSON com os resultados da importação ou mensagem de erro.
-        """
-        filename = request.args.get("filename")
-        if not filename:
-            return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuarquivo.txt"}, 400
-        try:
-            results = service.import_relationships(filename)
-            return [dto.to_dict() for dto in results], 201
-        except Exception as e:
-            return {"error": str(e)}, 400
+        
     
     @neo4j_blueprint.route('/get-all-nodes', methods=['GET'])
     @staticmethod

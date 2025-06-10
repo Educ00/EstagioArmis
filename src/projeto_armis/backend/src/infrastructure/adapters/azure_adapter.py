@@ -70,15 +70,9 @@ class AzureAdapter:
         :return: response of LLM
         """
             
-            
         print("[Azure Adapter]: Calling LLM")
-        start = datetime.now()
         prompt_template = PromptTemplate.from_template(prompt_template)
         prompt = prompt_template.format(**kwargs)
         message = HumanMessage(content=prompt)
-        print("[Azure Adapter]: Thinking...")
-        with get_openai_callback() as cb:
-            response = self.llm.invoke([message])
-        end = datetime.now()
-        print("[Azure Adapter]: LLM Called.")
-        return response, start, end, cb
+        response = self.llm.invoke([message])
+        return response

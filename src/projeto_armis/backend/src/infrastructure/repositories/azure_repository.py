@@ -56,11 +56,9 @@ class AzureRepository:
 
     def run_query(self, query):
         print("[Azure Adapter]: Calling Azure Ai Search")
-        start = datetime.now()
         response = self.vector_store.similarity_search(query, search_type="hybrid")
-        end = datetime.now()
         print("[Azure Adapter]: Azure Ai Search Called")
-        return response, start, end
+        return response
 
     def import_documents(self, docs):
         return self.vector_store.add_documents(documents=docs)

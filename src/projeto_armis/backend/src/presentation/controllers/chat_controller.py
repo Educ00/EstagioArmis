@@ -1,7 +1,10 @@
+import datetime
+
 from dependency_injector.wiring import inject, Provide
 
 from application.dtos.response_dto import ResponseDTO
 from application.services.azure_service import AzureService
+from application.services.chat_service import ChatService
 from application.services.neo4j_service import Neo4jService
 
 from dependency_container import DependencyContainer
@@ -15,28 +18,23 @@ class ChatController:
     @chat_blueprint.route("/make-question", methods=["GET"])
     @staticmethod
     @inject
-    def make_question(azure_service: AzureService = Provide[DependencyContainer.azure_service]):
+    def make_question(chat_service : ChatService = Provide[DependencyContainer.chat_service], azure_service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
             question = request.args.get("question")
             if not question:
                 return jsonify({"error": "Pergunta não incluída", "exemplo": f"{request.path}?question=minhapergunta"})
-            
-            method = 2
-            neo4j_benchmark_dto = None
-            azure_ai_search_benchmark_dto = None
-            match method:
-                case 1:
-                    neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
-                case 2:
-                    neo4j_benchmark_dto, azure_ai_search_benchmark_dto, aa = azure_service.make_question2(question, neo4j=True, azure_ai_search=True, chroma_db=False, display_benchmark_info=True)
-                    
-                    
+            method = request.args.get("method")
+            if not method:
+                method = 2
+                print("[Chat Controller] Método definido por definição para <2>. usar method=<number> para definir.")
+            question_benchmark_dto, neo4j_tuple, azure_tuple = chat_service.make_question(question=question, method=method)
+               
             response_dto = ResponseDTO(
-                neo4j_response=neo4j_benchmark_dto.neo4j_response, 
-                neo4j_query=neo4j_benchmark_dto.neo4j_query, 
-                neo4j_query_response=neo4j_benchmark_dto.neo4j_query_response,
-                azure_ai_search_response=azure_ai_search_benchmark_dto.response,
-                azure_ai_search_docs = azure_ai_search_benchmark_dto.docs
+                neo4j_query=neo4j_tuple[0], 
+                neo4j_query_response=neo4j_tuple[1],
+                neo4j_response=neo4j_tuple[2], 
+                azure_ai_search_response=azure_tuple[0],
+                azure_ai_search_docs = azure_tuple[1]
             )
             return make_response(response_dto.to_dict(), 200)
         except Exception as e:
@@ -45,38 +43,42 @@ class ChatController:
     @chat_blueprint.route("/import-file", methods=["GET"])
     @staticmethod
     @inject
-    def import_file(azure_service: AzureService = Provide[DependencyContainer.azure_service], neo4j_service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
-        filename = request.args.get("filename")
-        if not filename:
-            return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuficheiro.txt"}, 400
+    def import_file(chat_service : ChatService = Provide[DependencyContainer.chat_service], azure_service: AzureService = Provide[DependencyContainer.azure_service], neo4j_service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
         clear = True
+        
         try:
+            filename = request.args.get("filename")
+            if not filename:
+                return {"error": "Nome do ficheiro não incluído", "exemplo": f"{request.path}?filename=meuficheiro.txt"}, 400
+    
+            method = request.args.get("method")
+            if not method:
+                method = 2
+                print("[Chat Controller] Método definido por definição para <2>. usar method=<number> para definir.")
+
             if clear:
                 azure_service.clear_azure_index()
                 #azure_service.clear_azure_index2()
                 neo4j_service.clean_db()
-            imported_docs = azure_service.import_file(filename=filename)
-            for doc in imported_docs:
-                print(f"[Chat Controller]: Imported {doc} to Azure Ai Search.")
-
-            output_filename = "yeye.txt"
-            extraction_method = 2
-            match extraction_method:
-                case 1:
-                    print(f"[Chat Controller]: Extraction Method 1")
-                    azure_service.extract_entities_and_relations(filename=filename, output_filename=output_filename)
-                case 2:
-                    print(f"[Chat Controller]: Extraction Method 2")
-                    azure_service.extract_entities_and_relations2(filename=filename, output_filename=output_filename)
+                
+            index_benchmark_dto, azure_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=2400, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, method=method)
             
-            imported_nodes, imported_relationshipts = neo4j_service.import_file(filename=output_filename)
-            print(f"[Chat Controller]: Imported {imported_nodes} nodes to Neo4j.")
-            print(f"[Chat Controller]: Imported {imported_relationshipts} relationships to Neo4j.")
             response_dto = ResponseDTO(
-                imported_docs=imported_docs,
-                imported_nodes=[node.to_dict() for node in imported_nodes],
-                imported_relationshipts=[rela.to_dict() for rela in imported_relationshipts]
+                document_size=index_benchmark_dto.document_size,
+                start_azure=index_benchmark_dto.start_azure,
+                end_azure=index_benchmark_dto.end_azure,
+                azure_chunk_size=index_benchmark_dto.azure_chunk_size,
+                azure_chunk_overlap=index_benchmark_dto.azure_chunk_overlap,
+                start_neo4j=index_benchmark_dto.start_neo4j,
+                end_neo4j=index_benchmark_dto.end_neo4j,
+                number_nodes=index_benchmark_dto.number_nodes,
+                number_relationships=index_benchmark_dto.number_relationships,
+                neo4j_chunk_size=index_benchmark_dto.neo4j_chunk_size,
+                neo4j_chunk_overlap=index_benchmark_dto.neo4j_chunk_overlap,
+                azure_results = azure_results,
+                extraction_results = extraction_results
             )
+            
             return make_response(response_dto.to_dict(), 200)
             
         except Exception as e:

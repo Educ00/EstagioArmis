@@ -31,7 +31,6 @@ class Neo4jRepository:
         return self.neo4j_adapter.run_query(query, params or {})
     
     def query_graph(self, question: str, llm: AzureChatOpenAI, allow_dangerous_requests: bool = True, return_intermediate_steps: bool = True, validate_cypher: bool = True):
-        start = datetime.now()
         graph = self.neo4j_adapter.db
         with get_openai_callback() as cb:
 
@@ -45,13 +44,11 @@ class Neo4jRepository:
                 validate_cypher=validate_cypher,
                 callbacks=[cb]
             )
-
             response = chain.invoke({"query": question})
-        end = datetime.now()
-
-        return response, start, end, cb
+        return response, cb
     
     def import_nodes(self, nodes: list[EntityDTO]) -> list[EntityDTO]:
+        # TODO: implementar transações
         """
         Imports a node to the database. 
         :param nodes: tuple of string (name, category, description)
@@ -69,6 +66,7 @@ class Neo4jRepository:
         return list_to_return
     
     def import_relationships(self, relationships: list[RelationshipDTO]) -> list[RelationshipDTO]:
+        # TODO: implementar transações
         """
         Imports a relationship to the database. 
         :param relationships: tuple of string (origin node, target node, value)
@@ -83,9 +81,7 @@ class Neo4jRepository:
             query_template = f"""
                 MATCH (source {{name: $source}}), (target {{name: $target}})
                 CREATE (source)-[:{value}]->(target);
-                """
-            print(f"source: {source}, target: {target}, value: {value}")
-            
+                """            
             self.run_query(query_template, params={"source": source, "target": target})
             list_to_return.append(relationship)
         return list_to_return
