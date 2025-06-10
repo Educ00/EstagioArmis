@@ -1,0 +1,4 @@
+{
+    "neo4j_response": "Canidelo.",
+    "azure_ai_search_response": "Sofia vive em Canidelo, uma localidade em Vila Nova de Gaia."
+}

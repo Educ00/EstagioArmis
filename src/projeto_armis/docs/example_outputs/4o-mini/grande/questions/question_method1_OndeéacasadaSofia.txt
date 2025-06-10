@@ -1,0 +1,4 @@
+{
+    "neo4j_response": "A casa da Sofia está localizada perto do Parque da Cidade, onde ela costuma passar seu tempo.",
+    "azure_ai_search_response": "A casa de Sofia fica em Canidelo, após ela passar pelo Parque da Cidade em Vila Nova de Gaia, onde decidiu seguir pelo caminho largo, desfrutando da natureza e fazendo algumas descobertas pelo caminho."
+}

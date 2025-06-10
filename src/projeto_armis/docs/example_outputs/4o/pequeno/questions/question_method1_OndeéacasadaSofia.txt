@@ -1,0 +1,4 @@
+{
+    "neo4j_response": "A casa da Sofia se encontra próximo ao parque, local central da história mencionada.",
+    "azure_ai_search_response": "A casa da Sofia fica em Canidelo."
+}

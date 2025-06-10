@@ -1,0 +1,86 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Character",
+            "description": "A girl who recently left school and is on her way home."
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Location",
+            "description": "A park in Vila Nova de Gaia where Sofia is spending time."
+        },
+        {
+            "name": "Escola Secundária de Canelas",
+            "category": "Location",
+            "description": "The secondary school Sofia just left."
+        },
+        {
+            "name": "Cães",
+            "category": "Animal",
+            "description": "Dogs including Pantufa, the dog of an elderly lady."
+        },
+        {
+            "name": "Padre",
+            "category": "Character",
+            "description": "Sofia's father who is waiting at home."
+        },
+        {
+            "name": "Mãe",
+            "category": "Character",
+            "description": "Sofia's mother who is waiting at home."
+        },
+        {
+            "name": "Avó",
+            "category": "Character",
+            "description": "Sofia's grandmother who is waiting at home."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Business",
+            "description": "A small shop where Sofia buys ice cream."
+        },
+        {
+            "name": "Gelado",
+            "category": "Food",
+            "description": "The ice cream Sofia buys."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "spends time in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Escola Secundária de Canelas",
+            "value": "leaves after school"
+        },
+        {
+            "source": "Sofia",
+            "target": "Mãe",
+            "value": "is going home to"
+        },
+        {
+            "source": "Sofia",
+            "target": "Padre",
+            "value": "is going home to"
+        },
+        {
+            "source": "Sofia",
+            "target": "Avó",
+            "value": "is going home to"
+        },
+        {
+            "source": "Sofia",
+            "target": "Doce Gosto",
+            "value": "buys ice cream from"
+        },
+        {
+            "source": "Doce Gosto",
+            "target": "Gelado",
+            "value": "sells"
+        }
+    ]
+}

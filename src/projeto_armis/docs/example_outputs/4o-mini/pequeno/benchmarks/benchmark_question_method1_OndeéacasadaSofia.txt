@@ -1,0 +1,20 @@
+{
+    "method": 1,
+    "completion_llm_name": "GPT-4o-mini",
+    "embeddings_llm_name": "text-embedding-ada-002",
+    "neo4j_prompt_tokens": 539,
+    "neo4j_prompt_tokens_cached": 0,
+    "neo4j_completion_tokens": 53,
+    "neo4j_reasoning_tokens": 0,
+    "neo4j_successful_requests": 2,
+    "neo4j_total_cost_usd": 0.00011265,
+    "azure_prompt_tokens_cached": 0,
+    "azure_completion_tokens": 52,
+    "azure_reasoning_tokens": 0,
+    "azure_successful_requests": 1,
+    "azure_total_cost_usd": 7.11e-05,
+    "start_azure": "2025-06-10 23:28:12.675020",
+    "end_azure": "2025-06-10 23:28:14.753462",
+    "start_neo4j": "2025-06-10 23:28:14.753466",
+    "end_neo4j": "2025-06-10 23:28:17.810946"
+}

@@ -1,0 +1,116 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "A personagem que está no parque e faz escolhas sobre o caminho."
+        },
+        {
+            "name": "parque",
+            "category": "Lugares e Espaços",
+            "description": "Local onde a história acontece inicialmente."
+        },
+        {
+            "name": "caminhos",
+            "category": "Conceitos e Ideias",
+            "description": "Opções de trajetos disponíveis no parque."
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Objetos",
+            "description": "Trajeto no parque que é estreito e possui muitas pedras."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Objetos",
+            "description": "Trajeto no parque que é largo e possui árvores e flores."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "Local onde Sofia deseja chegar rapidamente."
+        },
+        {
+            "name": "árvores",
+            "category": "Seres Vivos",
+            "description": "Plantas encontradas no caminho largo."
+        },
+        {
+            "name": "flores",
+            "category": "Seres Vivos",
+            "description": "Plantas encontradas no caminho largo junto às árvores."
+        },
+        {
+            "name": "vento",
+            "category": "Eventos e Processos",
+            "description": "Fenômeno natural sentido por Sofia enquanto caminhava."
+        },
+        {
+            "name": "pássaros",
+            "category": "Seres Vivos",
+            "description": "Animais vistos ou ouvidos por Sofia enquanto caminhava."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "estava em"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminhos",
+            "value": "encontrou dois"
+        },
+        {
+            "source": "caminhos",
+            "target": "caminho estreito",
+            "value": "inclui"
+        },
+        {
+            "source": "caminhos",
+            "target": "caminho largo",
+            "value": "inclui"
+        },
+        {
+            "source": "caminho estreito",
+            "target": "pedras",
+            "value": "possui muitas"
+        },
+        {
+            "source": "caminho largo",
+            "target": "árvores",
+            "value": "possui"
+        },
+        {
+            "source": "caminho largo",
+            "target": "flores",
+            "value": "possui"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "queria chegar"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "escolheu"
+        },
+        {
+            "source": "Sofia",
+            "target": "árvores",
+            "value": "viu"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "sentiu"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "ouviu"
+        }
+    ]
+}

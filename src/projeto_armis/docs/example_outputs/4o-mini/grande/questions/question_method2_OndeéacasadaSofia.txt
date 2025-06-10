@@ -1,0 +1,4 @@
+{
+    "neo4j_response": "A casa da Sofia é no Parque da Cidade.",
+    "azure_ai_search_response": "A casa de Sofia fica em Canidelo, onde seus pais e avó a aguardam com o jantar, após ela ter desfrutado de uma agradável caminhada no Parque da Cidade em Vila Nova de Gaia."
+}

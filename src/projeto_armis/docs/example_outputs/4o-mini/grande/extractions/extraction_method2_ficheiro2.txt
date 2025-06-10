@@ -1,0 +1,381 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "Personagem principal da história."
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Lugares e Espaços",
+            "description": "Parque onde Sofia estava."
+        },
+        {
+            "name": "Vila Nova de Gaia",
+            "category": "Lugares e Espaços",
+            "description": "Cidade onde se localiza o Parque da Cidade."
+        },
+        {
+            "name": "Secundária de Canelas",
+            "category": "Organizações e Instituições",
+            "description": "Escola de onde Sofia saiu."
+        },
+        {
+            "name": "mochila",
+            "category": "Objetos",
+            "description": "Objeto que Sofia levava às costas."
+        },
+        {
+            "name": "garrafa de água",
+            "category": "Objetos",
+            "description": "Objeto que Sofia trazia no bolso lateral."
+        },
+        {
+            "name": "telemóvel",
+            "category": "Objetos",
+            "description": "Dispositivo que Sofia usava para ver o mapa."
+        },
+        {
+            "name": "Trilho da Fonte",
+            "category": "Lugares e Espaços",
+            "description": "Placa que indicava um dos caminhos."
+        },
+        {
+            "name": "senhora idosa",
+            "category": "Seres Vivos",
+            "description": "Pessoa que descia por um dos caminhos."
+        },
+        {
+            "name": "Pantufa",
+            "category": "Seres Vivos",
+            "description": "Cão da senhora idosa."
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Lugares e Espaços",
+            "description": "Um dos caminhos que Sofia encontrou."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Lugares e Espaços",
+            "description": "Outro caminho que Sofia encontrou e decidiu seguir."
+        },
+        {
+            "name": "plátanos",
+            "category": "Seres Vivos",
+            "description": "Tipo de árvore presente no caminho largo."
+        },
+        {
+            "name": "carvalhos",
+            "category": "Seres Vivos",
+            "description": "Outro tipo de árvore presente no caminho largo."
+        },
+        {
+            "name": "flores",
+            "category": "Seres Vivos",
+            "description": "Flores plantadas em canteiros ao longo do caminho largo."
+        },
+        {
+            "name": "bicicleta",
+            "category": "Objetos",
+            "description": "Bicicleta encostada a uma árvore."
+        },
+        {
+            "name": "duas crianças",
+            "category": "Seres Vivos",
+            "description": "Crianças que estavam a brincar com um papagaio."
+        },
+        {
+            "name": "papagaio colorido",
+            "category": "Objetos",
+            "description": "Brinquedo que as crianças estavam usando."
+        },
+        {
+            "name": "jardineiro",
+            "category": "Seres Vivos",
+            "description": "Pessoa que limpava as folhas caídas."
+        },
+        {
+            "name": "carrinho de mão",
+            "category": "Objetos",
+            "description": "Objeto que o jardineiro usava."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "Local onde Sofia queria chegar."
+        },
+        {
+            "name": "mãe",
+            "category": "Seres Vivos",
+            "description": "Mãe de Sofia, que a esperava em casa."
+        },
+        {
+            "name": "pai",
+            "category": "Seres Vivos",
+            "description": "Pai de Sofia, que a esperava em casa."
+        },
+        {
+            "name": "avó",
+            "category": "Seres Vivos",
+            "description": "Avó de Sofia, que a esperava em casa."
+        },
+        {
+            "name": "jantar",
+            "category": "Eventos e Processos",
+            "description": "Refeição que a família de Sofia estava preparando."
+        },
+        {
+            "name": "natureza",
+            "category": "Conceitos e Ideias",
+            "description": "O que Sofia gostava de observar."
+        },
+        {
+            "name": "fotografias",
+            "category": "Objetos",
+            "description": "Imagens que Sofia queria tirar com o telemóvel."
+        },
+        {
+            "name": "Instagram",
+            "category": "Organizações e Instituições",
+            "description": "Rede social onde Sofia queria publicar suas fotos."
+        },
+        {
+            "name": "bancos de pedra",
+            "category": "Objetos",
+            "description": "Locais onde Sofia se sentou."
+        },
+        {
+            "name": "esquilos",
+            "category": "Seres Vivos",
+            "description": "Animais que Sofia viu correrem entre os troncos."
+        },
+        {
+            "name": "gato preto",
+            "category": "Seres Vivos",
+            "description": "Animal que estava a dormir num canto."
+        },
+        {
+            "name": "grupo de estudantes",
+            "category": "Seres Vivos",
+            "description": "Estudantes que estavam fazendo um trabalho de campo."
+        },
+        {
+            "name": "cadernos",
+            "category": "Objetos",
+            "description": "Objetos que os estudantes usavam para seu trabalho."
+        },
+        {
+            "name": "binóculos",
+            "category": "Objetos",
+            "description": "Objetos que os estudantes usavam para observar."
+        },
+        {
+            "name": "vento",
+            "category": "Conceitos e Ideias",
+            "description": "Sensação que Sofia sentiu no rosto."
+        },
+        {
+            "name": "chilrear dos pássaros",
+            "category": "Conceitos e Ideias",
+            "description": "Som que Sofia ouviu."
+        },
+        {
+            "name": "Rua da Bélgica",
+            "category": "Lugares e Espaços",
+            "description": "Rua que Sofia atravessou."
+        },
+        {
+            "name": "gelado",
+            "category": "Objetos",
+            "description": "Doce que Sofia comprou."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Organizações e Instituições",
+            "description": "Pequena loja onde Sofia comprou o gelado."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "estava em"
+        },
+        {
+            "source": "Sofia",
+            "target": "Secundária de Canelas",
+            "value": "saiu da"
+        },
+        {
+            "source": "Sofia",
+            "target": "mochila",
+            "value": "levava"
+        },
+        {
+            "source": "Sofia",
+            "target": "garrafa de água",
+            "value": "trazia no bolso lateral"
+        },
+        {
+            "source": "Sofia",
+            "target": "telemóvel",
+            "value": "segurava na mão"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho estreito",
+            "value": "frente a"
+        },
+        {
+            "source": "senhora idosa",
+            "target": "Pantufa",
+            "value": "possui"
+        },
+        {
+            "source": "caminho estreito",
+            "target": "Trilho da Fonte",
+            "value": "é próximo ao"
+        },
+        {
+            "source": "caminho largo",
+            "target": "plátanos",
+            "value": "tem árvores de"
+        },
+        {
+            "source": "caminho largo",
+            "target": "carvalhos",
+            "value": "tem árvores de"
+        },
+        {
+            "source": "caminho largo",
+            "target": "flores",
+            "value": "tem canteiros com"
+        },
+        {
+            "source": "caminho largo",
+            "target": "bicicleta",
+            "value": "tem uma encostada a"
+        },
+        {
+            "source": "caminho largo",
+            "target": "duas crianças",
+            "value": "tem crianças a brincar"
+        },
+        {
+            "source": "duas crianças",
+            "target": "papagaio colorido",
+            "value": "brincam com"
+        },
+        {
+            "source": "caminho largo",
+            "target": "jardineiro",
+            "value": "é limpo por"
+        },
+        {
+            "source": "jardineiro",
+            "target": "carrinho de mão",
+            "value": "usa um"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "quer ir para"
+        },
+        {
+            "source": "mãe",
+            "target": "Sofia",
+            "value": "aguarda em Canidelo"
+        },
+        {
+            "source": "pai",
+            "target": "Sofia",
+            "value": "aguarda em Canidelo"
+        },
+        {
+            "source": "avó",
+            "target": "Sofia",
+            "value": "aguarda em Canidelo"
+        },
+        {
+            "source": "Canidelo",
+            "target": "jantar",
+            "value": "espera por"
+        },
+        {
+            "source": "Sofia",
+            "target": "fotografias",
+            "value": "quer tirar"
+        },
+        {
+            "source": "fotografias",
+            "target": "Instagram",
+            "value": "quer publicar no"
+        },
+        {
+            "source": "Sofia",
+            "target": "bancos de pedra",
+            "value": "sentou-se em"
+        },
+        {
+            "source": "Sofia",
+            "target": "garrafa de água",
+            "value": "bebeu um pouco de"
+        },
+        {
+            "source": "caminho largo",
+            "target": "esquilos",
+            "value": "tem animais como"
+        },
+        {
+            "source": "caminho largo",
+            "target": "gato preto",
+            "value": "tem um animal como"
+        },
+        {
+            "source": "caminho largo",
+            "target": "grupo de estudantes",
+            "value": "tem um grupo que"
+        },
+        {
+            "source": "grupo de estudantes",
+            "target": "cadernos",
+            "value": "usa para"
+        },
+        {
+            "source": "grupo de estudantes",
+            "target": "binóculos",
+            "value": "usa para"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "sentiu"
+        },
+        {
+            "source": "Sofia",
+            "target": "chilrear dos pássaros",
+            "value": "ouviu"
+        },
+        {
+            "source": "caminho largo",
+            "target": "Rua da Bélgica",
+            "value": "leva a"
+        },
+        {
+            "source": "Sofia",
+            "target": "gelado",
+            "value": "comprou um"
+        },
+        {
+            "source": "Rua da Bélgica",
+            "target": "Doce Gosto",
+            "value": "perto de"
+        },
+        {
+            "source": "Sofia",
+            "target": "Doce Gosto",
+            "value": "comprou o gelado na"
+        }
+    ]
+}
