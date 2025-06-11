@@ -18,7 +18,7 @@ class ChatController:
     @chat_blueprint.route("/make-question", methods=["GET"])
     @staticmethod
     @inject
-    def make_question(chat_service : ChatService = Provide[DependencyContainer.chat_service], azure_service: AzureService = Provide[DependencyContainer.azure_service]):
+    def make_question(chat_service : ChatService = Provide[DependencyContainer.chat_service]):
         try:
             question = request.args.get("question")
             if not question:
