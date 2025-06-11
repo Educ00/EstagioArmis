@@ -14,6 +14,7 @@ class QuestionBenchmarkDto :
         self.neo4j_reasoning_tokens : int = neo4j_cb.reasoning_tokens
         self.neo4j_successful_requests : int = neo4j_cb.successful_requests
         self.neo4j_total_cost_usd : float = neo4j_cb.total_cost
+        self.azure_prompt_tokens : int = azure_cb.prompt_tokens
         self.azure_prompt_tokens_cached : int = azure_cb.prompt_tokens_cached
         self.azure_completion_tokens : int = azure_cb.completion_tokens
         self.azure_reasoning_tokens : int = azure_cb.reasoning_tokens
