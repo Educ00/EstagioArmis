@@ -61,7 +61,7 @@ class ChatController:
                 #azure_service.clear_azure_index2()
                 neo4j_service.clean_db()
                 
-            index_benchmark_dto, azure_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=2400, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, method=method)
+            index_benchmark_dto, azure_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=500, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, method=method)
             
             response_dto = ResponseDTO(
                 document_size=index_benchmark_dto.document_size,
