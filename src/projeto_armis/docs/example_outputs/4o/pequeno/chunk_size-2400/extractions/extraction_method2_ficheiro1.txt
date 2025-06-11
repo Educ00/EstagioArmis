@@ -1,0 +1,96 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "A pessoa que está narrando ou experienciando os eventos no texto"
+        },
+        {
+            "name": "parque",
+            "category": "Lugares e Espaços",
+            "description": "Onde Sofia estava localizada no início da narrativa"
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Lugares e Espaços",
+            "description": "Um dos caminhos disponíveis para Sofia"
+        },
+        {
+            "name": "caminho largo",
+            "category": "Lugares e Espaços",
+            "description": "Outro caminho disponível para Sofia"
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "O local onde Sofia queria chegar"
+        },
+        {
+            "name": "árvores",
+            "category": "Objetos",
+            "description": "Elementos da natureza vistas por Sofia"
+        },
+        {
+            "name": "flores",
+            "category": "Objetos",
+            "description": "Plantas que decoravam o caminho largo"
+        },
+        {
+            "name": "vento",
+            "category": "Eventos e Processos",
+            "description": "A sensação do vento que Sofia sentiu enquanto caminhava"
+        },
+        {
+            "name": "pássaros",
+            "category": "Seres Vivos",
+            "description": "Os animais que Sofia ouviu enquanto caminhava"
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "located_in"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho estreito",
+            "value": "option"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "option"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "destination"
+        },
+        {
+            "source": "caminho largo",
+            "target": "árvores",
+            "value": "contains"
+        },
+        {
+            "source": "caminho largo",
+            "target": "flores",
+            "value": "contains"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "chose"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "experienced"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "heard"
+        }
+    ]
+}

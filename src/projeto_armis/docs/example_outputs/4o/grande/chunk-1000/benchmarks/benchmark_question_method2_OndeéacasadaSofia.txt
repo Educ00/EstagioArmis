@@ -1,0 +1,21 @@
+{
+    "method": 2,
+    "completion_llm_name": "GPT-4o",
+    "embeddings_llm_name": "text-embedding-ada-002",
+    "neo4j_prompt_tokens": 904,
+    "neo4j_prompt_tokens_cached": 0,
+    "neo4j_completion_tokens": 50,
+    "neo4j_reasoning_tokens": 0,
+    "neo4j_successful_requests": 2,
+    "neo4j_total_cost_usd": 0.00276,
+    "azure_prompt_tokens": 619,
+    "azure_prompt_tokens_cached": 0,
+    "azure_completion_tokens": 23,
+    "azure_reasoning_tokens": 0,
+    "azure_successful_requests": 1,
+    "azure_total_cost_usd": 0.0017775,
+    "start_azure": "2025-06-11 14:02:08.930123",
+    "end_azure": "2025-06-11 14:02:10.943137",
+    "start_neo4j": "2025-06-11 14:02:10.943142",
+    "end_neo4j": "2025-06-11 14:02:12.802560"
+}

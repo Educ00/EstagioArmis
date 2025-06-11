@@ -1,4 +1,0 @@
-{
-    "neo4j_response": "A casa da Sofia está localizada no Parque.",
-    "azure_ai_search_response": "Sofia, ao decidir entre dois caminhos em um parque, optou pelo mais largo, repleto de árvores e flores, permitindo-se apreciar a natureza a caminho de sua casa em Canidelo, o que a deixou profundamente feliz."
-}

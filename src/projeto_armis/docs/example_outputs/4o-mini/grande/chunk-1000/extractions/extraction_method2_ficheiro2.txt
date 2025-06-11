@@ -1,0 +1,346 @@
+{
+    "entities": [
+        {
+            "name": "Parque da Cidade",
+            "category": "Lugares e Espaços",
+            "description": "Um parque localizado em Vila Nova de Gaia."
+        },
+        {
+            "name": "Vila Nova de Gaia",
+            "category": "Lugares e Espaços",
+            "description": "Uma cidade em Portugal onde se encontra o Parque da Cidade."
+        },
+        {
+            "name": "Secundária de Canelas",
+            "category": "Organizações e Instituições",
+            "description": "Uma escola secundária que Sofia frequentava."
+        },
+        {
+            "name": "mochila",
+            "category": "Objetos",
+            "description": "Um objeto usado por Sofia para carregar seus pertences."
+        },
+        {
+            "name": "garrafa de água",
+            "category": "Objetos",
+            "description": "Um objeto que Sofia levava no bolso lateral da mochila."
+        },
+        {
+            "name": "telemóvel",
+            "category": "Objetos",
+            "description": "Um dispositivo que Sofia usava para ver o mapa."
+        },
+        {
+            "name": "Trilho da Fonte",
+            "category": "Lugares e Espaços",
+            "description": "Um caminho indicado por uma placa no parque."
+        },
+        {
+            "name": "Pantufa",
+            "category": "Seres Vivos",
+            "description": "Cão da senhora idosa que descia pelo caminho."
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Lugares e Espaços",
+            "description": "Um dos dois caminhos distintos que Sofia encontrou."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Lugares e Espaços",
+            "description": "O segundo caminho que era mais largo do que o primeiro."
+        },
+        {
+            "name": "plátanos",
+            "category": "Seres Vivos",
+            "description": "Árvores altas que estavam presentes no caminho largo."
+        },
+        {
+            "name": "carvalhos",
+            "category": "Seres Vivos",
+            "description": "Outro tipo de árvore alta encontrada no caminho largo."
+        },
+        {
+            "name": "flores",
+            "category": "Seres Vivos",
+            "description": "Várias flores plantadas em canteiros ao longo do caminho largo."
+        },
+        {
+            "name": "bicicleta",
+            "category": "Objetos",
+            "description": "Uma bicicleta que estava encostada a uma árvore."
+        },
+        {
+            "name": "crianças",
+            "category": "Seres Vivos",
+            "description": "Duas crianças que estavam a brincar no parque."
+        },
+        {
+            "name": "papagaio colorido",
+            "category": "Objetos",
+            "description": "Um brinquedo que as crianças estavam usando para brincar."
+        },
+        {
+            "name": "jardineiro",
+            "category": "Seres Vivos",
+            "description": "Um trabalhador que limpava as folhas caídas no parque."
+        },
+        {
+            "name": "carrinho de mão",
+            "category": "Objetos",
+            "description": "Um objeto utilizado pelo jardineiro para transportar folhas."
+        },
+        {
+            "name": "folhas caídas",
+            "category": "Objetos",
+            "description": "Folhas que o jardineiro estava limpando no caminho."
+        },
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "Personagem que queria chegar a casa."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "Local onde a mãe, o pai e a avó esperavam Sofia."
+        },
+        {
+            "name": "natureza",
+            "category": "Conceitos e Ideias",
+            "description": "Elemento que Sofia gosta de ver."
+        },
+        {
+            "name": "Instagram",
+            "category": "Organizações e Instituições",
+            "description": "Rede social onde Sofia queria publicar fotos."
+        },
+        {
+            "name": "bancos de pedra",
+            "category": "Objetos",
+            "description": "Lugar onde Sofia se sentou."
+        },
+        {
+            "name": "água",
+            "category": "Objetos",
+            "description": "Bebida que Sofia consumiu."
+        },
+        {
+            "name": "esquilos",
+            "category": "Seres Vivos",
+            "description": "Animais que Sofia viu a correr."
+        },
+        {
+            "name": "gato preto",
+            "category": "Seres Vivos",
+            "description": "Animal que estava a dormir."
+        },
+        {
+            "name": "grupo de estudantes",
+            "category": "Seres Vivos",
+            "description": "Pessoas que estavam a fazer um trabalho de campo."
+        },
+        {
+            "name": "cadernos",
+            "category": "Objetos",
+            "description": "Instrumentos utilizados pelo grupo de estudantes."
+        },
+        {
+            "name": "binóculos",
+            "category": "Objetos",
+            "description": "Instrumentos utilizados pelo grupo de estudantes."
+        },
+        {
+            "name": "vento",
+            "category": "Propriedades e Qualidades",
+            "description": "Sensação que Sofia sentiu no rosto."
+        },
+        {
+            "name": "pássaros",
+            "category": "Seres Vivos",
+            "description": "Animais cujos sons Sofia ouviu."
+        },
+        {
+            "name": "Rua da Bélgica",
+            "category": "Lugares e Espaços",
+            "description": "Rua que Sofia atravessou."
+        },
+        {
+            "name": "gelado",
+            "category": "Objetos",
+            "description": "Alimento que Sofia comprou."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Organizações e Instituições",
+            "description": "Loja onde Sofia comprou o gelado."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Parque da Cidade",
+            "target": "Vila Nova de Gaia",
+            "value": "localizado em"
+        },
+        {
+            "source": "Sofia",
+            "target": "Secundária de Canelas",
+            "value": "saiu da escola"
+        },
+        {
+            "source": "Sofia",
+            "target": "mochila",
+            "value": "carrega às costas"
+        },
+        {
+            "source": "Sofia",
+            "target": "garrafa de água",
+            "value": "leva no bolso lateral"
+        },
+        {
+            "source": "Sofia",
+            "target": "telemóvel",
+            "value": "segura na mão"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho estreito",
+            "value": "observa"
+        },
+        {
+            "source": "caminho estreito",
+            "target": "Trilho da Fonte",
+            "value": "indica acesso a"
+        },
+        {
+            "source": "Trilho da Fonte",
+            "target": "Pantufa",
+            "value": "cão da senhora idosa que desce"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "observa"
+        },
+        {
+            "source": "caminho largo",
+            "target": "plátanos",
+            "value": "árvores presentes"
+        },
+        {
+            "source": "caminho largo",
+            "target": "carvalhos",
+            "value": "árvores presentes"
+        },
+        {
+            "source": "caminho largo",
+            "target": "flores",
+            "value": "plantadas em canteiros"
+        },
+        {
+            "source": "caminho largo",
+            "target": "bicicleta",
+            "value": "objeto encostado na árvore"
+        },
+        {
+            "source": "caminho largo",
+            "target": "crianças",
+            "value": "a brincar"
+        },
+        {
+            "source": "crianças",
+            "target": "papagaio colorido",
+            "value": "brinquedo que usam"
+        },
+        {
+            "source": "caminho largo",
+            "target": "jardineiro",
+            "value": "pessoa que limpa o local"
+        },
+        {
+            "source": "jardineiro",
+            "target": "carrinho de mão",
+            "value": "objeto usado para trabalho"
+        },
+        {
+            "source": "jardineiro",
+            "target": "folhas caídas",
+            "value": "material que limpa."
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "mora em"
+        },
+        {
+            "source": "Sofia",
+            "target": "natureza",
+            "value": "gosta de"
+        },
+        {
+            "source": "Sofia",
+            "target": "Instagram",
+            "value": "publica fotografias no"
+        },
+        {
+            "source": "Sofia",
+            "target": "bancos de pedra",
+            "value": "senta-se em um"
+        },
+        {
+            "source": "Sofia",
+            "target": "água",
+            "value": "bebe um pouco de"
+        },
+        {
+            "source": "Sofia",
+            "target": "esquilos",
+            "value": "vê a correr entre os troncos"
+        },
+        {
+            "source": "Sofia",
+            "target": "gato preto",
+            "value": "vê a dormir"
+        },
+        {
+            "source": "Sofia",
+            "target": "grupo de estudantes",
+            "value": "observa a fazer um trabalho de campo"
+        },
+        {
+            "source": "grupo de estudantes",
+            "target": "cadernos",
+            "value": "usa"
+        },
+        {
+            "source": "grupo de estudantes",
+            "target": "binóculos",
+            "value": "usa"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "sente no rosto"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "ouve chilrear"
+        },
+        {
+            "source": "Sofia",
+            "target": "Rua da Bélgica",
+            "value": "atravessa"
+        },
+        {
+            "source": "Sofia",
+            "target": "gelado",
+            "value": "compra um"
+        },
+        {
+            "source": "gelado",
+            "target": "Doce Gosto",
+            "value": "comprado na loja chamada"
+        }
+    ]
+}

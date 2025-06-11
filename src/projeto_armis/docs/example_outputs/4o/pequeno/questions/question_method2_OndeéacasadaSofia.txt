@@ -1,4 +1,0 @@
-{
-    "neo4j_response": "A casa da Sofia é o Parque.",
-    "azure_ai_search_response": "A casa de Sofia fica em Canidelo."
-}

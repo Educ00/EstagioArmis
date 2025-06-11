@@ -1,0 +1,291 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "Protagonist who is trying to reach her home"
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Location",
+            "description": "Specific park where Sofia was"
+        },
+        {
+            "name": "Vila Nova de Gaia",
+            "category": "Location",
+            "description": "City where the park is located"
+        },
+        {
+            "name": "Escola Secundária de Canelas",
+            "category": "Institution",
+            "description": "School from which Sofia had just exited"
+        },
+        {
+            "name": "Mochila",
+            "category": "Object",
+            "description": "Backpack worn by Sofia"
+        },
+        {
+            "name": "Garrafa de Água",
+            "category": "Object",
+            "description": "Water bottle carried by Sofia"
+        },
+        {
+            "name": "Telemóvel",
+            "category": "Object",
+            "description": "Mobile phone held by Sofia"
+        },
+        {
+            "name": "Caminho Estreito",
+            "category": "Geography",
+            "description": "A narrow path with many scattered stones"
+        },
+        {
+            "name": "Arbustos Baixos",
+            "category": "Nature",
+            "description": "Short bushes surrounding the path"
+        },
+        {
+            "name": "Banco de Madeira",
+            "category": "Object",
+            "description": "An old wooden bench located near the path"
+        },
+        {
+            "name": "Placa 'Trilho da Fonte'",
+            "category": "Sign",
+            "description": "A sign indicating the path's name as 'Trilho da Fonte'"
+        },
+        {
+            "name": "Senhora Idosa",
+            "category": "Person",
+            "description": "An elderly lady accompanied by her dog"
+        },
+        {
+            "name": "Cão Pantufa",
+            "category": "Animal",
+            "description": "A dog named Pantufa accompanying the old lady"
+        },
+        {
+            "name": "Caminho Largo",
+            "category": "Place",
+            "description": "The second mentioned path, characterized by being wider"
+        },
+        {
+            "name": "Árvores",
+            "category": "Natural Element",
+            "description": "Includes sycamores and oaks surrounding the path"
+        },
+        {
+            "name": "Flores",
+            "category": "Natural Element",
+            "description": "Flowers planted in flowerbeds along the path"
+        },
+        {
+            "name": "Bicicleta",
+            "category": "Object",
+            "description": "An object found leaning against a tree"
+        },
+        {
+            "name": "Crianças",
+            "category": "Person",
+            "description": "Two children playing with a colorful kite"
+        },
+        {
+            "name": "Jardineiro",
+            "category": "Person",
+            "description": "A person cleaning fallen leaves using a wheelbarrow"
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "The destination location where Sofia's home is situated"
+        },
+        {
+            "name": "Instagram",
+            "category": "Platform",
+            "description": "Social media platform where Sofia publishes her photos"
+        },
+        {
+            "name": "Nature",
+            "category": "Concept",
+            "description": "Sofia enjoys viewing and capturing moments within nature"
+        },
+        {
+            "name": "Esquilos",
+            "category": "Animal",
+            "description": "Animals observed running between the trunks"
+        },
+        {
+            "name": "Gato Preto",
+            "category": "Animal",
+            "description": "A black cat observed sleeping in a corner"
+        },
+        {
+            "name": "Grupo de Estudantes",
+            "category": "Human",
+            "description": "Students conducting a field study"
+        },
+        {
+            "name": "Cadernos",
+            "category": "Object",
+            "description": "Objects used by students for note-taking"
+        },
+        {
+            "name": "Binóculos",
+            "category": "Object",
+            "description": "Instruments used by students for observation"
+        },
+        {
+            "name": "Vento",
+            "category": "Natural Element",
+            "description": "Natural elements felt on the face"
+        },
+        {
+            "name": "Pássaros",
+            "category": "Animal",
+            "description": "Animals heard chirping"
+        },
+        {
+            "name": "Rua da Bélgica",
+            "category": "Location",
+            "description": "A street mentioned in the text"
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Store",
+            "description": "A small shop selling ice cream"
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "present_in"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "Vila Nova de Gaia",
+            "value": "located_in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Escola Secundária de Canelas",
+            "value": "exited_from"
+        },
+        {
+            "source": "Sofia",
+            "target": "Mochila",
+            "value": "carrying"
+        },
+        {
+            "source": "Sofia",
+            "target": "Garrafa de Água",
+            "value": "carrying"
+        },
+        {
+            "source": "Sofia",
+            "target": "Telemóvel",
+            "value": "carrying"
+        },
+        {
+            "source": "Senhora Idosa",
+            "target": "Cão Pantufa",
+            "value": "companheiro"
+        },
+        {
+            "source": "Placa 'Trilho da Fonte'",
+            "target": "Caminho Estreito",
+            "value": "identifica"
+        },
+        {
+            "source": "Caminho Estreito",
+            "target": "Banco de Madeira",
+            "value": "próximo"
+        },
+        {
+            "source": "Caminho Estreito",
+            "target": "Arbustos Baixos",
+            "value": "surrounded_by"
+        },
+        {
+            "source": "Caminho Largo",
+            "target": "Árvores",
+            "value": "adorned_by"
+        },
+        {
+            "source": "Caminho Largo",
+            "target": "Flores",
+            "value": "decorated_with"
+        },
+        {
+            "source": "Árvores",
+            "target": "Bicicleta",
+            "value": "location_near"
+        },
+        {
+            "source": "Caminho Largo",
+            "target": "Crianças",
+            "value": "presence_of"
+        },
+        {
+            "source": "Caminho Largo",
+            "target": "Jardineiro",
+            "value": "maintained_by"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "wants_to_reach"
+        },
+        {
+            "source": "Sofia",
+            "target": "Instagram",
+            "value": "shares_photos_on"
+        },
+        {
+            "source": "Sofia",
+            "target": "Nature",
+            "value": "enjoys_observing_and_photographing"
+        },
+        {
+            "source": "Esquilos",
+            "target": "Troncos",
+            "value": "running_between"
+        },
+        {
+            "source": "Gato Preto",
+            "target": "Corner",
+            "value": "sleeping_in"
+        },
+        {
+            "source": "Grupo de Estudantes",
+            "target": "Fieldwork",
+            "value": "conducting"
+        },
+        {
+            "source": "Grupo de Estudantes",
+            "target": "Cadernos",
+            "value": "using"
+        },
+        {
+            "source": "Grupo de Estudantes",
+            "target": "Binóculos",
+            "value": "using"
+        },
+        {
+            "source": "Vento",
+            "target": "Face",
+            "value": "felt_on"
+        },
+        {
+            "source": "Pássaros",
+            "target": "Chirping",
+            "value": "heard"
+        },
+        {
+            "source": "Rua da Bélgica",
+            "target": "Doce Gosto",
+            "value": "proximity"
+        }
+    ]
+}

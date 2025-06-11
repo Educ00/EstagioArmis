@@ -1,0 +1,346 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "Uma jovem que estava no parque."
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Lugares e Espaços",
+            "description": "O parque onde Sofia estava localizada."
+        },
+        {
+            "name": "Vila Nova de Gaia",
+            "category": "Lugares e Espaços",
+            "description": "Uma cidade referida no texto."
+        },
+        {
+            "name": "Escola Secundária de Canelas",
+            "category": "Organizações e Instituições",
+            "description": "A escola que Sofia frequentava."
+        },
+        {
+            "name": "mochila",
+            "category": "Objetos",
+            "description": "Um objeto que Sofia levava consigo."
+        },
+        {
+            "name": "garrafa de água",
+            "category": "Objetos",
+            "description": "Um objeto que Sofia guardava no bolso lateral da mochila."
+        },
+        {
+            "name": "telemóvel",
+            "category": "Objetos",
+            "description": "Um dispositivo usado por Sofia para visualizar o mapa."
+        },
+        {
+            "name": "Trilho da Fonte",
+            "category": "Lugares e Espaços",
+            "description": "O nome do caminho estreito descrito no texto."
+        },
+        {
+            "name": "senhora idosa",
+            "category": "Seres Vivos",
+            "description": "Uma pessoa mencionada no texto que caminhava pelo trilho."
+        },
+        {
+            "name": "Pantufa",
+            "category": "Seres Vivos",
+            "description": "O cão da senhora idosa."
+        },
+        {
+            "name": "árvores altas",
+            "category": "Propriedades e Qualidades",
+            "description": "Elementos naturais presentes no segundo caminho."
+        },
+        {
+            "name": "plátanos",
+            "category": "Seres Vivos",
+            "description": "Tipo de árvore mencionada."
+        },
+        {
+            "name": "carvalhos",
+            "category": "Seres Vivos",
+            "description": "Tipo de árvore mencionada."
+        },
+        {
+            "name": "bicicleta",
+            "category": "Objetos",
+            "description": "Um objeto encostado a uma árvore."
+        },
+        {
+            "name": "papagaio colorido",
+            "category": "Objetos",
+            "description": "Um objeto com o qual as crianças brincavam."
+        },
+        {
+            "name": "jardineiro",
+            "category": "Seres Vivos",
+            "description": "Um trabalhador mencionado no parque."
+        },
+        {
+            "name": "carrinho de mão",
+            "category": "Objetos",
+            "description": "Um objeto que o jardineiro usava."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "O lugar em que Sofia mora e está chegando após sua caminhada."
+        },
+        {
+            "name": "mãe",
+            "category": "Seres Vivos",
+            "description": "Pessoa que esperava Sofia em casa."
+        },
+        {
+            "name": "pai",
+            "category": "Seres Vivos",
+            "description": "Pessoa que esperava Sofia em casa."
+        },
+        {
+            "name": "avó",
+            "category": "Seres Vivos",
+            "description": "Pessoa que esperava Sofia em casa."
+        },
+        {
+            "name": "jantar",
+            "category": "Eventos e Processos",
+            "description": "A refeição que esperava Sofia em casa."
+        },
+        {
+            "name": "natureza",
+            "category": "Conceitos e Ideias",
+            "description": "Um elemento que Sofia gosta de observar."
+        },
+        {
+            "name": "Instagram",
+            "category": "Organizações e Instituições",
+            "description": "Plataforma onde Sofia publica fotografias."
+        },
+        {
+            "name": "bancos de pedra",
+            "category": "Objetos",
+            "description": "Área onde Sofia se sentou."
+        },
+        {
+            "name": "água",
+            "category": "Objetos",
+            "description": "Bebida que Sofia consumiu durante o percurso."
+        },
+        {
+            "name": "esquilos",
+            "category": "Seres Vivos",
+            "description": "Animais que Sofia viu durante seu percurso."
+        },
+        {
+            "name": "troncos",
+            "category": "Objetos",
+            "description": "Elementos naturais presentes no cenário do percurso."
+        },
+        {
+            "name": "gato preto",
+            "category": "Seres Vivos",
+            "description": "Animal observado por Sofia enquanto caminhava."
+        },
+        {
+            "name": "estudantes",
+            "category": "Seres Vivos",
+            "description": "Grupo de pessoas realizando trabalho de campo."
+        },
+        {
+            "name": "cadernos",
+            "category": "Objetos",
+            "description": "Ferramentas utilizadas pelos estudantes."
+        },
+        {
+            "name": "binóculos",
+            "category": "Objetos",
+            "description": "Objetos utilizados pelos estudantes."
+        },
+        {
+            "name": "Rua da Bélgica",
+            "category": "Lugares e Espaços",
+            "description": "Local atravessado por Sofia durante seu percurso."
+        },
+        {
+            "name": "gelado",
+            "category": "Objetos",
+            "description": "Comida comprada por Sofia."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Organizações e Instituições",
+            "description": "Loja onde Sofia comprou o gelado."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "está em"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "Vila Nova de Gaia",
+            "value": "localizado em"
+        },
+        {
+            "source": "Sofia",
+            "target": "Escola Secundária de Canelas",
+            "value": "saiu de"
+        },
+        {
+            "source": "Sofia",
+            "target": "mochila",
+            "value": "leva"
+        },
+        {
+            "source": "mochila",
+            "target": "garrafa de água",
+            "value": "contém"
+        },
+        {
+            "source": "Sofia",
+            "target": "telemóvel",
+            "value": "segura"
+        },
+        {
+            "source": "telemóvel",
+            "target": "mapa",
+            "value": "exibe"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "Trilho da Fonte",
+            "value": "contém"
+        },
+        {
+            "source": "Trilho da Fonte",
+            "target": "senhora idosa",
+            "value": "é percorrido por"
+        },
+        {
+            "source": "senhora idosa",
+            "target": "Pantufa",
+            "value": "acompanha"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "árvores altas",
+            "value": "possui"
+        },
+        {
+            "source": "árvores altas",
+            "target": "plátanos",
+            "value": "incluem"
+        },
+        {
+            "source": "árvores altas",
+            "target": "carvalhos",
+            "value": "incluem"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "bicicleta",
+            "value": "possui"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "papagaio colorido",
+            "value": "presente no espaço"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "jardineiro",
+            "value": "emprega"
+        },
+        {
+            "source": "jardineiro",
+            "target": "carrinho de mão",
+            "value": "utiliza"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "mora"
+        },
+        {
+            "source": "Sofia",
+            "target": "telemóvel",
+            "value": "usou"
+        },
+        {
+            "source": "telemóvel",
+            "target": "Instagram",
+            "value": "conexão com"
+        },
+        {
+            "source": "Instagram",
+            "target": "natureza",
+            "value": "publica conteúdo de"
+        },
+        {
+            "source": "Sofia",
+            "target": "bancos de pedra",
+            "value": "sentou-se"
+        },
+        {
+            "source": "Sofia",
+            "target": "água",
+            "value": "bebeu"
+        },
+        {
+            "source": "Sofia",
+            "target": "esquilos",
+            "value": "observou"
+        },
+        {
+            "source": "Sofia",
+            "target": "troncos",
+            "value": "viu juntos dos esquilos"
+        },
+        {
+            "source": "Sofia",
+            "target": "gato preto",
+            "value": "localizou"
+        },
+        {
+            "source": "Sofia",
+            "target": "estudantes",
+            "value": "notou"
+        },
+        {
+            "source": "estudantes",
+            "target": "cadernos",
+            "value": "usaram"
+        },
+        {
+            "source": "estudantes",
+            "target": "binóculos",
+            "value": "usaram"
+        },
+        {
+            "source": "Sofia",
+            "target": "Rua da Bélgica",
+            "value": "atravessou"
+        },
+        {
+            "source": "Sofia",
+            "target": "gelado",
+            "value": "comprou"
+        },
+        {
+            "source": "gelado",
+            "target": "Doce Gosto",
+            "value": "vendido por"
+        },
+        {
+            "source": "Doce Gosto",
+            "target": "Rua da Bélgica",
+            "value": "localizado próximo de"
+        }
+    ]
+}

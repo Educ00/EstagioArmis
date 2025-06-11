@@ -1,0 +1,171 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Character",
+            "description": "A young girl who just finished school and is in Parque da Cidade."
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Location",
+            "description": "A park located in Vila Nova de Gaia."
+        },
+        {
+            "name": "Escola Secundária de Canelas",
+            "category": "Institution",
+            "description": "The secondary school Sofia has just left."
+        },
+        {
+            "name": "Caminho 1",
+            "category": "Path",
+            "description": "Narrow path with stones, surrounded by low bushes."
+        },
+        {
+            "name": "Caminho 2",
+            "category": "Path",
+            "description": "Wider path with tall trees and flowers."
+        },
+        {
+            "name": "Pantufa",
+            "category": "Pet",
+            "description": "An old dog belonging to a lady on the narrow path."
+        },
+        {
+            "name": "Crianças",
+            "category": "Characters",
+            "description": "Two children playing with a colorful kite on the wider path."
+        },
+        {
+            "name": "Jardineiro",
+            "category": "Occupation",
+            "description": "A gardener cleaning fallen leaves near the wider path."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "Sofia's home village."
+        },
+        {
+            "name": "Mãe",
+            "category": "Family",
+            "description": "Sofia's mother."
+        },
+        {
+            "name": "Pai",
+            "category": "Family",
+            "description": "Sofia's father."
+        },
+        {
+            "name": "Avó",
+            "category": "Family",
+            "description": "Sofia's grandmother."
+        },
+        {
+            "name": "Rua da Bélgica",
+            "category": "Location",
+            "description": "A street that Sofia crosses."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Establishment",
+            "description": "An ice cream shop where Sofia buys ice cream."
+        },
+        {
+            "name": "Estudantes",
+            "category": "People",
+            "description": "A group of students doing fieldwork."
+        },
+        {
+            "name": "Esquilos",
+            "category": "Animal",
+            "description": "Squirrels that run between tree trunks."
+        },
+        {
+            "name": "Gato Preto",
+            "category": "Animal",
+            "description": "A black cat sleeping in a corner."
+        },
+        {
+            "name": "Pássaros",
+            "category": "Animal",
+            "description": "Birds that chirp."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "is in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Escola Secundária de Canelas",
+            "value": "just left"
+        },
+        {
+            "source": "Caminho 1",
+            "target": "Pantufa",
+            "value": "is being walked by"
+        },
+        {
+            "source": "Caminho 2",
+            "target": "Crianças",
+            "value": "is where they are playing"
+        },
+        {
+            "source": "Caminho 2",
+            "target": "Jardineiro",
+            "value": "is cleaning leaves"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "lives in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Mãe",
+            "value": "is the daughter of"
+        },
+        {
+            "source": "Sofia",
+            "target": "Pai",
+            "value": "is the daughter of"
+        },
+        {
+            "source": "Sofia",
+            "target": "Avó",
+            "value": "is the granddaughter of"
+        },
+        {
+            "source": "Sofia",
+            "target": "Doce Gosto",
+            "value": "buys ice cream from"
+        },
+        {
+            "source": "Sofia",
+            "target": "Rua da Bélgica",
+            "value": "crosses"
+        },
+        {
+            "source": "Sofia",
+            "target": "Estudantes",
+            "value": "sees doing fieldwork"
+        },
+        {
+            "source": "Sofia",
+            "target": "Esquilos",
+            "value": "sees running"
+        },
+        {
+            "source": "Sofia",
+            "target": "Gato Preto",
+            "value": "sees sleeping"
+        },
+        {
+            "source": "Sofia",
+            "target": "Pássaros",
+            "value": "hears chirping"
+        }
+    ]
+}

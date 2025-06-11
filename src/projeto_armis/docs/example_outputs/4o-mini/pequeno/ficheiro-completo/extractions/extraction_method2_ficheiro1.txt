@@ -1,0 +1,141 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "Personagem principal do texto."
+        },
+        {
+            "name": "parque",
+            "category": "Lugares e Espaços",
+            "description": "Local onde Sofia estava."
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Lugares e Espaços",
+            "description": "Primeiro caminho que Sofia encontrou."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Lugares e Espaços",
+            "description": "Segundo caminho que Sofia escolheu."
+        },
+        {
+            "name": "pedras",
+            "category": "Objetos",
+            "description": "Elementos que caracterizam o caminho estreito."
+        },
+        {
+            "name": "árvores",
+            "category": "Seres Vivos",
+            "description": "Elementos encontrados no caminho largo."
+        },
+        {
+            "name": "flores",
+            "category": "Seres Vivos",
+            "description": "Elementos encontrados no caminho largo."
+        },
+        {
+            "name": "casa",
+            "category": "Lugares e Espaços",
+            "description": "Destino desejado por Sofia."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "Localização da casa de Sofia."
+        },
+        {
+            "name": "vento",
+            "category": "Propriedades e Qualidades",
+            "description": "Sentido experimentado por Sofia durante a caminhada."
+        },
+        {
+            "name": "pássaros",
+            "category": "Seres Vivos",
+            "description": "Criaturas que Sofia ouviu enquanto caminhava."
+        },
+        {
+            "name": "felicidade",
+            "category": "Conceitos e Ideias",
+            "description": "Sentimento que Sofia experimentou ao chegar ao fim do caminho."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "estava"
+        },
+        {
+            "source": "parque",
+            "target": "caminho estreito",
+            "value": "tem"
+        },
+        {
+            "source": "parque",
+            "target": "caminho largo",
+            "value": "tem"
+        },
+        {
+            "source": "caminho estreito",
+            "target": "pedras",
+            "value": "contém"
+        },
+        {
+            "source": "caminho largo",
+            "target": "árvores",
+            "value": "tem"
+        },
+        {
+            "source": "caminho largo",
+            "target": "flores",
+            "value": "tem"
+        },
+        {
+            "source": "Sofia",
+            "target": "casa",
+            "value": "quer chegar"
+        },
+        {
+            "source": "Canidelo",
+            "target": "casa",
+            "value": "localização de"
+        },
+        {
+            "source": "Sofia",
+            "target": "natureza",
+            "value": "gosta de ver"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "escolheu"
+        },
+        {
+            "source": "Sofia",
+            "target": "árvores",
+            "value": "viu"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "sentiu"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "ouviu"
+        },
+        {
+            "source": "Sofia",
+            "target": "felicidade",
+            "value": "sentiu-se"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "caminhou pelo"
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "The main character in the narrative."
+        },
+        {
+            "name": "Parque",
+            "category": "Location",
+            "description": "The place where Sofia is located."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "The final destination Sofia aims to reach."
+        },
+        {
+            "name": "Natureza",
+            "category": "Concept",
+            "description": "The natural environment Sofia enjoys while choosing her path."
+        },
+        {
+            "name": "Caminho estreito",
+            "category": "Object",
+            "description": "The first path Sofia considers, which is narrow and stony."
+        },
+        {
+            "name": "Caminho largo",
+            "category": "Object",
+            "description": "The second path Sofia considers, which is wide with trees and flowers."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque",
+            "value": "located_in"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "destination"
+        },
+        {
+            "source": "Sofia",
+            "target": "Natureza",
+            "value": "appreciates"
+        },
+        {
+            "source": "Sofia",
+            "target": "Caminho estreito",
+            "value": "considers"
+        },
+        {
+            "source": "Sofia",
+            "target": "Caminho largo",
+            "value": "selects"
+        }
+    ]
+}

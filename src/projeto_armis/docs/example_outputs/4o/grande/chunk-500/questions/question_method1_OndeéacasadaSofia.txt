@@ -1,0 +1,4 @@
+{
+    "neo4j_response": "A casa da Sofia está localizada em Canidelo.",
+    "azure_ai_search_response": "Sofia mora em Canidelo, em Vila Nova de Gaia, Portugal."
+}

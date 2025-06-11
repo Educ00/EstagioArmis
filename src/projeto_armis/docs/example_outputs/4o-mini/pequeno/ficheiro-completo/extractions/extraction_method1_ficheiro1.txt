@@ -1,0 +1,116 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Character",
+            "description": "A person in a park faced with two paths."
+        },
+        {
+            "name": "parque",
+            "category": "Location",
+            "description": "The park where Sofia is."
+        },
+        {
+            "name": "primeiro caminho",
+            "category": "Path",
+            "description": "A narrow path with many stones."
+        },
+        {
+            "name": "segundo caminho",
+            "category": "Path",
+            "description": "A wide path with trees and flowers."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "Sofia's home."
+        },
+        {
+            "name": "natureza",
+            "category": "Concept",
+            "description": "Natural elements that Sofia enjoys."
+        },
+        {
+            "name": "árvores",
+            "category": "Nature Element",
+            "description": "Trees that Sofia sees along the path."
+        },
+        {
+            "name": "flores",
+            "category": "Nature Element",
+            "description": "Flowers that are along the wide path."
+        },
+        {
+            "name": "vento",
+            "category": "Natural Element",
+            "description": "The wind that Sofia feels while walking."
+        },
+        {
+            "name": "pássaros",
+            "category": "Animal",
+            "description": "Birds that Sofia hears while walking."
+        },
+        {
+            "name": "felicidade",
+            "category": "Emotion",
+            "description": "The feeling Sofia has at the end of her walk."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "is in"
+        },
+        {
+            "source": "parque",
+            "target": "primeiro caminho",
+            "value": "contains"
+        },
+        {
+            "source": "parque",
+            "target": "segundo caminho",
+            "value": "contains"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "wants to reach quickly"
+        },
+        {
+            "source": "Sofia",
+            "target": "natureza",
+            "value": "enjoys"
+        },
+        {
+            "source": "Sofia",
+            "target": "segundo caminho",
+            "value": "chooses to walk on"
+        },
+        {
+            "source": "segundo caminho",
+            "target": "árvores",
+            "value": "contains"
+        },
+        {
+            "source": "segundo caminho",
+            "target": "flores",
+            "value": "contains"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "feels"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "hears"
+        },
+        {
+            "source": "Sofia",
+            "target": "felicidade",
+            "value": "feels at the end of the walk"
+        }
+    ]
+}

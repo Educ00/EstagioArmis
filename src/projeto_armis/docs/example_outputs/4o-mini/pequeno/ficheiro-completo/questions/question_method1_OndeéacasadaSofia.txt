@@ -1,0 +1,4 @@
+{
+    "neo4j_response": "A localização da casa da Sofia não foi especificada.",
+    "azure_ai_search_response": "Sofia, em sua jornada pelo parque, optou pelo caminho largo repleto de árvores e flores, que a levou até sua casa em Canidelo, trazendo-lhe alegria ao conectar-se com a natureza."
+}

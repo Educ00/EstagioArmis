@@ -1,0 +1,23 @@
+{
+    "filename": "ficheiro2.txt",
+    "method": 2,
+    "completion_llm_name": "GPT-4o",
+    "embeddings_llm_name": "text-embedding-ada-002",
+    "neo4j_prompt_tokens": 4729,
+    "neo4j_prompt_tokens_cached": 0,
+    "neo4j_completion_tokens": 4341,
+    "neo4j_reasoning_tokens": 0,
+    "neo4j_successful_requests": 6,
+    "neo4j_total_cost_usd": 0.0552325,
+    "document_size": 1703,
+    "start_azure": "2025-06-11 14:00:37.245422",
+    "end_azure": "2025-06-11 14:00:38.284909",
+    "azure_chunk_size": 1000,
+    "azure_chunk_overlap": 250,
+    "start_neo4j": "2025-06-11 14:00:38.284913",
+    "end_neo4j": "2025-06-11 14:01:42.684064",
+    "number_nodes": 35,
+    "number_relationships": 33,
+    "neo4j_chunk_size": 1000,
+    "neo4j_chunk_overlap": 250
+}

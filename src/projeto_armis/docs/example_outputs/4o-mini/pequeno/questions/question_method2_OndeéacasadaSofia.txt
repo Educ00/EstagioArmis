@@ -1,4 +1,0 @@
-{
-    "neo4j_response": "A casa da Sofia é no Parque.",
-    "azure_ai_search_response": "Sofia estava em um parque, diante de dois caminhos: um estreito e pedregoso, e outro largo, adornado por árvores e flores. Embora quisesse chegar rapidamente à sua casa em Canidelo, a beleza da natureza a cativou, e assim, decidiu seguir o caminho largo, onde pôde desfrutar do vento suave e do canto dos pássaros, retornando para casa com um sorriso no rosto."
-}
