@@ -49,8 +49,8 @@ class AzureAdapter:
             print("[Azure Adapter]: Initializing LLM instance...")
             self.llm_base = AzureChatOpenAI(
                 openai_api_version=openaiApiVersion,
-                #deployment_name=modeloGpt4o,
-                deployment_name=modeloGpt4omini,
+                deployment_name=modeloGpt4o,
+                #deployment_name=modeloGpt4omini,
                 azure_endpoint=getenv("MODELS_ENDPOINT"),
                 openai_api_key=getenv("MODELS_ENDPOINT_KEY"),
                 openai_api_type=openAiApiType,
