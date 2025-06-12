@@ -4,15 +4,11 @@ left to right direction
 actor Utilizador as user
 
 package "Sistema RAG" {
-    usecase "Importar Ficheiro de Texto" as UC1
-    usecase "Processar e indexar na Azure AI Search" as UC2
-    usecase "Processar e indexar na Neo4j" as UC3
-    usecase "Efetuar Perguntas" as UC4
-    usecase "Visualizar Resultados das Perguntas" as UC5
-
-    'usecase "Calcular Custos de de Armazenamento" as UC6
-    'usecase "Calcular Custos de Consulta"       as UC7
-    'usecase "Gerar Relatório de Comparação"     as UC8
+    usecase "Importar Ficheiros de Texto" as UC1
+    usecase "Processar e Indexar Informação em Diferentes Bases de Dados" as UC2
+    usecase "Efetuar Perguntas" as UC3
+    usecase "Visualizar Resultados das Perguntas" as UC4
+    usecase "Fornecer Métricas" as UC5
 }
 
 user --> UC1
@@ -20,8 +16,5 @@ user --> UC2
 user --> UC3
 user --> UC4
 user --> UC5
-'user --> UC6
-'user --> UC7
-'user --> UC8
 
 @enduml
