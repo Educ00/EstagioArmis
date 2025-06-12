@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Utilizador
+participant Sistema
+
+Utilizador -> Sistema : Escolhe Ficheiro
+Sistema -> Sistema : Processa Ficheiro
+Sistema -> Sistema : Guarda nas Diferentes Bases de Dados
+Sistema -> Utilizador : Envia Mensagem de Confirmação
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Utilizador
+participant Sistema
+
+Utilizador -> Sistema : Envia Pergunta
+Sistema -> Sistema : Interpreta a Pergunta
+Sistema -> Sistema : Procura Dados Relevantes nas Bases de Dados
+Sistema -> Sistema : Formula Resposta Contextualizada e Formatada
+Sistema -> Utilizador : Envia Resposta, Métricas
+
+@enduml
