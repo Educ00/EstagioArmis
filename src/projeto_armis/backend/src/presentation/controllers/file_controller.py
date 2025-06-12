@@ -1,5 +1,7 @@
+import os
+
 from dependency_injector.wiring import inject, Provide
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, send_from_directory
 
 from application.services.files_service import FilesService
 
@@ -23,3 +25,8 @@ class FileController:
         result = file_service.upload_file(file)
     
         return jsonify(result), 201
+
+    @files_blueprint.route("/favicon.ico", methods=["GET"])
+    @staticmethod
+    def favicon():
+        return send_from_directory(os.path.join(os.getcwd(), "static"), "favicon.ico", mimetype="image/vnd.microsoft.icon")
