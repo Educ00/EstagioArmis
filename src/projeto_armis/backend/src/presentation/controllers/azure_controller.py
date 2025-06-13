@@ -38,7 +38,7 @@ class AzureController:
     @inject
     def generate_query(service: AzureService = Provide[DependencyContainer.azure_service]):
         try:
-            llm_response, graph_response = service.generate_chyper_query_and_query_neo4j("Por onde foi a Sofia?")
+            llm_response, graph_response = service.generate_cypher_query_and_query_neo4j("Por onde foi a Sofia?")
             print(llm_response)
             return jsonify(llm_response, graph_response), 400
         except Exception as e:

@@ -28,7 +28,7 @@ class AzureService:
         self.neo4j_repository = neo4j_repository
 
 
-    def generate_chyper_query_and_query_neo4j(self, question: str, max_correction_attempts : int = 5):
+    def generate_cypher_query_and_query_neo4j(self, question: str, max_correction_attempts : int = 5):
         """
         Accepts a question, converts to a valid Chyper query and retreives the query result.
         :param question: question to parse to Cypher

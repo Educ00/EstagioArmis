@@ -50,7 +50,7 @@ class ChatService:
             case 1:
                 start_neo4j = datetime.now()
                 with get_openai_callback() as neo4j_cb:
-                    neo4j_query, neo4j_query_response = self.azure_service.generate_chyper_query_and_query_neo4j(question=question)
+                    neo4j_query, neo4j_query_response = self.azure_service.generate_cypher_query_and_query_neo4j(question=question)
                     self.azure_service.change_schema(json_schema=json_schema2)
                     llm_response = self.azure_service.call_llm(prompt_template=prompt_template3, instructions=instructions_format_answer_to_question, question=question, answer=neo4j_query_response)
                 end_neo4j = datetime.now()    
