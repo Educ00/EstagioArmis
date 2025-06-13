@@ -17,9 +17,11 @@ def config_upload_folder(app):
     app.config["EXTRACTION_FOLDER"] = "outputs/extractions"
     app.config["BENCHMARK_FOLDER"] = "outputs/benchmarks"
     app.config["QUESTION_FOLDER"] = "outputs/questions"
+    app.config["CHROMADB"] = "chroma_db"
     makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     makedirs(app.config["OUTPUT_FOLDER"], exist_ok=True)
     makedirs(app.config["EXTRACTION_FOLDER"], exist_ok=True)
     makedirs(app.config["BENCHMARK_FOLDER"], exist_ok=True)
     makedirs(app.config["QUESTION_FOLDER"], exist_ok=True)
+    makedirs(app.config["CHROMADB"], exist_ok=True)
     return app

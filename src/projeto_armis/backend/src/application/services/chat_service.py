@@ -12,14 +12,16 @@ from application.dtos.index_benchmark_dto import IndexBenchmarkDto
 from application.dtos.question_benchmark_dto import QuestionBenchmarkDto
 from application.dtos.relationship_dto import RelationshipDTO
 from application.services.azure_service import AzureService
+from application.services.chroma_service import ChromaService
 from application.services.neo4j_service import Neo4jService
 from core.constants import prompt_template3, instructions_format_answer_to_question, json_schema2
 
 
 class ChatService:
-    def __init__(self, azure_service : AzureService, neo4j_service : Neo4jService):
+    def __init__(self, azure_service : AzureService, neo4j_service : Neo4jService, chroma_service : ChromaService):
         self.azure_service : AzureService = azure_service
         self.neo4j_service : Neo4jService = neo4j_service
+        self.chroma_service : ChromaService = chroma_service
         
     def make_question(self, question : str, method: int):
         benchmark_folder = current_app.config["BENCHMARK_FOLDER"]
@@ -41,8 +43,19 @@ class ChatService:
 
             azure_ai_search_response = llm_response["response"]
         end_azure = datetime.now()
+        
+        # ------- chroma ---------
+        start_chroma = datetime.now()
+        with get_openai_callback() as chroma_cb:
+            response = self.chroma_service.run_query(query=question)
+            docs = []
+            for doc in response:
+                docs.append(doc.page_content)
+                llm_response = self.azure_service.call_llm(prompt_template=prompt_template3,instructions=instructions_format_answer_to_question, question=question, answer=docs)
+            chroma_search_response = llm_response["response"]
+        end_chroma = datetime.now()
 
-        # -------- neo4j ----------
+    # -------- neo4j ----------
         start_neo4j : datetime = datetime.min
         end_neo4j : datetime = datetime.min
         neo4j_response = None
@@ -67,7 +80,8 @@ class ChatService:
         
         question_results = {
             "neo4j_response": neo4j_response,
-            "azure_ai_search_response": azure_ai_search_response
+            "azure_ai_search_response": azure_ai_search_response,
+            "chroma_db_response": chroma_search_response
         }
         
         self.save_to_file(content=question_results, output_folder=question_folder, output_filename=question_file_filename)
@@ -78,10 +92,13 @@ class ChatService:
             embeddings_llm_name= self.azure_service.get_embeddings_llm_name(),
             neo4j_cb=neo4j_cb,
             azure_cb=azure_cb,
+            chroma_cb=chroma_cb,
             start_neo4j=start_neo4j,
             end_neo4j=end_neo4j,
             start_azure=start_azure,
-            end_azure=end_azure
+            end_azure=end_azure,
+            start_chroma=start_chroma,
+            end_chroma=end_chroma
         )
 
         self.save_to_file(content=question_benchmark_dto.to_dict(), output_folder=benchmark_folder, output_filename=benchmark_file_filename)
@@ -94,7 +111,7 @@ class ChatService:
         
         
     
-    def import_file(self, input_filename : str, chunk_size: int = 0, chunk_overlap: int = 0, split_azure_ai_search : bool = False, split_neo4j : bool = False, method : int = 2):
+    def import_file(self, input_filename : str, chunk_size: int = 0, chunk_overlap: int = 0, split_azure_ai_search : bool = False, split_chroma : bool = False,split_neo4j : bool = False,method : int = 2):
         upload_folder = current_app.config["UPLOAD_FOLDER"]
         extraction_folder = current_app.config["EXTRACTION_FOLDER"]
         benchmark_folder = current_app.config["BENCHMARK_FOLDER"]
@@ -116,6 +133,17 @@ class ChatService:
             azure_chunk_overlap = 0
         azure_results = self.azure_service.import_documents_to_azure(documents=docs, chunk_size=azure_chunk_size, chunk_overlap=azure_chunk_overlap)
         end_azure = datetime.now()
+        
+        # -------- chroma ---------
+        chroma_chunk_size = chunk_size
+        chroma_chunk_overlap = chunk_overlap
+        start_chroma = datetime.now()
+        if not split_chroma:
+            chroma_chunk_size = 0
+            chroma_chunk_overlap = 0
+        
+        chroma_results, embedding_tokens = self.chroma_service.import_documents(documents=docs, chunk_size=chroma_chunk_size, chunk_overlap=chroma_chunk_overlap)
+        end_chroma = datetime.now()
         
         # -------- neo4j ----------
         start_neo4j : datetime = datetime.min
@@ -164,13 +192,19 @@ class ChatService:
             number_nodes=number_nodes,
             number_relationships=number_relationships,
             neo4j_chunk_size=neo4j_chunk_size,
-            neo4j_chunk_overlap=neo4j_chunk_overlap)
+            neo4j_chunk_overlap=neo4j_chunk_overlap,
+            start_chroma=start_chroma,
+            end_chroma=end_chroma,
+            embedding_tokens=embedding_tokens,
+            chroma_chunk_size=chroma_chunk_size,
+            chroma_chunk_overlap=chroma_chunk_overlap
+        )
         
         self.save_to_file(content=index_benchmark_dto.to_dict(), output_folder=benchmark_folder, output_filename=benchmark_file_filename)
         
         
         
-        return index_benchmark_dto, azure_results, extraction_results
+        return index_benchmark_dto, azure_results, chroma_results, extraction_results
     
     
     def import_entities_and_relationships_to_neo4j(self, data : dict) -> tuple[list[EntityDTO], list[RelationshipDTO]]:

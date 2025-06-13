@@ -5,6 +5,7 @@ from dependency_injector.wiring import inject, Provide
 from application.dtos.response_dto import ResponseDTO
 from application.services.azure_service import AzureService
 from application.services.chat_service import ChatService
+from application.services.chroma_service import ChromaService
 from application.services.neo4j_service import Neo4jService
 
 from dependency_container import DependencyContainer
@@ -43,7 +44,7 @@ class ChatController:
     @chat_blueprint.route("/import-file", methods=["GET"])
     @staticmethod
     @inject
-    def import_file(chat_service : ChatService = Provide[DependencyContainer.chat_service], azure_service: AzureService = Provide[DependencyContainer.azure_service], neo4j_service : Neo4jService = Provide[DependencyContainer.neo4j_service]):
+    def import_file(chat_service : ChatService = Provide[DependencyContainer.chat_service], azure_service: AzureService = Provide[DependencyContainer.azure_service], neo4j_service : Neo4jService = Provide[DependencyContainer.neo4j_service], chroma_service : ChromaService = Provide[DependencyContainer.chroma_service]):
         clear = True
         
         try:
@@ -60,8 +61,9 @@ class ChatController:
                 azure_service.clear_azure_index()
                 #azure_service.clear_azure_index2()
                 neo4j_service.clean_db()
+                chroma_service.clean_db()
                 
-            index_benchmark_dto, azure_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=500, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, method=method)
+            index_benchmark_dto, azure_results, chroma_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=500, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, method=method)
             
             response_dto = ResponseDTO(
                 document_size=index_benchmark_dto.document_size,
@@ -76,7 +78,8 @@ class ChatController:
                 neo4j_chunk_size=index_benchmark_dto.neo4j_chunk_size,
                 neo4j_chunk_overlap=index_benchmark_dto.neo4j_chunk_overlap,
                 azure_results = azure_results,
-                extraction_results = extraction_results
+                extraction_results = extraction_results,
+                chroma_results = chroma_results
             )
             
             return make_response(response_dto.to_dict(), 200)

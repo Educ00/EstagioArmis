@@ -5,7 +5,7 @@ from langchain_core.documents import Document
 
 
 class IndexBenchmarkDto:
-    def __init__(self, filename: str, method: int, completion_llm_name: str, embeddings_llm_name: str, neo4j_cb : OpenAICallbackHandler, doc : Document, start_azure : datetime, end_azure: datetime, azure_chunk_size: int, azure_chunk_overlap : int, start_neo4j : datetime, end_neo4j: datetime, number_nodes : int, number_relationships : int, neo4j_chunk_size : int, neo4j_chunk_overlap : int):
+    def __init__(self, filename: str, method: int, completion_llm_name: str, embeddings_llm_name: str, neo4j_cb : OpenAICallbackHandler, doc : Document, start_azure : datetime, end_azure: datetime, azure_chunk_size: int, azure_chunk_overlap : int, start_neo4j : datetime, end_neo4j: datetime, number_nodes : int, number_relationships : int, neo4j_chunk_size : int, neo4j_chunk_overlap : int, start_chroma : datetime, end_chroma : datetime, embedding_tokens : int, chroma_chunk_size : int, chroma_chunk_overlap : int):
         self.filename : str = filename
         self.method : int = method
         self.completion_llm_name : str = completion_llm_name
@@ -27,6 +27,11 @@ class IndexBenchmarkDto:
         self.number_relationships : int = number_relationships
         self.neo4j_chunk_size : int = neo4j_chunk_size
         self.neo4j_chunk_overlap : int = neo4j_chunk_overlap
+        self.start_chroma : str =  str(start_chroma)
+        self.end_chroma : str = str(end_chroma)
+        self.embedding_tokens : int = embedding_tokens
+        self.chroma_chunk_size : int = chroma_chunk_size
+        self.chroma_chunk_overlap : int = chroma_chunk_overlap
 
 
     def _get_char_size(self, doc : Document) -> int:

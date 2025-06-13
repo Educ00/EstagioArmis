@@ -4,7 +4,7 @@ from langchain_community.callbacks import OpenAICallbackHandler
 
 
 class QuestionBenchmarkDto :
-    def __init__(self, method: int, completion_llm_name: str, embeddings_llm_name: str, neo4j_cb : OpenAICallbackHandler, azure_cb : OpenAICallbackHandler, start_azure : datetime, end_azure: datetime, start_neo4j : datetime, end_neo4j: datetime):
+    def __init__(self, method: int, completion_llm_name: str, embeddings_llm_name: str, neo4j_cb : OpenAICallbackHandler, azure_cb : OpenAICallbackHandler, chroma_cb : OpenAICallbackHandler, start_azure : datetime, end_azure: datetime, start_neo4j : datetime, end_neo4j: datetime, start_chroma: datetime, end_chroma: datetime):
         self.method : int = method
         self.completion_llm_name : str = completion_llm_name
         self.embeddings_llm_name : str = embeddings_llm_name
@@ -19,11 +19,19 @@ class QuestionBenchmarkDto :
         self.azure_completion_tokens : int = azure_cb.completion_tokens
         self.azure_reasoning_tokens : int = azure_cb.reasoning_tokens
         self.azure_successful_requests : int = azure_cb.successful_requests
-        self.azure_total_cost_usd : float = azure_cb.total_cost
+        self.azure_total_cost_usd : float = chroma_cb.total_cost
+        self.chroma_prompt_tokens : int = chroma_cb.prompt_tokens
+        self.chroma_prompt_tokens_cached : int = chroma_cb.prompt_tokens_cached
+        self.chroma_completion_tokens : int = chroma_cb.completion_tokens
+        self.chroma_reasoning_tokens : int = chroma_cb.reasoning_tokens
+        self.chroma_successful_requests : int = chroma_cb.successful_requests
+        self.chroma_total_cost_usd : float = chroma_cb.total_cost
         self.start_azure : str = str(start_azure)
         self.end_azure : str = str(end_azure)
         self.start_neo4j : str = str(start_neo4j)
         self.end_neo4j : str = str(end_neo4j)
+        self.start_chroma : str = str(start_chroma)
+        self.end_chroma : str = str(end_chroma)
 
 
     def to_dict(self) -> dict:
