@@ -1,5 +1,5 @@
 {
-    "neo4j_response": "A casa da Sofia está localizada após um percurso conhecido como Caminho, que leva à Rua da Bélgica.",
-    "azure_ai_search_response": "A casa da Sofia está em Canidelo, onde sua mãe, pai e avó a esperam com o jantar.",
-    "chroma_db_response": "Sofia vive em Canidelo, onde sua família a aguardava ansiosamente com o jantar, mas antes de voltar para casa, ela decidiu explorar o Parque da Cidade em Vila Nova de Gaia, onde se deliciou com a natureza e registrou momentos especiais com seu celular."
+    "neo4j_response": "A casa da Sofia está localizada em Canidelo.",
+    "azure_ai_search_response": "Sofia estava a caminho de casa, localizada em Canidelo, onde a esperavam sua mãe, pai e avó para o jantar. Após sair da escola Secundária de Canelas e passar um tempo no Parque da Cidade, decidiu aproveitar a natureza, capturando fotos para o Instagram antes de seguir pelo caminho largo.",
+    "chroma_db_response": "Sofia estava ansiosa para chegar a casa em Canidelo, onde sua mãe, pai e avó a aguardavam ansiosamente com o jantar. Após sair da escola Secundária de Canelas e passar pelo Parque da Cidade em Vila Nova de Gaia, ela decidiu fazer uma pausa para apreciar a natureza e capturar momentos com seu telemóvel. No final de sua caminhada, parou em uma loja chamada 'Doce Gosto' para comprar um gelado, voltando para casa com um sorriso no rosto, repleta de novas descobertas."
 }

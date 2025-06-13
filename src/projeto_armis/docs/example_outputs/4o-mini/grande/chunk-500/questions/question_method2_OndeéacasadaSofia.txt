@@ -1,5 +1,5 @@
 {
-    "neo4j_response": "Não sei a resposta.",
-    "azure_ai_search_response": "Sofia vive em Canidelo, onde sua mãe, pai e avó a aguardam com o jantar, após um passeio pelo Parque da Cidade em Vila Nova de Gaia.",
-    "chroma_db_response": "Sofia se dirigia para casa, em Canidelo, onde seus pais e avó a aguardavam com o jantar, depois de uma agradável caminhada no Parque da Cidade, em Vila Nova de Gaia, onde aproveitou para fotografar a natureza e saborear um gelado durante o trajeto."
+    "neo4j_response": "A casa da Sofia é em Canidelo, onde a mãe, o pai e a avó dela a esperavam.",
+    "azure_ai_search_response": "Sofia, ansiosa para chegar rapidamente em casa em Canidelo, onde sua família a aguardava com o jantar, decidiu explorar um pouco a natureza ao redor do Parque da Cidade, em Vila Nova de Gaia, tirando fotos para o Instagram. Após ponderar, sentou-se em um banco de pedra, bebeu água e escolheu seguir pelo amplo caminho. De mochila nas costas e celular em mãos, ela encontrou dois percursos à sua frente: um estreito, repleto de pedras, que levava a uma placa que dizia \"Trilho da Fonte\", onde uma senhora descia com seu cão. Ao final do trajeto, comprou um gelado na loja \"Doce Gosto\" e seguiu para casa, feliz por ter aproveitado a caminhada e as novas descobertas feitas pelo caminho.",
+    "chroma_db_response": "A casa da Sofia fica em Canidelo, onde seus pais e avó a aguardam ansiosamente com o jantar."
 }
