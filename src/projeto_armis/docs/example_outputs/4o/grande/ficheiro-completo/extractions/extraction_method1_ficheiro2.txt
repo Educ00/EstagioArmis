@@ -1,0 +1,76 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "A young girl on her way home."
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Place",
+            "description": "A park where Sofia finds herself."
+        },
+        {
+            "name": "Vila Nova de Gaia",
+            "category": "Location",
+            "description": "The city where Parque da Cidade is situated."
+        },
+        {
+            "name": "Secundária de Canelas",
+            "category": "Place",
+            "description": "The school that Sofia left before heading to the park."
+        },
+        {
+            "name": "Trilho da Fonte",
+            "category": "Location",
+            "description": "Narrow path in Parque da Cidade with a rustic charm."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "The neighborhood where Sofia lives."
+        },
+        {
+            "name": "Pantufa",
+            "category": "Animal",
+            "description": "The dog accompanying an old woman on the narrow path."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Business",
+            "description": "Small store where Sofia buys an ice cream."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "Present"
+        },
+        {
+            "source": "Parque da Cidade",
+            "target": "Vila Nova de Gaia",
+            "value": "Located In"
+        },
+        {
+            "source": "Sofia",
+            "target": "Secundária de Canelas",
+            "value": "Attends"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "Lives In"
+        },
+        {
+            "source": "Sofia",
+            "target": "Doce Gosto",
+            "value": "Buys Ice Cream"
+        },
+        {
+            "source": "Pantufa",
+            "target": "Trilho da Fonte",
+            "value": "Walks Along"
+        }
+    ]
+}
