@@ -1,6 +1,7 @@
 import os
 
 import tiktoken
+from chromadb import Settings
 from flask import current_app
 
 from langchain_chroma import Chroma
@@ -14,7 +15,9 @@ class ChromaAdapter:
     embeddings : AzureOpenAIEmbeddings = None
     db : Chroma = None
     token_encoder = None
-    
+    _default_collection_name = "my_application_chunks"
+
+
     def __init__(self):
         self.embeddings : AzureOpenAIEmbeddings = self.get_embeddings_llm()
         self.db = self.init_chroma()
@@ -35,7 +38,9 @@ class ChromaAdapter:
             print("[Chroma Adapter]: ChromaDB instance...")
             self.db = Chroma(
                 persist_directory = current_app.config["CHROMADB"],
-                embedding_function= self.get_embeddings_llm()
+                embedding_function= self.get_embeddings_llm(),
+                client_settings=Settings(allow_reset=True),
+                collection_name=self._default_collection_name
             )
         return self.db
 

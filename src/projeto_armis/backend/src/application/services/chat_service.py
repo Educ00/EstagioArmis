@@ -36,10 +36,10 @@ class ChatService:
             response = self.azure_service.run_query(query=question)
 
             self.azure_service.change_schema(json_schema=json_schema2)
-            docs = []
+            azure_docs = []
             for doc in response:
-                docs.append(doc.page_content)
-            llm_response = self.azure_service.call_llm(prompt_template=prompt_template3,instructions=instructions_format_answer_to_question, question=question, answer=docs)
+                azure_docs.append(doc.page_content)
+            llm_response = self.azure_service.call_llm(prompt_template=prompt_template3,instructions=instructions_format_answer_to_question, question=question, answer=azure_docs)
 
             azure_ai_search_response = llm_response["response"]
         end_azure = datetime.now()
@@ -48,10 +48,10 @@ class ChatService:
         start_chroma = datetime.now()
         with get_openai_callback() as chroma_cb:
             response = self.chroma_service.run_query(query=question)
-            docs = []
+            chroma_docs = []
             for doc in response:
-                docs.append(doc.page_content)
-                llm_response = self.azure_service.call_llm(prompt_template=prompt_template3,instructions=instructions_format_answer_to_question, question=question, answer=docs)
+                chroma_docs.append(doc.page_content)
+                llm_response = self.azure_service.call_llm(prompt_template=prompt_template3,instructions=instructions_format_answer_to_question, question=question, answer=chroma_docs)
             chroma_search_response = llm_response["response"]
         end_chroma = datetime.now()
 
@@ -104,9 +104,10 @@ class ChatService:
         self.save_to_file(content=question_benchmark_dto.to_dict(), output_folder=benchmark_folder, output_filename=benchmark_file_filename)
                 
         neo4j_tuple = (neo4j_query, neo4j_query_response, neo4j_response)
-        azure_tuple = (azure_ai_search_response, docs)
+        azure_tuple = (azure_ai_search_response, azure_docs)
+        chroma_tuple = (chroma_search_response, chroma_docs)
         
-        return question_benchmark_dto, neo4j_tuple, azure_tuple
+        return question_benchmark_dto, neo4j_tuple, azure_tuple, chroma_tuple
         
         
         
@@ -129,7 +130,7 @@ class ChatService:
         azure_chunk_overlap = chunk_overlap
         start_azure = datetime.now()
         if not split_azure_ai_search:
-            azure_chunk_size = 0
+            azure_chunk_size = 999999999
             azure_chunk_overlap = 0
         azure_results = self.azure_service.import_documents_to_azure(documents=docs, chunk_size=azure_chunk_size, chunk_overlap=azure_chunk_overlap)
         end_azure = datetime.now()
@@ -139,7 +140,7 @@ class ChatService:
         chroma_chunk_overlap = chunk_overlap
         start_chroma = datetime.now()
         if not split_chroma:
-            chroma_chunk_size = 0
+            chroma_chunk_size = 999999999
             chroma_chunk_overlap = 0
         
         chroma_results, embedding_tokens = self.chroma_service.import_documents(documents=docs, chunk_size=chroma_chunk_size, chunk_overlap=chroma_chunk_overlap)
@@ -155,7 +156,7 @@ class ChatService:
         extraction_results : dict = {}
         
         if not split_neo4j:
-            neo4j_chunk_size = 0
+            neo4j_chunk_size = 999999999
             neo4j_chunk_overlap = 0
         match method:
             case 1:

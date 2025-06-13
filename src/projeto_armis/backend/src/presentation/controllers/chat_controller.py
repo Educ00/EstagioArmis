@@ -28,14 +28,16 @@ class ChatController:
             if not method:
                 method = 2
                 print("[Chat Controller] Método definido por definição para <2>. usar method=<number> para definir.")
-            question_benchmark_dto, neo4j_tuple, azure_tuple = chat_service.make_question(question=question, method=method)
+            question_benchmark_dto, neo4j_tuple, azure_tuple, chroma_tuple = chat_service.make_question(question=question, method=method)
                
             response_dto = ResponseDTO(
                 neo4j_query=neo4j_tuple[0], 
                 neo4j_query_response=neo4j_tuple[1],
                 neo4j_response=neo4j_tuple[2], 
                 azure_ai_search_response=azure_tuple[0],
-                azure_ai_search_docs = azure_tuple[1]
+                azure_ai_search_docs = azure_tuple[1],
+                chroma_response=chroma_tuple[0],
+                chroma_docs=chroma_tuple[1]
             )
             return make_response(response_dto.to_dict(), 200)
         except Exception as e:
@@ -63,7 +65,7 @@ class ChatController:
                 neo4j_service.clean_db()
                 chroma_service.clean_db()
                 
-            index_benchmark_dto, azure_results, chroma_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=500, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, method=method)
+            index_benchmark_dto, azure_results, chroma_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=500, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, split_chroma=True ,method=method)
             
             response_dto = ResponseDTO(
                 document_size=index_benchmark_dto.document_size,
@@ -79,7 +81,8 @@ class ChatController:
                 neo4j_chunk_overlap=index_benchmark_dto.neo4j_chunk_overlap,
                 azure_results = azure_results,
                 extraction_results = extraction_results,
-                chroma_results = chroma_results
+                chroma_results = chroma_results,
+                embedding_tokens=index_benchmark_dto.embedding_tokens
             )
             
             return make_response(response_dto.to_dict(), 200)
