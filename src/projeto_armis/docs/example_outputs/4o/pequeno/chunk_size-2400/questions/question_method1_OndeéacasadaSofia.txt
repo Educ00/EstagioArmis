@@ -1,4 +1,0 @@
-{
-    "neo4j_response": "A casa da Sofia fica no Parque.",
-    "azure_ai_search_response": "A casa da Sofia, em Canidelo, é um refúgio de paz e natureza que inspira alegria e serenidade."
-}

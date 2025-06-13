@@ -1,0 +1,51 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "Protagonist of the story"
+        },
+        {
+            "name": "parque",
+            "category": "Location",
+            "description": "The place where Sofia is located"
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "Sofia's home"
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Path",
+            "description": "The first option for Sofia's way back"
+        },
+        {
+            "name": "caminho largo",
+            "category": "Path",
+            "description": "The second option for Sofia's way back, filled with nature"
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "is at"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "home is"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho estreito",
+            "value": "considers"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "chooses"
+        }
+    ]
+}

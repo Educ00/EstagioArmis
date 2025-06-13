@@ -1,4 +1,5 @@
 {
     "neo4j_response": "Não sei a resposta.",
-    "azure_ai_search_response": "A casa da Sofia está localizada em Canidelo, onde sua mãe, pai e avó a aguardam com o jantar, após ela ter explorado e aproveitado sua caminhada pelo Parque da Cidade, em Vila Nova de Gaia."
+    "azure_ai_search_response": "Sofia vive em Canidelo, onde sua mãe, pai e avó a aguardam com o jantar, após um passeio pelo Parque da Cidade em Vila Nova de Gaia.",
+    "chroma_db_response": "Sofia se dirigia para casa, em Canidelo, onde seus pais e avó a aguardavam com o jantar, depois de uma agradável caminhada no Parque da Cidade, em Vila Nova de Gaia, onde aproveitou para fotografar a natureza e saborear um gelado durante o trajeto."
 }

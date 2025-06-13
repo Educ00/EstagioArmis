@@ -2,8 +2,8 @@
     "entities": [
         {
             "name": "Sofia",
-            "category": "Character",
-            "description": "A young girl who just finished school and is in Parque da Cidade."
+            "category": "Person",
+            "description": "A student coming from Canelas Secondary School, carrying a backpack."
         },
         {
             "name": "Parque da Cidade",
@@ -11,131 +11,196 @@
             "description": "A park located in Vila Nova de Gaia."
         },
         {
-            "name": "Escola Secundária de Canelas",
-            "category": "Institution",
-            "description": "The secondary school Sofia has just left."
+            "name": "Canelas Secondary School",
+            "category": "Location",
+            "description": "The school Sofia just left."
         },
         {
-            "name": "Caminho 1",
+            "name": "Trilho da Fonte",
             "category": "Path",
-            "description": "Narrow path with stones, surrounded by low bushes."
-        },
-        {
-            "name": "Caminho 2",
-            "category": "Path",
-            "description": "Wider path with tall trees and flowers."
+            "description": "A narrow path surrounded by low bushes with a bench and a sign."
         },
         {
             "name": "Pantufa",
-            "category": "Pet",
+            "category": "Animal",
             "description": "An old dog belonging to a lady on the narrow path."
         },
         {
-            "name": "Crianças",
-            "category": "Characters",
-            "description": "Two children playing with a colorful kite on the wider path."
+            "name": "jardineiro",
+            "category": "Person",
+            "description": "A gardener cleaning fallen leaves in the park."
         },
         {
-            "name": "Jardineiro",
-            "category": "Occupation",
-            "description": "A gardener cleaning fallen leaves near the wider path."
+            "name": "bicicleta",
+            "category": "Object",
+            "description": "A bike leaned against a tree on the wider path."
+        },
+        {
+            "name": "papagaio",
+            "category": "Object",
+            "description": "A colorful kite that two children are playing with."
+        },
+        {
+            "name": "árvores",
+            "category": "Object",
+            "description": "Tall trees such as plane and oak trees along the wider path."
         },
         {
             "name": "Canidelo",
             "category": "Location",
-            "description": "Sofia's home village."
+            "description": "Sofia's home where her family is waiting for her."
         },
         {
             "name": "Mãe",
-            "category": "Family",
-            "description": "Sofia's mother."
+            "category": "Character",
+            "description": "Sofia's mother who is waiting at home."
         },
         {
             "name": "Pai",
-            "category": "Family",
-            "description": "Sofia's father."
+            "category": "Character",
+            "description": "Sofia's father who is waiting at home."
         },
         {
             "name": "Avó",
-            "category": "Family",
-            "description": "Sofia's grandmother."
+            "category": "Character",
+            "description": "Sofia's grandmother who is waiting at home."
+        },
+        {
+            "name": "Caminho largo",
+            "category": "Path",
+            "description": "Wide path that Sofia decided to take."
         },
         {
             "name": "Rua da Bélgica",
-            "category": "Location",
-            "description": "A street that Sofia crosses."
+            "category": "Street",
+            "description": "The street that Sofia crossed to get to a gelato shop."
         },
         {
             "name": "Doce Gosto",
-            "category": "Establishment",
-            "description": "An ice cream shop where Sofia buys ice cream."
-        },
-        {
-            "name": "Estudantes",
-            "category": "People",
-            "description": "A group of students doing fieldwork."
+            "category": "Business",
+            "description": "A small gelato shop where Sofia bought ice cream."
         },
         {
             "name": "Esquilos",
             "category": "Animal",
-            "description": "Squirrels that run between tree trunks."
+            "description": "Squirrels that Sofia saw running between the trunks."
         },
         {
-            "name": "Gato Preto",
+            "name": "Gato preto",
             "category": "Animal",
-            "description": "A black cat sleeping in a corner."
+            "description": "A black cat that Sofia saw sleeping."
         },
         {
-            "name": "Pássaros",
-            "category": "Animal",
-            "description": "Birds that chirp."
+            "name": "Estudantes",
+            "category": "Character",
+            "description": "A group of students doing fieldwork."
+        },
+        {
+            "name": "Cadernos",
+            "category": "Object",
+            "description": "Notebooks used by the students for their work."
+        },
+        {
+            "name": "Binóculos",
+            "category": "Object",
+            "description": "Binoculars used by the students for observing."
+        },
+        {
+            "name": "Gelado",
+            "category": "Food",
+            "description": "Ice cream that Sofia bought."
+        },
+        {
+            "name": "Instagram",
+            "category": "Social Media",
+            "description": "Platform where Sofia likes to publish her photos."
         }
     ],
     "relationships": [
         {
             "source": "Sofia",
             "target": "Parque da Cidade",
-            "value": "is in"
+            "value": "is located in"
         },
         {
             "source": "Sofia",
-            "target": "Escola Secundária de Canelas",
+            "target": "Canelas Secondary School",
             "value": "just left"
         },
         {
-            "source": "Caminho 1",
-            "target": "Pantufa",
-            "value": "is being walked by"
+            "source": "Sofia",
+            "target": "mapa",
+            "value": "is looking at"
         },
         {
-            "source": "Caminho 2",
-            "target": "Crianças",
-            "value": "is where they are playing"
+            "source": "Sofia",
+            "target": "Trilho da Fonte",
+            "value": "is in front of"
         },
         {
-            "source": "Caminho 2",
-            "target": "Jardineiro",
-            "value": "is cleaning leaves"
+            "source": "Sofia",
+            "target": "caminhos",
+            "value": "has two distinct"
+        },
+        {
+            "source": "Pantufa",
+            "target": "senhora idosa",
+            "value": "is owned by"
+        },
+        {
+            "source": "senhora idosa",
+            "target": "Trilho da Fonte",
+            "value": "is walking on"
+        },
+        {
+            "source": "jardineiro",
+            "target": "folhas caídas",
+            "value": "is cleaning"
+        },
+        {
+            "source": "bicicleta",
+            "target": "árvore",
+            "value": "is leaning against"
+        },
+        {
+            "source": "duas crianças",
+            "target": "papagaio",
+            "value": "are playing with"
+        },
+        {
+            "source": "árvores",
+            "target": "flores",
+            "value": "are near the wider path."
         },
         {
             "source": "Sofia",
             "target": "Canidelo",
-            "value": "lives in"
+            "value": "home"
         },
         {
             "source": "Sofia",
             "target": "Mãe",
-            "value": "is the daughter of"
+            "value": "family member"
         },
         {
             "source": "Sofia",
             "target": "Pai",
-            "value": "is the daughter of"
+            "value": "family member"
         },
         {
             "source": "Sofia",
             "target": "Avó",
-            "value": "is the granddaughter of"
+            "value": "family member"
+        },
+        {
+            "source": "Sofia",
+            "target": "Caminho largo",
+            "value": "decides to walk on"
+        },
+        {
+            "source": "Sofia",
+            "target": "Rua da Bélgica",
+            "value": "crosses to reach the ice cream shop"
         },
         {
             "source": "Sofia",
@@ -144,28 +209,38 @@
         },
         {
             "source": "Sofia",
-            "target": "Rua da Bélgica",
-            "value": "crosses"
+            "target": "Esquilos",
+            "value": "observes while walking"
+        },
+        {
+            "source": "Sofia",
+            "target": "Gato preto",
+            "value": "sees while walking"
         },
         {
             "source": "Sofia",
             "target": "Estudantes",
-            "value": "sees doing fieldwork"
+            "value": "sees while walking"
+        },
+        {
+            "source": "Estudantes",
+            "target": "Cadernos",
+            "value": "uses for their work"
+        },
+        {
+            "source": "Estudantes",
+            "target": "Binóculos",
+            "value": "uses for their work"
         },
         {
             "source": "Sofia",
-            "target": "Esquilos",
-            "value": "sees running"
+            "target": "Gelado",
+            "value": "enjoys after buying"
         },
         {
             "source": "Sofia",
-            "target": "Gato Preto",
-            "value": "sees sleeping"
-        },
-        {
-            "source": "Sofia",
-            "target": "Pássaros",
-            "value": "hears chirping"
+            "target": "Instagram",
+            "value": "posts photos on"
         }
     ]
 }

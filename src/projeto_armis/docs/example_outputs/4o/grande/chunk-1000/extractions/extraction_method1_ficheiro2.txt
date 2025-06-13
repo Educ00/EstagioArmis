@@ -3,104 +3,69 @@
         {
             "name": "Sofia",
             "category": "Person",
-            "description": "Protagonist of the story carrying a backpack and a phone."
+            "description": "A school student who is navigating through various locations."
         },
         {
             "name": "Parque da Cidade",
             "category": "Location",
-            "description": "The park in Vila Nova de Gaia visited by Sofia."
+            "description": "A park in Vila Nova de Gaia where the events are occurring."
         },
         {
             "name": "Secundária de Canelas",
             "category": "Location",
-            "description": "The school Sofia attended."
+            "description": "The school from which Sofia has just left."
         },
         {
             "name": "Pantufa",
             "category": "Animal",
-            "description": "The dog accompanying an elder lady."
+            "description": "A dog accompanying an elderly woman in the park."
         },
         {
             "name": "Trilho da Fonte",
             "category": "Location",
-            "description": "A narrow path with bushes, an old bench, and stones mentioned in the story."
-        },
-        {
-            "name": "Papagaio colorido",
-            "category": "Object",
-            "description": "A kite with which two children were playing."
-        },
-        {
-            "name": "Jardineiro",
-            "category": "Person",
-            "description": "A worker cleaning fallen leaves with a wheelbarrow in the park."
+            "description": "A narrow path in the park described in the text."
         },
         {
             "name": "Canidelo",
-            "category": "Location",
-            "description": "Local where Sofia lives."
-        },
-        {
-            "name": "Instagram",
-            "category": "Platform",
-            "description": "Social media where Sofia shares images."
+            "category": "Place",
+            "description": "Place where Sofia's family lives"
         },
         {
             "name": "Rua da Bélgica",
-            "category": "Location",
-            "description": "Street that Sofia crosses during her journey."
+            "category": "Place",
+            "description": "Street that Sofia traversed"
         },
         {
             "name": "Doce Gosto",
             "category": "Business",
-            "description": "Establishment where Sofia bought ice cream."
+            "description": "Store where Sofia bought an ice cream"
         }
     ],
     "relationships": [
         {
             "source": "Sofia",
             "target": "Parque da Cidade",
-            "value": "visited"
+            "value": "is in"
         },
         {
             "source": "Sofia",
             "target": "Secundária de Canelas",
-            "value": "attended"
+            "value": "left from"
         },
         {
             "source": "Pantufa",
-            "target": "elderly lady",
-            "value": "accompanied"
-        },
-        {
-            "source": "elderly lady",
             "target": "Trilho da Fonte",
-            "value": "walked"
-        },
-        {
-            "source": "two children",
-            "target": "Papagaio colorido",
-            "value": "played"
-        },
-        {
-            "source": "Jardineiro",
-            "target": "fallen leaves",
-            "value": "cleaned"
+            "value": "is located on"
         },
         {
             "source": "Sofia",
             "target": "Canidelo",
-            "value": "Residence"
-        },
-        {
-            "source": "Sofia",
-            "target": "Instagram",
-            "value": "Publishes photos"
+            "value": "Destination"
         },
         {
             "source": "Sofia",
             "target": "Rua da Bélgica",
-            "value": "Passes through"
+            "value": "Traverses"
         },
         {
             "source": "Sofia",

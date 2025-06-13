@@ -1,0 +1,116 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "Personagem principal que estava no parque"
+        },
+        {
+            "name": "parque",
+            "category": "Lugares e Espaços",
+            "description": "Lugar onde Sofia estava"
+        },
+        {
+            "name": "caminho estreito",
+            "category": "Lugares e Espaços",
+            "description": "Caminho no parque com muitas pedras"
+        },
+        {
+            "name": "caminho largo",
+            "category": "Lugares e Espaços",
+            "description": "Caminho no parque com árvores e flores"
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "Lugar onde Sofia queria chegar"
+        },
+        {
+            "name": "árvores e flores",
+            "category": "Objetos",
+            "description": "Elementos presentes no caminho largo"
+        },
+        {
+            "name": "vento",
+            "category": "Conceitos e Ideias",
+            "description": "Fenômeno natural sentido por Sofia"
+        },
+        {
+            "name": "pássaros",
+            "category": "Seres Vivos",
+            "description": "Animais que Sofia ouviu durante sua caminhada"
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "parque",
+            "value": "está em"
+        },
+        {
+            "source": "parque",
+            "target": "caminho estreito",
+            "value": "possui"
+        },
+        {
+            "source": "parque",
+            "target": "caminho largo",
+            "value": "possui"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho estreito",
+            "value": "considera"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "considera"
+        },
+        {
+            "source": "caminho estreito",
+            "target": "muitas pedras",
+            "value": "contém"
+        },
+        {
+            "source": "caminho largo",
+            "target": "árvores e flores",
+            "value": "contém"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "escolhe"
+        },
+        {
+            "source": "caminho largo",
+            "target": "vento",
+            "value": "é associado"
+        },
+        {
+            "source": "caminho largo",
+            "target": "pássaros",
+            "value": "é associado"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "deseja alcançar"
+        },
+        {
+            "source": "Sofia",
+            "target": "árvores e flores",
+            "value": "observa"
+        },
+        {
+            "source": "Sofia",
+            "target": "vento",
+            "value": "sente"
+        },
+        {
+            "source": "Sofia",
+            "target": "pássaros",
+            "value": "escuta"
+        }
+    ]
+}

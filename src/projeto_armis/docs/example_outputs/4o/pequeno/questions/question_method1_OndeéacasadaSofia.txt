@@ -1,0 +1,5 @@
+{
+    "neo4j_response": "A casa de Sofia está em Canidelo.",
+    "azure_ai_search_response": "Sofia mora em Canidelo, onde sua família a aguardava com carinho e um jantar especial.",
+    "chroma_db_response": "\"De acordo com a narrativa, a casa da Sofia está localizada em Canidelo.\""
+}

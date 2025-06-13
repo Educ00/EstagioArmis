@@ -1,4 +1,5 @@
 {
-    "neo4j_response": "A casa da Sofia fica em Canidelo, onde a mãe, o pai e a avó a aguardavam.",
-    "azure_ai_search_response": "Sofia estava no Parque da Cidade, em Vila Nova de Gaia, a caminho de sua casa em Canidelo, onde sua família a aguardava para o jantar. Após deixar a escola Secundária de Canelas, ela decidiu seguir por um caminho largo e florido, desfrutando da natureza e capturando momentos no seu telemóvel, antes de finalmente parar para comprar um gelado e retornar para casa, feliz e satisfeita com sua jornada."
+    "neo4j_response": "A casa da Sofia está localizada em Canidelo, onde sua mãe, pai e avó a aguardavam.",
+    "azure_ai_search_response": "A casa de Sofia fica em Canidelo, onde a família a aguardava para o jantar, mas durante seu caminho, ela se permitiu explorar o Parque da Cidade, em Vila Nova de Gaia, desfrutando da natureza e capturando momentos com seu telemóvel.",
+    "chroma_db_response": "Sofia estava a caminho de casa em Canidelo, após sair da escola Secundária de Canelas, mas antes fez uma pausa no Parque da Cidade, onde decidiu explorar e apreciar a natureza, rodeada de belas árvores e coloridas flores. Com o telemóvel na mão para capturar momentos e um gelado na outra, voltou para casa com um sorriso, satisfeita por ter descoberto tantas novas belezas ao longo do seu caminho."
 }

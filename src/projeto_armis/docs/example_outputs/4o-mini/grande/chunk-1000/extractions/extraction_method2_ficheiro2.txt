@@ -3,117 +3,132 @@
         {
             "name": "Parque da Cidade",
             "category": "Lugares e Espaços",
-            "description": "Um parque localizado em Vila Nova de Gaia."
+            "description": "Um parque situado em Vila Nova de Gaia."
         },
         {
             "name": "Vila Nova de Gaia",
             "category": "Lugares e Espaços",
-            "description": "Uma cidade em Portugal onde se encontra o Parque da Cidade."
+            "description": "Uma cidade em Portugal."
         },
         {
             "name": "Secundária de Canelas",
             "category": "Organizações e Instituições",
-            "description": "Uma escola secundária que Sofia frequentava."
+            "description": "Uma escola secundária."
         },
         {
             "name": "mochila",
             "category": "Objetos",
-            "description": "Um objeto usado por Sofia para carregar seus pertences."
+            "description": "Um objeto usado para carregar itens."
         },
         {
             "name": "garrafa de água",
             "category": "Objetos",
-            "description": "Um objeto que Sofia levava no bolso lateral da mochila."
+            "description": "Um recipiente para armazenar água."
         },
         {
             "name": "telemóvel",
             "category": "Objetos",
-            "description": "Um dispositivo que Sofia usava para ver o mapa."
+            "description": "Um dispositivo eletrônico usado para comunicação."
+        },
+        {
+            "name": "caminho",
+            "category": "Conceitos e Ideias",
+            "description": "Um percurso a seguir."
         },
         {
             "name": "Trilho da Fonte",
             "category": "Lugares e Espaços",
-            "description": "Um caminho indicado por uma placa no parque."
+            "description": "Uma placa indicando um caminho no parque."
         },
         {
-            "name": "Pantufa",
+            "name": "senhora idosa",
             "category": "Seres Vivos",
-            "description": "Cão da senhora idosa que descia pelo caminho."
+            "description": "Uma mulher mais velha."
         },
         {
-            "name": "caminho estreito",
-            "category": "Lugares e Espaços",
-            "description": "Um dos dois caminhos distintos que Sofia encontrou."
-        },
-        {
-            "name": "caminho largo",
-            "category": "Lugares e Espaços",
-            "description": "O segundo caminho que era mais largo do que o primeiro."
-        },
-        {
-            "name": "plátanos",
+            "name": "cão chamado Pantufa",
             "category": "Seres Vivos",
-            "description": "Árvores altas que estavam presentes no caminho largo."
+            "description": "Um animal de estimação."
         },
         {
-            "name": "carvalhos",
+            "name": "árvores altas como plátanos e carvalhos",
             "category": "Seres Vivos",
-            "description": "Outro tipo de árvore alta encontrada no caminho largo."
+            "description": "Espécies de árvores."
         },
         {
-            "name": "flores",
+            "name": "flores plantadas em canteiros",
             "category": "Seres Vivos",
-            "description": "Várias flores plantadas em canteiros ao longo do caminho largo."
+            "description": "Flores que estão organizadas em caixas de plantio."
         },
         {
             "name": "bicicleta",
             "category": "Objetos",
-            "description": "Uma bicicleta que estava encostada a uma árvore."
+            "description": "Um meio de transporte."
         },
         {
-            "name": "crianças",
+            "name": "duas crianças",
             "category": "Seres Vivos",
-            "description": "Duas crianças que estavam a brincar no parque."
+            "description": "Dois indivíduos jovens."
         },
         {
             "name": "papagaio colorido",
             "category": "Objetos",
-            "description": "Um brinquedo que as crianças estavam usando para brincar."
+            "description": "Um brinquedo que voa com a ajuda do vento."
         },
         {
             "name": "jardineiro",
             "category": "Seres Vivos",
-            "description": "Um trabalhador que limpava as folhas caídas no parque."
+            "description": "Uma pessoa que cuida de jardins."
         },
         {
             "name": "carrinho de mão",
             "category": "Objetos",
-            "description": "Um objeto utilizado pelo jardineiro para transportar folhas."
+            "description": "Um equipamento usado para transportar materiais."
         },
         {
             "name": "folhas caídas",
             "category": "Objetos",
-            "description": "Folhas que o jardineiro estava limpando no caminho."
+            "description": "Folhas que caem das árvores."
         },
         {
             "name": "Sofia",
             "category": "Seres Vivos",
-            "description": "Personagem que queria chegar a casa."
+            "description": "Pessoa que queria chegar a casa."
         },
         {
             "name": "Canidelo",
             "category": "Lugares e Espaços",
-            "description": "Local onde a mãe, o pai e a avó esperavam Sofia."
+            "description": "Local onde a mãe, o pai e a avó de Sofia a esperavam."
+        },
+        {
+            "name": "mãe",
+            "category": "Seres Vivos",
+            "description": "Mãe de Sofia."
+        },
+        {
+            "name": "pai",
+            "category": "Seres Vivos",
+            "description": "Pai de Sofia."
+        },
+        {
+            "name": "avó",
+            "category": "Seres Vivos",
+            "description": "Avó de Sofia."
+        },
+        {
+            "name": "jantar",
+            "category": "Eventos e Processos",
+            "description": "Refere-se à refeição que a família estava a preparar."
         },
         {
             "name": "natureza",
             "category": "Conceitos e Ideias",
-            "description": "Elemento que Sofia gosta de ver."
+            "description": "Ambiente natural que Sofia gostava de ver."
         },
         {
             "name": "Instagram",
             "category": "Organizações e Instituições",
-            "description": "Rede social onde Sofia queria publicar fotos."
+            "description": "Plataforma onde Sofia desejava publicar as fotos."
         },
         {
             "name": "bancos de pedra",
@@ -123,7 +138,12 @@
         {
             "name": "água",
             "category": "Objetos",
-            "description": "Bebida que Sofia consumiu."
+            "description": "Bebida que Sofia bebeu."
+        },
+        {
+            "name": "caminho largo",
+            "category": "Lugares e Espaços",
+            "description": "Caminho por onde Sofia decidiu seguir."
         },
         {
             "name": "esquilos",
@@ -136,19 +156,19 @@
             "description": "Animal que estava a dormir."
         },
         {
-            "name": "grupo de estudantes",
+            "name": "estudantes",
             "category": "Seres Vivos",
-            "description": "Pessoas que estavam a fazer um trabalho de campo."
+            "description": "Grupo que estava a fazer um trabalho de campo."
         },
         {
             "name": "cadernos",
             "category": "Objetos",
-            "description": "Instrumentos utilizados pelo grupo de estudantes."
+            "description": "Objetos usados pelos estudantes."
         },
         {
             "name": "binóculos",
             "category": "Objetos",
-            "description": "Instrumentos utilizados pelo grupo de estudantes."
+            "description": "Objetos usados pelos estudantes."
         },
         {
             "name": "vento",
@@ -158,7 +178,7 @@
         {
             "name": "pássaros",
             "category": "Seres Vivos",
-            "description": "Animais cujos sons Sofia ouviu."
+            "description": "Animais cujo chilrear Sofia ouviu."
         },
         {
             "name": "Rua da Bélgica",
@@ -168,104 +188,99 @@
         {
             "name": "gelado",
             "category": "Objetos",
-            "description": "Alimento que Sofia comprou."
+            "description": "Sobremesa que Sofia comprou."
         },
         {
             "name": "Doce Gosto",
             "category": "Organizações e Instituições",
-            "description": "Loja onde Sofia comprou o gelado."
+            "description": "Nome da loja onde Sofia comprou o gelado."
         }
     ],
     "relationships": [
         {
-            "source": "Parque da Cidade",
-            "target": "Vila Nova de Gaia",
-            "value": "localizado em"
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "está no"
         },
         {
             "source": "Sofia",
             "target": "Secundária de Canelas",
-            "value": "saiu da escola"
+            "value": "saiu da"
         },
         {
             "source": "Sofia",
             "target": "mochila",
-            "value": "carrega às costas"
+            "value": "leva às costas"
         },
         {
-            "source": "Sofia",
+            "source": "mochila",
             "target": "garrafa de água",
-            "value": "leva no bolso lateral"
+            "value": "contém"
         },
         {
             "source": "Sofia",
             "target": "telemóvel",
-            "value": "segura na mão"
+            "value": "segura"
         },
         {
-            "source": "Sofia",
-            "target": "caminho estreito",
-            "value": "observa"
+            "source": "telemóvel",
+            "target": "caminho",
+            "value": "exibe mapa do"
         },
         {
-            "source": "caminho estreito",
+            "source": "Parque da Cidade",
             "target": "Trilho da Fonte",
-            "value": "indica acesso a"
+            "value": "possui"
         },
         {
             "source": "Trilho da Fonte",
-            "target": "Pantufa",
-            "value": "cão da senhora idosa que desce"
+            "target": "senhora idosa",
+            "value": "é percorrido por"
         },
         {
-            "source": "Sofia",
-            "target": "caminho largo",
-            "value": "observa"
+            "source": "senhora idosa",
+            "target": "cão chamado Pantufa",
+            "value": "é dono de"
         },
         {
-            "source": "caminho largo",
-            "target": "plátanos",
-            "value": "árvores presentes"
+            "source": "caminho",
+            "target": "árvores altas como plátanos e carvalhos",
+            "value": "adornado por"
         },
         {
-            "source": "caminho largo",
-            "target": "carvalhos",
-            "value": "árvores presentes"
+            "source": "caminho",
+            "target": "flores plantadas em canteiros",
+            "value": "adornado por"
         },
         {
-            "source": "caminho largo",
-            "target": "flores",
-            "value": "plantadas em canteiros"
-        },
-        {
-            "source": "caminho largo",
+            "source": "caminho",
             "target": "bicicleta",
-            "value": "objeto encostado na árvore"
+            "value": "tem"
         },
         {
-            "source": "caminho largo",
-            "target": "crianças",
-            "value": "a brincar"
+            "source": "caminho",
+            "target": "duas crianças",
+            "value": "permite brincar com"
         },
         {
-            "source": "crianças",
+            "source": "duas crianças",
             "target": "papagaio colorido",
-            "value": "brinquedo que usam"
+            "value": "brinca com"
         },
         {
-            "source": "caminho largo",
+            "source": "caminho",
             "target": "jardineiro",
-            "value": "pessoa que limpa o local"
+            "value": "é limpo por"
         },
         {
             "source": "jardineiro",
             "target": "carrinho de mão",
-            "value": "objeto usado para trabalho"
+            "value": "utiliza"
         },
         {
             "source": "jardineiro",
             "target": "folhas caídas",
-            "value": "material que limpa."
+            "value": "limpa"
         },
         {
             "source": "Sofia",
@@ -274,73 +289,103 @@
         },
         {
             "source": "Sofia",
+            "target": "mãe",
+            "value": "tem como familiar"
+        },
+        {
+            "source": "Sofia",
+            "target": "pai",
+            "value": "tem como familiar"
+        },
+        {
+            "source": "Sofia",
+            "target": "avó",
+            "value": "tem como familiar"
+        },
+        {
+            "source": "Sofia",
+            "target": "jantar",
+            "value": "ia para casa para"
+        },
+        {
+            "source": "Sofia",
             "target": "natureza",
-            "value": "gosta de"
+            "value": "gostava de ver"
         },
         {
             "source": "Sofia",
             "target": "Instagram",
-            "value": "publica fotografias no"
+            "value": "pretendia publicar fotografias no"
         },
         {
             "source": "Sofia",
             "target": "bancos de pedra",
-            "value": "senta-se em um"
+            "value": "sentou-se num"
         },
         {
             "source": "Sofia",
             "target": "água",
-            "value": "bebe um pouco de"
+            "value": "bebeu um pouco de"
+        },
+        {
+            "source": "Sofia",
+            "target": "caminho largo",
+            "value": "decidiu seguir pelo"
         },
         {
             "source": "Sofia",
             "target": "esquilos",
-            "value": "vê a correr entre os troncos"
+            "value": "viu enquanto caminhava"
         },
         {
             "source": "Sofia",
             "target": "gato preto",
-            "value": "vê a dormir"
+            "value": "viu a dormir"
         },
         {
             "source": "Sofia",
-            "target": "grupo de estudantes",
-            "value": "observa a fazer um trabalho de campo"
+            "target": "estudantes",
+            "value": "viu a fazer um trabalho de campo"
         },
         {
-            "source": "grupo de estudantes",
+            "source": "estudantes",
             "target": "cadernos",
-            "value": "usa"
+            "value": "usavam para o trabalho"
         },
         {
-            "source": "grupo de estudantes",
+            "source": "estudantes",
             "target": "binóculos",
-            "value": "usa"
+            "value": "usavam para observação"
         },
         {
             "source": "Sofia",
             "target": "vento",
-            "value": "sente no rosto"
+            "value": "sentiu no rosto"
         },
         {
             "source": "Sofia",
             "target": "pássaros",
-            "value": "ouve chilrear"
+            "value": "ouviu enquanto caminhava"
         },
         {
             "source": "Sofia",
             "target": "Rua da Bélgica",
-            "value": "atravessa"
+            "value": "atravessou"
         },
         {
             "source": "Sofia",
             "target": "gelado",
-            "value": "compra um"
+            "value": "comprou um"
         },
         {
-            "source": "gelado",
+            "source": "Sofia",
             "target": "Doce Gosto",
-            "value": "comprado na loja chamada"
+            "value": "comprou o gelado na"
+        },
+        {
+            "source": "mãe",
+            "target": "jantar",
+            "value": "preparou o"
         }
     ]
 }

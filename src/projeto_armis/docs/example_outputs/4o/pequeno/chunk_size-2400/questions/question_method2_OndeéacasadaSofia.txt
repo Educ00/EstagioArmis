@@ -1,4 +1,0 @@
-{
-    "neo4j_response": "A casa da Sofia é no Parque.",
-    "azure_ai_search_response": "A casa da Sofia situa-se em Canidelo, acessível por um caminho amplo e envolto pela natureza."
-}

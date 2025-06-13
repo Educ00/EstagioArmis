@@ -1,4 +1,5 @@
 {
-    "neo4j_response": "A casa da Sofia é em Canidelo, onde a mãe, o pai e a avó a esperavam.",
-    "azure_ai_search_response": "Sofia estava a caminho de casa, após um dia na escola Secundária de Canelas, e decidiu seguir por um caminho mais largo no Parque da Cidade, em Vila Nova de Gaia, encantando-se com a natureza e a alegria de pequenas descobertas, antes de finalmente chegar a Canidelo, onde a família a esperava para o jantar."
+    "neo4j_response": "A casa da Sofia é em Canidelo.",
+    "azure_ai_search_response": "Sofia morava em Canidelo, e após sair da escola no Parque da Cidade, ela decidiu explorar um caminho amplo e bonito, repleto de natureza, antes de retornar para casa, onde sua família a aguardava com o jantar.",
+    "chroma_db_response": "Sofia estava no Parque da Cidade, em Vila Nova de Gaia, a caminho de casa em Canidelo, onde sua família a aguardava com o jantar. Após sair da escola, ela se deparou com dois caminhos e, optando pelo mais largo, contemplou a natureza ao seu redor, antes de chegar a casa com um sorriso e um gelado na mão."
 }

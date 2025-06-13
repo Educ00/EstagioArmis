@@ -2,8 +2,8 @@
     "entities": [
         {
             "name": "Sofia",
-            "category": "Person",
-            "description": "A girl who just finished school and is at the park."
+            "category": "Character",
+            "description": "A girl who wants to reach her home quickly in Canidelo."
         },
         {
             "name": "Parque da Cidade",
@@ -11,49 +11,44 @@
             "description": "A park located in Vila Nova de Gaia."
         },
         {
-            "name": "Vila Nova de Gaia",
-            "category": "Location",
-            "description": "A municipality in Portugal."
-        },
-        {
             "name": "Secundária de Canelas",
             "category": "School",
-            "description": "A secondary school that Sofia attended."
+            "description": "A secondary school Sofia recently left."
         },
         {
             "name": "mochila",
-            "category": "Item",
-            "description": "A backpack that Sofia carries."
+            "category": "Object",
+            "description": "A backpack that Sofia is carrying."
         },
         {
             "name": "garrafa de água",
-            "category": "Item",
-            "description": "A water bottle that Sofia has in her backpack."
+            "category": "Object",
+            "description": "A water bottle in the side pocket of her backpack."
         },
         {
             "name": "telemóvel",
-            "category": "Item",
-            "description": "A mobile phone that Sofia is holding."
+            "category": "Object",
+            "description": "A mobile phone Sofia is holding to see her way home."
         },
         {
-            "name": "mapa",
-            "category": "Item",
-            "description": "A map that shows Sofia's way home."
+            "name": "Vila Nova de Gaia",
+            "category": "Location",
+            "description": "A city in Portugal where the park and school are located."
         },
         {
-            "name": "Caminho Estreito",
-            "category": "Caminho",
-            "description": "Um caminho estreito com muitas pedras espalhadas."
+            "name": "Caminhos",
+            "category": "Location",
+            "description": "Dois caminhos distintos na narrativa, um estreito e pedregoso."
         },
         {
             "name": "Trilho da Fonte",
-            "category": "Trilha",
-            "description": "Uma trilha que leva a uma fonte, marcada por uma placa."
+            "category": "Path",
+            "description": "O caminho que possui uma placa indicando seu nome."
         },
         {
             "name": "Senhora Idosa",
-            "category": "Personagem",
-            "description": "Uma mulher idosa que está caminhando devagar."
+            "category": "Character",
+            "description": "Uma mulher idosa que desce pelo caminho."
         },
         {
             "name": "Cão Pantufa",
@@ -61,34 +56,34 @@
             "description": "Cão da senhora idosa."
         },
         {
-            "name": "Banco de madeira",
-            "category": "Mobiliário",
-            "description": "Um banco antigo feito de madeira, situado ao redor do caminho."
+            "name": "Banco de Madeira",
+            "category": "Object",
+            "description": "Um banco antigo localizado ao redor dos caminhos."
         },
         {
-            "name": "Arbustos baixos",
-            "category": "Vegetação",
-            "description": "Vegetação baixa ao redor do caminho."
+            "name": "Arbustos Baixos",
+            "category": "Flora",
+            "description": "Arbustos localizados ao redor dos caminhos."
         },
         {
             "name": "Caminho",
             "category": "Lugar",
-            "description": "Um caminho mais largo, cercado por árvores e flores."
+            "description": "O segundo caminho mais largo."
         },
         {
-            "name": "Árvores altas",
+            "name": "Árvores",
             "category": "Planta",
-            "description": "Incluindo plátanos e carvalhos."
+            "description": "Altas árvores como plátanos e carvalhos."
         },
         {
             "name": "Flores",
             "category": "Planta",
-            "description": "Diversas flores plantadas em canteiros."
+            "description": "Várias flores plantadas em canteiros."
         },
         {
             "name": "Bicicleta",
             "category": "Objeto",
-            "description": "Uma bicicleta encostada a uma árvore."
+            "description": "Bicicleta encostada a uma árvore."
         },
         {
             "name": "Crianças",
@@ -98,119 +93,114 @@
         {
             "name": "Jardineiro",
             "category": "Pessoa",
-            "description": "Um jardineiro usando um carrinho de mão."
+            "description": "Um jardineiro limpando folhas caídas."
         },
         {
             "name": "Carrinho de mão",
             "category": "Objeto",
-            "description": "Um carrinho utilizado pelo jardineiro para limpar folhas."
+            "description": "Carrinho usado pelo jardineiro."
         },
         {
-            "name": "Papagaio colorido",
-            "category": "Animal",
-            "description": "Um papagaio com várias cores, sendo usado pelas crianças."
+            "name": "Papagaio",
+            "category": "Objeto",
+            "description": "Papagaio colorido com que as crianças brincam."
         },
         {
             "name": "Canidelo",
             "category": "Location",
-            "description": "A town where Sofia's family home is located."
+            "description": "The place where Sofia's family is waiting for her."
         },
         {
             "name": "Mãe",
-            "category": "Family",
-            "description": "Sofia's mother who is waiting at home with dinner."
+            "category": "Family Member",
+            "description": "Sofia's mother waiting for her at home."
         },
         {
             "name": "Pai",
-            "category": "Family",
-            "description": "Sofia's father who is also waiting at home."
+            "category": "Family Member",
+            "description": "Sofia's father waiting for her at home."
         },
         {
             "name": "Avó",
-            "category": "Family",
-            "description": "Sofia's grandmother who is waiting at home."
-        },
-        {
-            "name": "Nature",
-            "category": "Concept",
-            "description": "The natural environment that Sofia enjoys observing."
+            "category": "Family Member",
+            "description": "Sofia's grandmother waiting for her at home."
         },
         {
             "name": "Instagram",
-            "category": "Platform",
-            "description": "A social media platform where Sofia shares her photographs."
+            "category": "Social Media",
+            "description": "Platform where Sofia likes to publish her photos."
+        },
+        {
+            "name": "Natural scenery",
+            "category": "Environment",
+            "description": "Nature that Sofia enjoys seeing."
         },
         {
             "name": "Bancos de pedra",
-            "category": "Place",
-            "description": "Stone benches where Sofia sits to rest and take a break."
+            "category": "Object",
+            "description": "Stone benches where Sofia sits to rest."
         },
         {
             "name": "Caminho largo",
             "category": "Path",
-            "description": "The wide path that Sofia decides to follow."
+            "description": "The wide path that Sofia decides to take."
         },
         {
             "name": "Esquilos",
-            "category": "Animal",
-            "description": "Animais pequenos que correm entre os troncos."
+            "category": "animal",
+            "description": "Pequenos mamíferos conhecidos por sua agilidade e capacidade de escalar árvores."
         },
         {
-            "name": "Gato Preto",
-            "category": "Animal",
-            "description": "Um gato de pelagem preta que dorme."
+            "name": "Gato preto",
+            "category": "animal",
+            "description": "Um felino doméstico, frequentemente associado a superstições."
         },
         {
             "name": "Estudantes",
-            "category": "Grupo",
-            "description": "Um grupo de estudantes fazendo trabalho de campo."
+            "category": "grupo",
+            "description": "Um grupo de pessoas que estão realizando um trabalho de campo."
         },
         {
-            "name": "Cadernos",
-            "category": "Material",
-            "description": "Ferramenta usada pelos estudantes para anotar informações."
-        },
-        {
-            "name": "Binóculos",
-            "category": "Ferramenta",
-            "description": "Instrumento utilizado pelos estudantes para observar objetos distantes."
+            "name": "Troncos",
+            "category": "natureza",
+            "description": "Partes de árvores que sustentam a flora e a fauna."
         },
         {
             "name": "Vento",
-            "category": "Elemento Natural",
-            "description": "Ar em movimento sentido no rosto."
+            "category": "elemento natural",
+            "description": "Movimento do ar, sentido no rosto do narrador."
         },
         {
             "name": "Pássaros",
-            "category": "Animal",
-            "description": "Aves que estão chilreando."
+            "category": "animal",
+            "description": "Aves que se fazem ouvir com seu canto."
         },
         {
             "name": "Rua da Bélgica",
-            "category": "Location",
-            "description": "A street in the city where the character crossed."
+            "category": "Lugar",
+            "description": "Uma rua por onde o personagem passa."
         },
         {
             "name": "Doce Gosto",
-            "category": "Business",
-            "description": "A small ice cream shop where the character bought ice cream."
+            "category": "Estabelecimento",
+            "description": "Uma pequena loja onde o personagem compra um gelado."
         },
         {
-            "name": "Character",
-            "category": "Person",
-            "description": "The individual who is navigating through the street and enjoying the ice cream."
+            "name": "Personagem",
+            "category": "Pessoa",
+            "description": "O indivíduo que narra a experiência de caminhar."
         }
     ],
     "relationships": [
         {
             "source": "Sofia",
             "target": "Parque da Cidade",
-            "value": "is at"
+            "value": "is in"
         },
         {
             "source": "Sofia",
             "target": "Secundária de Canelas",
-            "value": "just finished school at"
+            "value": "just left"
         },
         {
             "source": "Sofia",
@@ -228,54 +218,69 @@
             "value": "is holding"
         },
         {
-            "source": "telemóvel",
-            "target": "mapa",
-            "value": "displays"
+            "source": "Parque da Cidade",
+            "target": "Vila Nova de Gaia",
+            "value": "is located in"
         },
         {
-            "source": "Caminho Estreito",
+            "source": "Secundária de Canelas",
+            "target": "Vila Nova de Gaia",
+            "value": "is located in"
+        },
+        {
+            "source": "Caminhos",
             "target": "Trilho da Fonte",
-            "value": "é um caminho que leva à trilha."
+            "value": "é um"
+        },
+        {
+            "source": "Caminhos",
+            "target": "Banco de Madeira",
+            "value": "estão próximos"
+        },
+        {
+            "source": "Caminhos",
+            "target": "Arbustos Baixos",
+            "value": "estão ao redor"
         },
         {
             "source": "Senhora Idosa",
             "target": "Cão Pantufa",
-            "value": "acompanha."
+            "value": "possui"
         },
         {
-            "source": "Trilho da Fonte",
-            "target": "Banco de madeira",
-            "value": "possui um banco ao lado."
+            "source": "Senhora Idosa",
+            "target": "Trilho da Fonte",
+            "value": "desce pelo"
         },
         {
-            "source": "Trilho da Fonte",
-            "target": "Arbustos baixos",
-            "value": "está rodeado por arbustos."
+            "source": "Banco de Madeira",
+            "target": "Trilho da Fonte",
+            "value": "indica um ponto de descanso"
         },
         {
             "source": "Caminho",
-            "target": "Árvores altas",
-            "value": "é rodeado por"
+            "target": "Árvores",
+            "value": "contém"
         },
         {
             "source": "Caminho",
             "target": "Flores",
-            "value": "é decorado com"
+            "value": "contém"
         },
         {
             "source": "Caminho",
             "target": "Bicicleta",
-            "value": "possui"
+            "value": "contém"
         },
         {
             "source": "Caminho",
             "target": "Crianças",
-            "value": "onde brincam"
+            "value": "presentes"
         },
         {
             "source": "Caminho",
             "target": "Jardineiro",
-            "value": "é limpo por"
+            "value": "presentes"
         },
         {
             "source": "Jardineiro",
@@ -284,38 +289,38 @@
         },
         {
             "source": "Crianças",
-            "target": "Papagaio colorido",
+            "target": "Papagaio",
             "value": "brincam com"
         },
         {
             "source": "Sofia",
             "target": "Canidelo",
-            "value": "home destination"
+            "value": "wants to reach quickly"
         },
         {
             "source": "Sofia",
             "target": "Mãe",
-            "value": "family member"
+            "value": "wants to see and eat dinner with"
         },
         {
             "source": "Sofia",
             "target": "Pai",
-            "value": "family member"
+            "value": "wants to see and eat dinner with"
         },
         {
             "source": "Sofia",
             "target": "Avó",
-            "value": "family member"
+            "value": "wants to see and eat dinner with"
         },
         {
             "source": "Sofia",
-            "target": "Nature",
-            "value": "interest in photographing"
+            "target": "Natural scenery",
+            "value": "enjoys and takes photos of"
         },
         {
             "source": "Sofia",
             "target": "Instagram",
-            "value": "platform for sharing photos"
+            "value": "publishes photos on"
         },
         {
             "source": "Sofia",
@@ -325,47 +330,57 @@
         {
             "source": "Sofia",
             "target": "Caminho largo",
-            "value": "path to follow"
-        },
-        {
-            "source": "Estudantes",
-            "target": "Cadernos",
-            "value": "Usam"
-        },
-        {
-            "source": "Estudantes",
-            "target": "Binóculos",
-            "value": "Usam"
-        },
-        {
-            "source": "Estudantes",
-            "target": "Pássaros",
-            "value": "Observam"
-        },
-        {
-            "source": "Vento",
-            "target": "Rosto",
-            "value": "Sente"
+            "value": "decides to follow"
         },
         {
             "source": "Esquilos",
             "target": "Troncos",
-            "value": "Correm entre"
+            "value": "correm entre"
         },
         {
-            "source": "Gato Preto",
+            "source": "Gato preto",
             "target": "Canto",
-            "value": "Dorme em"
+            "value": "dorme em"
         },
         {
-            "source": "Character",
-            "target": "Doce Gosto",
-            "value": "bought ice cream at"
+            "source": "Estudantes",
+            "target": "Trabalho de campo",
+            "value": "realizam"
         },
         {
-            "source": "Character",
+            "source": "Vento",
+            "target": "rosto",
+            "value": "sente"
+        },
+        {
+            "source": "Pássaros",
+            "target": "chilrear",
+            "value": "produzem"
+        },
+        {
+            "source": "Personagem",
             "target": "Rua da Bélgica",
-            "value": "crossed"
+            "value": "atravessa"
+        },
+        {
+            "source": "Personagem",
+            "target": "Doce Gosto",
+            "value": "compra gelado"
+        },
+        {
+            "source": "Personagem",
+            "target": "casa",
+            "value": "segue para"
+        },
+        {
+            "source": "Personagem",
+            "target": "experiência",
+            "value": "sente-se feliz"
+        },
+        {
+            "source": "experiência",
+            "target": "coisas novas",
+            "value": "descobre"
         }
     ]
 }

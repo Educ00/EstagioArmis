@@ -65,7 +65,7 @@ class ChatController:
                 neo4j_service.clean_db()
                 chroma_service.clean_db()
                 
-            index_benchmark_dto, azure_results, chroma_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=500, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, split_chroma=True ,method=method)
+            index_benchmark_dto, azure_results, chroma_results, extraction_results = chat_service.import_file(input_filename=filename, chunk_size=1000, chunk_overlap = 250, split_azure_ai_search=True, split_neo4j=True, split_chroma=True ,method=method)
             
             response_dto = ResponseDTO(
                 document_size=index_benchmark_dto.document_size,

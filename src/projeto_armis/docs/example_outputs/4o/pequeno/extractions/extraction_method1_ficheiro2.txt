@@ -1,0 +1,71 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Person",
+            "description": "Protagonist of the narrative"
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Location",
+            "description": "Park in Vila Nova de Gaia"
+        },
+        {
+            "name": "Secundária de Canelas",
+            "category": "Location",
+            "description": "School Sofia attends"
+        },
+        {
+            "name": "Canidelo",
+            "category": "Location",
+            "description": "Where Sofia's house is located"
+        },
+        {
+            "name": "Pantufa",
+            "category": "Animal",
+            "description": "Dog owned by the elderly lady"
+        },
+        {
+            "name": "Trilho da Fonte",
+            "category": "Location",
+            "description": "Narrow path in the park"
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Location",
+            "description": "Shop selling ice cream visited by Sofia"
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Sofia",
+            "target": "Parque da Cidade",
+            "value": "visited"
+        },
+        {
+            "source": "Sofia",
+            "target": "Secundária de Canelas",
+            "value": "student"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "resides"
+        },
+        {
+            "source": "Pantufa",
+            "target": "elderly lady",
+            "value": "pet"
+        },
+        {
+            "source": "Trilho da Fonte",
+            "target": "Parque da Cidade",
+            "value": "located in"
+        },
+        {
+            "source": "Doce Gosto",
+            "target": "Sofia",
+            "value": "bought ice cream"
+        }
+    ]
+}

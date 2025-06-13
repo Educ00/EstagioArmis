@@ -1,0 +1,81 @@
+{
+    "entities": [
+        {
+            "name": "Sofia",
+            "category": "Seres Vivos",
+            "description": "Uma jovem que está voltando da escola para casa."
+        },
+        {
+            "name": "Parque da Cidade",
+            "category": "Lugares e Espaços",
+            "description": "Parque onde Sofia se encontrava."
+        },
+        {
+            "name": "Vila Nova de Gaia",
+            "category": "Lugares e Espaços",
+            "description": "Cidade onde ocorre a narrativa."
+        },
+        {
+            "name": "Escola Secundária de Canelas",
+            "category": "Organizações e Instituições",
+            "description": "Local de onde Sofia acabou de sair."
+        },
+        {
+            "name": "Trilho da Fonte",
+            "category": "Lugares e Espaços",
+            "description": "Um dos caminhos no parque."
+        },
+        {
+            "name": "Pantufa",
+            "category": "Seres Vivos",
+            "description": "Cachorro de uma senhora idosa no parque."
+        },
+        {
+            "name": "Canidelo",
+            "category": "Lugares e Espaços",
+            "description": "Região onde Sofia mora."
+        },
+        {
+            "name": "Rua da Bélgica",
+            "category": "Lugares e Espaços",
+            "description": "Rua por onde Sofia passou."
+        },
+        {
+            "name": "Doce Gosto",
+            "category": "Organizações e Instituições",
+            "description": "Loja onde Sofia comprou um gelado."
+        }
+    ],
+    "relationships": [
+        {
+            "source": "Parque da Cidade",
+            "target": "Vila Nova de Gaia",
+            "value": "localizado_em"
+        },
+        {
+            "source": "Sofia",
+            "target": "Escola Secundária de Canelas",
+            "value": "saiu_de"
+        },
+        {
+            "source": "Trilho da Fonte",
+            "target": "Parque da Cidade",
+            "value": "localizado_em"
+        },
+        {
+            "source": "Pantufa",
+            "target": "Trilho da Fonte",
+            "value": "presente_em"
+        },
+        {
+            "source": "Sofia",
+            "target": "Canidelo",
+            "value": "reside_em"
+        },
+        {
+            "source": "Rua da Bélgica",
+            "target": "Doce Gosto",
+            "value": "localiza_loja"
+        }
+    ]
+}
