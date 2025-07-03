@@ -2,6 +2,8 @@
 
 Este repositório representa parte do trabalho desenvolvido durante o estágio curricular.
 
+[Relatório](https://myisepipp-my.sharepoint.com/:b:/g/personal/1211199_isep_ipp_pt/EQcttTYhM4BEoPAwbkrP_AYBTSXYQbWk7YJ_rycFeS7wuA?e=cgL2Ox)
+
 ## Documentação
 
 A fazer
